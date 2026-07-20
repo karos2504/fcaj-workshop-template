@@ -1,125 +1,103 @@
 ---
 title: "Event 1"
-date: 2024-01-01
+date: 2026-05-09
 weight: 1
 chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# Báo cáo tổng kết: FCAJ Community Day
 
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+## Mục Tiêu Sự Kiện
 
-### Mục Đích Của Sự Kiện
+- Học hỏi các phương pháp tự học hiệu quả và phát triển bản thân trong kỷ nguyên AI.
+- Làm chủ kỹ thuật thiết kế prompt (prompt engineering) và khám phá các ứng dụng hỗ trợ như Promptimizer.
+- Định hình lộ trình nghề nghiệp và chiến lược tìm kiếm cơ hội việc làm trong ngành công nghệ.
+- Hiểu khái niệm Vibe Coding và các phương pháp thực tế khi sử dụng BMAD.
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+## Nội Dung Nổi Bật
 
-### Danh Sách Diễn Giả
+- Chia sẻ thực tế về việc biến tự học thành thói quen hấp dẫn và dễ dàng như lướt mạng xã hội.
+- Hướng dẫn thực hành viết prompt như một kỹ sư để có kết quả ổn định và chất lượng cao.
+- Buổi định hướng nghề nghiệp với những lời khuyên thực tế để thu hút nhà tuyển dụng.
+- Khám phá xu hướng "Vibe Coding" và cách dẫn dắt các trợ lý lập trình AI hiệu quả thông qua BMAD.
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+---
 
-### Nội Dung Nổi Bật
+## Phiên 1: Làm thế nào để tự học như sử dụng mạng xã hội (How to make self-learning like using social media)
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+### Các chủ đề được đề cập
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+- Vượt qua sự trì trệ của các phương pháp học tập truyền thống.
+- Thiết kế lại chu trình học tập bằng cách sử dụng nội dung siêu nhỏ (micro-content) và hệ thống phần thưởng giống mạng xã hội.
+- Lọc và tối ưu hóa nguồn tài liệu học tập cá nhân chất lượng cao.
+- Xây dựng tính nhất quán qua thói quen tự học hàng ngày.
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
+### Bài học chính
 
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
+- Tự học nên được thiết kế để không gây áp lực, mang tính tương tác và được game hóa.
+- Tự tối ưu hóa môi trường học tập để dễ dàng tiếp cận như việc lướt mạng xã hội.
+- Tập trung vào các thói quen nhỏ hàng ngày thay vì học dồn dập không liên tục.
 
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
+---
 
-#### Domain-Driven Design (DDD)
+## Phiên 2: Viết prompt như một kỹ sư và các ứng dụng hỗ trợ (Promptimizer)
 
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
+### Các chủ đề được đề cập
 
-#### Event-Driven Architecture
+- Cấu trúc cốt lõi của một prompt chất lượng (Role, Context, Task, Constraints, và Output Format).
+- Chuyển dịch từ việc viết prompt theo cảm tính sang quy trình thiết kế prompt có hệ thống.
+- Giới thiệu Promptimizer và các công cụ giúp tự động hóa và tối ưu hóa thiết kế prompt.
+- Thực hành tinh chỉnh prompt cho các tác vụ kỹ thuật phần mềm phức tạp.
 
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
+### Bài học chính
 
-#### Compute Evolution
+- Viết prompt chuyên nghiệp yêu cầu cấu trúc rõ ràng, ngữ cảnh chi tiết và các ràng buộc chặt chẽ.
+- Các công cụ tự động như Promptimizer giúp tối ưu prompt, giảm chi phí token và nâng cao độ ổn định.
+- Prompt chất lượng cao là nền tảng để AI tạo ra kết quả đáng tin cậy cho môi trường production.
 
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
+---
 
-#### Amazon Q Developer
+## Phiên 3: Làm thế nào để tìm kiếm cơ hội việc làm
 
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+### Các chủ đề được đề cập
 
-### Những Gì Học Được
+- Xây dựng profile lập trình viên nổi bật và thương hiệu cá nhân.
+- Kết nối hiệu quả trong cộng đồng công nghệ trong nước và quốc tế.
+- Vượt qua các vòng phỏng vấn kỹ thuật và quy trình tuyển dụng hiện đại.
+- Tận dụng kinh nghiệm thực tập và đóng góp cộng đồng để thu hút nhà tuyển dụng.
 
-#### Tư Duy Thiết Kế
+### Bài học chính
 
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
+- Một portfolio dự án thực tế ấn tượng có giá trị hơn nhiều so với một CV chung chung.
+- Sự tham gia tích cực và kết nối trong cộng đồng mở ra nhiều cơ hội việc làm tiềm năng.
+- Khả năng tự học liên tục và sự thích ứng là những kỹ năng mềm được đánh giá rất cao.
 
-#### Kiến Trúc Kỹ Thuật
+---
 
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
+## Phiên 4: Vibe Coding và phương pháp sử dụng BMAD
 
-#### Chiến Lược Hiện Đại Hóa
+### Các chủ đề được đề cập
 
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
+- "Vibe Coding" là gì và cách cộng tác với trợ lý lập trình AI mà không làm mất đi tính kiểm soát của kỹ sư.
+- Giới thiệu phương pháp BMAD (Behavior, Model, Action, Details).
+- Quản lý chất lượng mã nguồn, kiểm thử và debug khi AI viết phần lớn code.
+- Cách giữ cho context của dự án luôn sạch sẽ và dễ quản lý.
 
-### Ứng Dụng Vào Công Việc
+### Bài học chính
 
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
+- "Vibe Coding" không phải là lập trình không cần tư duy; nó đòi hỏi khả năng lập kế hoạch kiến trúc hệ thống cấp cao.
+- Các framework như BMAD đảm bảo trợ lý AI tạo ra code đúng định hướng và chức năng.
+- Luôn kiểm thử, xác minh và tái cấu trúc code do AI tạo ra để giữ cho hệ thống ổn định.
 
-### Trải nghiệm trong event
+---
 
-Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
+## Trải nghiệm sự kiện & Bài học rút ra
 
-#### Học hỏi từ các diễn giả có chuyên môn cao
-- Các diễn giả đến từ AWS và các tổ chức công nghệ lớn đã chia sẻ **best practices** trong thiết kế ứng dụng hiện đại.
-- Qua các case study thực tế, tôi hiểu rõ hơn cách áp dụng **Domain-Driven Design (DDD)** và **Event-Driven Architecture** vào các project lớn.
+Tham gia **FCAJ Community Day** là một trải nghiệm tuyệt vời, kết hợp giữa định hướng nghề nghiệp thực tế cùng các phương pháp lập trình và ứng dụng AI hiện đại.
 
-#### Trải nghiệm kỹ thuật thực tế
-- Tham gia các phiên trình bày về **event storming** giúp tôi hình dung cách **mô hình hóa quy trình kinh doanh** thành các domain events.
-- Học cách **phân tách microservices** và xác định **bounded contexts** để quản lý sự phức tạp của hệ thống lớn.
-- Hiểu rõ trade-offs giữa **synchronous và asynchronous communication** cũng như các pattern tích hợp như **pub/sub, point-to-point, streaming**.
+### Bài học rút ra
 
-#### Ứng dụng công cụ hiện đại
-- Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
-- Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
-
-#### Kết nối và trao đổi
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
-
-#### Bài học rút ra
-- Việc áp dụng DDD và event-driven patterns giúp giảm **coupling**, tăng **scalability** và **resilience** cho hệ thống.
-- Chiến lược hiện đại hóa cần **phased approach** và đo lường **ROI**, không nên vội vàng chuyển đổi toàn bộ hệ thống.
-- Các công cụ AI như Amazon Q Developer có thể **boost productivity** nếu được tích hợp vào workflow phát triển hiện tại.
-
-#### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
-> Tổng thể, sự kiện không chỉ cung cấp kiến thức kỹ thuật mà còn giúp tôi thay đổi cách tư duy về thiết kế ứng dụng, hiện đại hóa hệ thống và phối hợp hiệu quả hơn giữa các team.
+- **Thay đổi tư duy**: Biến việc tự học thành thói quen hàng ngày giúp tiếp thu kiến thức mới cực kỳ nhanh chóng.
+- **Prompt Engineering là một kỹ năng cốt lõi**: Viết prompt chính xác là năng lực quan trọng của kỹ sư trong thời đại GenAI.
+- **Phát triển phần mềm cộng tác**: BMAD cung cấp cách lập trình có cấu trúc với AI, giúp tăng tốc độ phát triển nhưng vẫn đảm bảo chất lượng.

@@ -5,54 +5,25 @@ weight: 1
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Mục tiêu tuần 6
 
-### Mục tiêu tuần 6:
+* Hiểu các nguyên lý thiết kế hệ thống tính sẵn sàng cao (High Availability) và tự động mở rộng (Scalability).
+* Cấu hình Elastic Load Balancing (Application Load Balancer - ALB) phân phối lưu lượng truy cập.
+* Thiết lập EC2 Auto Scaling Group và Route 53 Health Checks & DNS Failover.
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Các công việc cần triển khai trong tuần này
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2 | - Tìm hiểu Elastic Load Balancing (ELB): <br>&emsp; + ALB (Layer 7) vs NLB (Layer 4) <br>&emsp; + Target Groups, Health Checks & Listener Rules <br>&emsp; + SSL/TLS Termination với AWS Certificate Manager (ACM) | 08/06/2026 | 08/06/2026 | <https://000006.awsstudygroup.com> |
+| 3 | - Tìm hiểu EC2 Auto Scaling Groups (ASG): <br>&emsp; + Launch Templates vs Launch Configurations <br>&emsp; + Scaling Policies: Target Tracking, Step Scaling & Scheduled Scaling <br>&emsp; + Dynamic Scaling dựa trên CPU utilization / ALB Request count | 09/06/2026 | 09/06/2026 | <https://000006.awsstudygroup.com> |
+| 4 | - **Thực hành:** <br>&emsp; + Tạo Launch Template định nghĩa Web Server EC2 <br>&emsp; + Khởi tạo ALB trên 2 Public Subnets và gắn Target Group <br>&emsp; + Tạo Auto Scaling Group spanning 2 Private Subnets tích hợp với ALB | 10/06/2026 | 10/06/2026 | <https://000006.awsstudygroup.com> |
+| 5 | - Tìm hiểu Amazon Route 53 & Hybrid DNS: <br>&emsp; + Hosted Zones (Public vs Private) <br>&emsp; + Routing Policies: Simple, Weighted, Latency, Failover & Geolocation <br>&emsp; + Route 53 Health Checks cấu hình DNS Failover | 11/06/2026 | 11/06/2026 | <https://000010.awsstudygroup.com> <br> <https://000101.awsstudygroup.com> |
+| 6 | - **Thực hành:** <br>&emsp; + Giả lập tải cao bằng công cụ Stress Test trên EC2 để kiểm tra Auto Scaling tự động tăng/giảm số lượng instance <br>&emsp; + Cấu hình Route 53 Failover Routing thử nghiệm chuyển hướng lưu lượng khi primary region gặp sự cố | 12/06/2026 | 12/06/2026 | <https://000101.awsstudygroup.com> |
 
+### Kết quả đạt được tuần 6
 
-### Kết quả đạt được tuần 6:
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Triển khai thành công bộ cân bằng tải Application Load Balancer phân phối lưu lượng truy cập đa AZ.
+* Thiết lập Auto Scaling Group tự động co giãn tài nguyên EC2 theo nhu cầu thực tế.
+* Làm chủ các chiến lược định tuyến Route 53 DNS và cơ chế tự động chuyển hướng khi xảy ra thảm họa (Disaster Recovery Failover).

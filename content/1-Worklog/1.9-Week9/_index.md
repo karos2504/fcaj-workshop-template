@@ -5,53 +5,26 @@ weight: 1
 chapter: false
 pre: " <b> 1.9. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Week 9 Objectives
 
-### Week 9 Objectives:
+* Understand Containerization core principles using Docker (Dockerfile, Images, Containers, Multi-stage builds).
+* Manage private container image registries with Amazon Elastic Container Registry (ECR).
+* Orchestrate containers at scale on Amazon ECS (Elastic Container Service) with AWS Fargate & Explore Amazon EKS (Elastic Kubernetes Service).
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+### Tasks to be carried out this week
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | --- | --- | --- | --- |
+| 2 | - Learn Docker Core Concepts: <br>&emsp; + Docker Architecture, Images, Containers & Registries <br>&emsp; + Standard Dockerfile syntax & Multi-stage builds for small image footprints <br>&emsp; + Docker Networking & Persistent Volumes | 29/06/2026 | 29/06/2026 | <https://000015.awsstudygroup.com> |
+| 3 | - **Practice:** <br>&emsp; + Write optimized Dockerfile for Web App (Node.js/Python/Go) <br>&emsp; + Build, run & debug containers on local computer <br>&emsp; + Create Amazon ECR Private Repository, authenticate AWS CLI, and push image to ECR | 30/06/2026 | 30/06/2026 | <https://000015.awsstudygroup.com> <br> <https://000067.awsstudygroup.com> |
+| 4 | - Learn Amazon ECS Architecture: <br>&emsp; + Task Definitions (CPU, Memory, Env vars, Logging) <br>&emsp; + ECS Services, Clusters & Launch Types (EC2 vs AWS Fargate) <br>&emsp; + ECS Service Auto Scaling & Application Load Balancer integration | 01/07/2026 | 01/07/2026 | <https://000016.awsstudygroup.com> <br> <https://000067.awsstudygroup.com> |
+| 5 | - **Practice:** <br>&emsp; + Provision an ECS Cluster powered by Serverless AWS Fargate <br>&emsp; + Create Task Definition pulling image from ECR & Launch ECS Service behind ALB <br>&emsp; + Verify Service Auto Scaling and zero-downtime rolling update deployments | 02/07/2026 | 02/07/2026 | <https://000067.awsstudygroup.com> |
+| 6 | - Study Amazon EKS (Elastic Kubernetes Service) & Container IaC: <br>&emsp; + Kubernetes Control Plane & Managed Worker Nodes architecture <br>&emsp; + Overview of EKS Blueprints for AWS CDK for automated cluster provisioning | 03/07/2026 | 03/07/2026 | <https://000126.awsstudygroup.com> <br> <https://000065.awsstudygroup.com> |
 
+### Week 9 Achievements
 
-### Week 9 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Successfully containerized web applications using optimized multi-stage Docker builds.
+* Established secure container image lifecycle management using Amazon ECR.
+* Deployed scalable containerized microservices in production using Serverless ECS Fargate.
+* Acquired foundational knowledge of Kubernetes architecture and Amazon EKS cluster management.

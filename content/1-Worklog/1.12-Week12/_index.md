@@ -5,53 +5,26 @@ weight: 2
 chapter: false
 pre: " <b> 1.12. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Week 12 Objectives
 
-### Week 12 Objectives:
+* Design and implement Phase 1 of the Capstone Project: **SaaS Timekeeping Platform (Multi-Tenant AWS Serverless Architecture)** aligned with the authoritative `Demo.drawio` architecture specification.
+* Program infrastructure using AWS CDK (TypeScript/Python): Provision VPC Private Subnets, CloudFront CDN, Route 53, AWS WAF v2, Amazon Cognito Auth & API Gateway HTTP API v2.
+* Construct core application layers: DynamoDB Single-Table Design (tenant data isolation), business AWS Lambda functions (Check-in, Check-out, Attendance, Admin, Subscription), AWS Step Functions Workflow for async report generation, and Event-Driven Notification Bus.
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+### Tasks to be carried out this week
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | --- | --- | --- | --- |
+| 2 | - **Architecture Analysis & System Design:** <br>&emsp; + Analyze `Demo.drawio` architecture specification for **SaaS Timekeeping Platform** <br>&emsp; + Design Multi-Tenancy isolation pattern using Partition Key (`tenantId`) strategy on DynamoDB <br>&emsp; + Establish RBAC permission matrix & Estimate monthly cost using AWS Pricing Calculator | 20/07/2026 | 20/07/2026 | <https://cloudjourney.awsstudygroup.com> |
+| 3 | - **Provision IaC Infrastructure & Edge/Auth Layer (AWS CDK):** <br>&emsp; + Initialize AWS CDK project to provision VPC Private Subnets, Route 53 & CloudFront CDN (integrated with AWS WAF v2 & AWS Shield) <br>&emsp; + Configure Amazon Cognito User Pools with Custom Claims (`{tenantId, role, userId}`) <br>&emsp; + Provision Amazon API Gateway (HTTP API v2) with JWT Authorizer & Custom Header Verification | 21/07/2026 | 21/07/2026 | <https://000076.awsstudygroup.com> <br> <https://000141.awsstudygroup.com> |
+| 4 | - **Provision Data Layer & Core Compute (Lambda Functions):** <br>&emsp; + Provision **Amazon DynamoDB Single-Table Design** (`Attendance`, `Users`, `Tenants`) with **DynamoDB Streams (CDC)** & Data Encryption via **AWS KMS CMK** <br>&emsp; + Write business logic for Lambda functions: `Lambda Check-in`, `Lambda Check-out`, `Lambda Attendance`, and `Lambda Admin` <br>&emsp; + Store API Keys & DB Credentials in **AWS Secrets Manager** with Auto Rotation | 22/07/2026 | 22/07/2026 | <https://000060.awsstudygroup.com> <br> <https://000096.awsstudygroup.com> |
+| 5 | - **Implement Workflow Engine & Event Notification Layer:** <br>&emsp; + Build async attendance report generation pipeline using **AWS Step Functions Engine** (Standard Workflow) & **Amazon SQS Queue + DLQ** <br>&emsp; + Provision **Amazon S3** (Intelligent-Tiering, KMS Encryption) storing report files (PDF, Excel, CSV) <br>&emsp; + Configure event pipeline: **DynamoDB Streams -> EventBridge Event Bus -> SQS Email Queue -> Lambda Email Worker -> Amazon SES** | 23/07/2026 | 23/07/2026 | <https://000047.awsstudygroup.com> <br> <https://000077.awsstudygroup.com> |
+| 6 | - **Webhook Integration & DevOps CI/CD Pipeline Setup:** <br>&emsp; + Configure `Lambda Subscription` & `Lambda Webhook` handling inbound B2B subscription payment webhooks <br>&emsp; + Create **AWS CodePipeline** & **AWS CodeBuild** automating Build, Test & Vulnerability Scanning via **Amazon Inspector** | 24/07/2026 | 24/07/2026 | <https://000152.awsstudygroup.com> |
 
+### Week 12 Achievements
 
-### Week 12 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Designed and deployed a complete end-to-end Multi-Tenant Serverless SaaS Timekeeping Platform based on `Demo.drawio`.
+* Mastered DynamoDB Single-Table Design combined with DynamoDB Streams for Change Data Capture (CDC).
+* Implemented scalable asynchronous report processing using AWS Step Functions and Amazon SQS queues.
+* Fully automated multi-tier cloud infrastructure deployment using AWS CDK v2 and CodePipeline CI/CD.

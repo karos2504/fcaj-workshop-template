@@ -5,55 +5,26 @@ weight: 2
 chapter: false
 pre: " <b> 1.11. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Mục tiêu tuần 11
 
-### Mục tiêu tuần 11:
+* Hiểu các giải pháp bảo mật dữ liệu, mã hóa và tuân thủ trên AWS (AWS KMS, Secrets Manager, WAF, GuardDuty).
+* Tìm hiểu giải pháp chuyển đổi cơ sở dữ liệu (Migration) với AWS DMS & SCT.
+* Khám phá tổng quan về Data Lake & Phân tích dữ liệu serverless với Amazon Athena.
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Các công việc cần triển khai trong tuần này
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2 | - Tìm hiểu AWS KMS (Key Management Service) & AWS Secrets Manager: <br>&emsp; + Customer Managed Keys (CMK), Envelope Encryption & Key Policies <br>&emsp; + Quản lý, xoay vòng tự động (Automatic Rotation) credentials DB trong Secrets Manager | 13/07/2026 | 13/07/2026 | <https://000033.awsstudygroup.com> <br> <https://000096.awsstudygroup.com> |
+| 3 | - Tìm hiểu AWS WAF (Web Application Firewall) & Threat Detection: <br>&emsp; + Managed Rule Groups (SQLi, XSS, OWASP Top 10) & Rate Limiting <br>&emsp; + Giám sát an ninh với AWS GuardDuty & AWS Security Hub | 14/07/2026 | 14/07/2026 | <https://000026.awsstudygroup.com> <br> <https://000098.awsstudygroup.com> |
+| 4 | - **Thực hành:** <br>&emsp; + Tạo KMS Key mã hóa S3 Bucket & EBS Volume <br>&emsp; + Cấu hình AWS WAF Web ACL bảo vệ Application Load Balancer <br>&emsp; + Lưu trữ DB password trong Secrets Manager và lấy credential từ ứng dụng Lambda | 15/07/2026 | 15/07/2026 | <https://000033.awsstudygroup.com> <br> <https://000026.awsstudygroup.com> |
+| 5 | - Tìm hiểu Chuyển đổi dữ liệu (AWS Migration): <br>&emsp; + AWS Schema Conversion Tool (SCT) chuyển đổi schema On-Premises sang Cloud <br>&emsp; + AWS Database Migration Service (DMS) đồng bộ hóa dữ liệu thời gian thực (CDC) | 16/07/2026 | 16/07/2026 | <https://000043.awsstudygroup.com> |
+| 6 | - Tìm hiểu Data & Analytics trên AWS: <br>&emsp; + Mô hình Data Lake trên Amazon S3 & AWS Glue Crawler/Data Catalog <br>&emsp; + Thực vấn dữ liệu trực tiếp trên S3 bằng câu lệnh SQL với Amazon Athena | 17/07/2026 | 17/07/2026 | <https://000035.awsstudygroup.com> <br> <https://000106.awsstudygroup.com> |
 
+### Kết quả đạt được tuần 11
 
-### Kết quả đạt được tuần 11:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Triển khai giải pháp mã hóa dữ liệu tĩnh (At-Rest) và dữ liệu chuyển động (In-Transit) sử dụng AWS KMS.
+* Bảo vệ ứng dụng web chống tấn công mạng phổ biến (SQLi/XSS) với WAF Web ACLs.
+* Loại bỏ việc hardcode mật khẩu nhờ quản lý tập trung trên AWS Secrets Manager.
+* Hiểu quy trình dịch chuyển cơ sở dữ liệu lớn không làm gián đoạn hệ thống (AWS DMS/SCT) và phân tích dữ liệu serverless với Athena.

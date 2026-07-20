@@ -5,55 +5,26 @@ weight: 1
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Mục tiêu tuần 2
 
-### Mục tiêu tuần 2:
+* Nắm vững kiến thức nền tảng về hạ tầng mạng Amazon VPC và bảo mật mạng trên AWS.
+* Thiết kế và triển khai custom VPC tích hợp Public Subnets, Private Subnets, Internet Gateway và NAT Gateway.
+* Hiểu sâu về phân quyền IAM (Users, Groups, Roles, Policies) và giám sát lưu lượng mạng với VPC Flow Logs.
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Các công việc cần triển khai trong tuần này
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2 | - Tìm hiểu chuyên sâu IAM (Identity and Access Management): <br>&emsp; + IAM Users, Groups, Roles & Policies (Managed vs Inline) <br>&emsp; + Principle of Least Privilege & Bật MFA bảo mật | 11/05/2026 | 11/05/2026 | <https://000002.awsstudygroup.com> |
+| 3 | - Tìm hiểu lý thuyết Amazon VPC Core Components: <br>&emsp; + CIDR Blocks, Public Subnets & Private Subnets <br>&emsp; + Internet Gateway (IGW), NAT Gateway & Route Tables | 12/05/2026 | 12/05/2026 | <https://000003.awsstudygroup.com> <br> <https://000092.awsstudygroup.com> |
+| 4 | - **Thực hành:** <br>&emsp; + Khởi tạo Custom VPC với 2 Public Subnets và 2 Private Subnets trên 2 AZs <br>&emsp; + Cấu hình Internet Gateway cho Public Subnet & NAT Gateway cho Private Subnet | 13/05/2026 | 13/05/2026 | <https://000003.awsstudygroup.com> |
+| 5 | - Tìm hiểu cơ chế bảo mật mạng: Security Groups (Stateful) vs Network ACLs (Stateless) <br> - Tìm hiểu VPC Peering và VPC Flow Logs giám sát lưu lượng mạng | 14/05/2026 | 14/05/2026 | <https://000019.awsstudygroup.com/> <br> <https://000074.awsstudygroup.com> |
+| 6 | - **Thực hành:** <br>&emsp; + Thiết lập Security Groups & NACL rules cho Web Server và Bastion Host <br>&emsp; + Cấu hình VPC Flow Logs đẩy log về CloudWatch Logs <br>&emsp; + Kiểm tra kết nối mạng giữa các subnet và xác nhận tính riêng tư của Private Subnet | 15/05/2026 | 15/05/2026 | <https://000074.awsstudygroup.com> |
 
+### Kết quả đạt me được tuần 2
 
-### Kết quả đạt được tuần 2:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Thành thạo phân quyền tối thiểu IAM và thiết lập MFA cho các tài khoản.
+* Làm chủ kiến trúc mạng VPC: Tự tay thiết kế và cấu hình VPC hoàn chỉnh đáp ứng chuẩn thiết kế multi-AZ.
+* Phân biệt rõ sự khác nhau và kết hợp hiệu quả giữa Security Groups và Network ACLs.
+* Thu thập và phân tích được lưu lượng mạng bằng VPC Flow Logs.

@@ -5,53 +5,26 @@ weight: 1
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Week 7 Objectives
 
-### Week 7 Objectives:
+* Understand Infrastructure as Code (IaC) principles and cloud infrastructure automation benefits.
+* Master AWS CloudFormation: Write YAML templates to automate VPC, Subnets, EC2, RDS & Security Groups deployment.
+* Program infrastructure using modern high-level constructs with AWS Cloud Development Kit (AWS CDK v2) in TypeScript/Python.
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+### Tasks to be carried out this week
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | --- | --- | --- | --- |
+| 2 | - Study AWS CloudFormation Core Concepts: <br>&emsp; + Template syntax (JSON/YAML): Parameters, Mappings, Conditions, Resources, Outputs <br>&emsp; + Stack lifecycle management (Create, Update, Drift Detection, Rollback & Delete) | 15/06/2026 | 15/06/2026 | <https://000037.awsstudygroup.com> |
+| 3 | - **Practice:** <br>&emsp; + Write a CloudFormation Template provisioning complete VPC, Subnets, IGW & Security Groups <br>&emsp; + Deploy stack via AWS CLI & test Drift Detection after manual console edits | 16/06/2026 | 16/06/2026 | <https://000037.awsstudygroup.com> |
+| 4 | - Study AWS Cloud Development Kit (AWS CDK) Essentials: <br>&emsp; + CDK Architecture: App, Stacks & Constructs (L1, L2, L3 constructs) <br>&emsp; + CDK CLI (cdk init, cdk synth, cdk diff, cdk deploy, cdk destroy) | 17/06/2026 | 17/06/2026 | <https://000038.awsstudygroup.com> |
+| 5 | - Study AWS CDK Advanced: <br>&emsp; + Multi-stack architecture & Cross-stack references <br>&emsp; + Build reusable Custom Constructs for team standards <br>&emsp; + CDK Aspects & Unit Testing infrastructure code with Jest/PyTest | 18/06/2026 | 18/06/2026 | <https://000076.awsstudygroup.com> <br> <https://000102.awsstudygroup.com> |
+| 6 | - **Practice:** <br>&emsp; + Build an AWS CDK TypeScript/Python project for a 3-Tier Web App (VPC + ALB + EC2 ASG + RDS) <br>&emsp; + Execute `cdk synth` to generate template and `cdk deploy` for automated provisioning | 19/06/2026 | 19/06/2026 | <https://000076.awsstudygroup.com> |
 
+### Week 7 Achievements
 
-### Week 7 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Mastered CloudFormation YAML template formatting for consistent infrastructure packaging.
+* Understood drift detection mechanisms and stack failure rollback scenarios.
+* Gained proficiency in AWS CDK v2 object-oriented infrastructure modeling using L2 Constructs.
+* Fully automated 3-tier enterprise infrastructure provisioning via CLI commands.

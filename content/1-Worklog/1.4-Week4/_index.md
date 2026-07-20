@@ -5,53 +5,26 @@ weight: 1
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Week 4 Objectives
 
-### Week 4 Objectives:
+* Understand Amazon RDS (Relational Database Service) fundamentals and supported database engines (MySQL, PostgreSQL).
+* Study High Availability features with Multi-AZ deployments and read scaling with Read Replicas.
+* Learn NoSQL Database essentials with Amazon DynamoDB (Tables, Primary Key, Sort Key, Capacity Modes, Indexing).
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+### Tasks to be carried out this week
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | --- | --- | --- | --- |
+| 2 | - Learn Amazon RDS Core: <br>&emsp; + Database Engines (MySQL, PostgreSQL, Aurora) <br>&emsp; + Instance Classes, Storage Types (gp3, io2) & Subnet Groups <br>&emsp; + Automated Backups, Snapshots & Parameter Groups | 25/05/2026 | 25/05/2026 | <https://000005.awsstudygroup.com> |
+| 3 | - Learn RDS High Availability Architecture: <br>&emsp; + Multi-AZ deployment (Synchronous replication & Failover) <br>&emsp; + Read Replicas (Asynchronous replication for read scaling) | 26/05/2026 | 26/05/2026 | <https://000005.awsstudygroup.com> |
+| 4 | - **Practice:** <br>&emsp; + Provision an Amazon RDS MySQL Multi-AZ instance inside Private Subnets <br>&emsp; + Restrict Security Group access strictly to Web EC2 instances <br>&emsp; + Test DB connection from app instance and trigger manual failover | 27/05/2026 | 27/05/2026 | <https://000005.awsstudygroup.com> |
+| 5 | - Learn Amazon DynamoDB NoSQL: <br>&emsp; + Partition Key, Sort Key & Composite Primary Keys <br>&emsp; + Read/Write Capacity Modes (On-Demand vs Provisioned) <br>&emsp; + Local Secondary Indexes (LSI) & Global Secondary Indexes (GSI) | 28/05/2026 | 28/05/2026 | <https://000060.awsstudygroup.com> |
+| 6 | - **Practice:** <br>&emsp; + Create a DynamoDB table and perform CRUD operations via AWS CLI/SDK <br>&emsp; + Compare performance, cost, and design trade-offs between RDS and DynamoDB | 29/05/2026 | 29/05/2026 | <https://000060.awsstudygroup.com> |
 
+### Week 4 Achievements
 
-### Week 4 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Successfully provisioned, secured, and connected Amazon RDS instances within private subnets.
+* Understood automated backup retention and RDS Multi-AZ disaster recovery failover.
+* Mastered DynamoDB NoSQL schema design, primary keys, and secondary indexing.
+* Developed clear architectural criteria for choosing Relational vs NoSQL databases.

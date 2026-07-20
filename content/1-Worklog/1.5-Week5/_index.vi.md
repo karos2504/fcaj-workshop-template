@@ -5,55 +5,26 @@ weight: 1
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Mục tiêu tuần 5
 
-### Mục tiêu tuần 5:
+* Hiểu các khái niệm giám sát (Monitoring), ghi log (Logging) và khả năng quan sát (Observability) trên AWS.
+* Sử dụng thành thạo Amazon CloudWatch (Metrics, Dashboards, Alarms & Logs Insights).
+* Tích hợp CloudWatch với Amazon SNS để cảnh báo và khám phá tích hợp CloudWatch với Grafana.
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Các công việc cần triển khai trong tuần này
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2 | - Tìm hiểu Amazon CloudWatch Core Concepts: <br>&emsp; + Metrics (System metrics vs Custom metrics) <br>&emsp; + CloudWatch Agent cài đặt trên EC2 thu thập Memory/Disk metrics <br>&emsp; + CloudWatch Dashboards trực quan hóa dữ liệu | 01/06/2026 | 01/06/2026 | <https://000008.awsstudygroup.com> |
+| 3 | - Tìm hiểu CloudWatch Logs & Amazon SNS: <br>&emsp; + Log Groups, Log Streams & Retention Policies <br>&emsp; + CloudWatch Alarms (Static Threshold & Anomaly Detection) <br>&emsp; + Tích hợp CloudWatch Alarms với Amazon SNS gửi email cảnh báo | 02/06/2026 | 02/06/2026 | <https://000008.awsstudygroup.com> <br> <https://000077.awsstudygroup.com> |
+| 4 | - **Thực hành:** <br>&emsp; + Cài đặt CloudWatch Agent lên EC2 instance <br>&emsp; + Tạo Dashboard tổng quan hiển thị CPU, RAM, Disk I/O & Network <br>&emsp; + Cấu hình Alarm cảnh báo CPU > 85% và phát email thông báo qua SNS | 03/06/2026 | 03/06/2026 | <https://000008.awsstudygroup.com> |
+| 5 | - Tìm hiểu CloudWatch Logs Insights & Observability nâng cao: <br>&emsp; + Viết câu truy vấn ngữ pháp CloudWatch Logs Insights (filter, fields, stats) <br>&emsp; + Giới thiệu tích hợp Amazon Managed Grafana với CloudWatch | 04/06/2026 | 04/06/2026 | <https://000036.awsstudygroup.com> <br> <https://000029.awsstudygroup.com> |
+| 6 | - **Thực hành:** <br>&emsp; + Thu thập application logs từ EC2 và truy vấn log lỗi bằng Logs Insights <br>&emsp; + Xây dựng kịch bản phản hồi sự cố dựa trên cảnh báo tự động | 05/06/2026 | 05/06/2026 | <https://000029.awsstudygroup.com> |
 
+### Kết quả đạt được tuần 5
 
-### Kết quả đạt được tuần 5:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Cài đặt và cấu hình thành công CloudWatch Agent thu thập custom metrics (RAM/Disk).
+* Xây dựng Dashboard giám sát trực quan chuyên nghiệp cho hạ tầng EC2 & RDS.
+* Thiết lập quy trình tự động phát cảnh báo sự cố hạ tầng qua SNS Email Notification.
+* Thành thạo kỹ năng truy vấn log bằng CloudWatch Logs Insights để nhanh chóng phát hiện lỗi.
