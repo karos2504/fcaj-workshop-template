@@ -79,6 +79,13 @@ Configuring SAM deploy
 
 Quá trình khởi tạo các tài nguyên CloudFormation sẽ diễn ra trong khoảng 2–3 phút.
 
+> [!TIP]
+> **Xử lý lỗi `Error: S3 Bucket does not exist`:**  
+> Nếu gặp thông báo lỗi S3 Bucket chưa tồn tại khi deploy, hãy thêm cờ `--resolve-s3` để SAM CLI tự động khởi tạo mới S3 Deployment Bucket cho tài khoản AWS của bạn:
+> ```bash
+> sam deploy --guided --resolve-s3
+> ```
+
 ---
 
 ### 4. Kiểm tra kết quả Đầu ra (Outputs)
