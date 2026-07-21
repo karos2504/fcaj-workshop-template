@@ -69,11 +69,25 @@ dist/
 
 ### 4. Upload Static Files lên Amazon S3 Bucket
 
-Sử dụng AWS CLI để đồng bộ thư mục `dist/` lên S3 SPA Bucket:
+Sử dụng AWS CLI để khởi tạo Bucket và đồng bộ thư mục `dist/` lên S3 SPA Bucket:
 
 ```bash
+# Tạo S3 Bucket chứa Frontend
+aws s3 mb s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID> --region ap-southeast-1
+
+# Đồng bộ file build lên S3 Bucket
 aws s3 sync dist/ s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID> --delete
 ```
+
+> [!TIP]
+> **Xử lý lỗi `Your account must be verified before you can add new CloudFront resources`:**  
+> Lỗi này xuất hiện trên các tài khoản AWS mới do chính sách bảo mật tạm thời khóa tạo CloudFront.  
+> - **Giải pháp dùng ngay (S3 Website Endpoint):** Bạn có thể bật S3 Static Website Hosting để xem trước giao diện lập tức:
+>   ```bash
+>   aws s3 website s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID>/ --index-document index.html
+>   ```
+>   Truy cập link: `http://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID>.s3-website.ap-southeast-1.amazonaws.com`
+> - **Mở khóa CloudFront:** Mở ticket tại [AWS Support Center](https://console.aws.amazon.com/support/home#/) chọn **Account Verification** để kích hoạt dịch vụ CloudFront.
 
 ---
 
@@ -86,3 +100,4 @@ aws s3 sync dist/ s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID> --delete
    aws cloudfront create-invalidation --distribution-id <DISTRIBUTION_ID> --paths "/*"
    ```
 4. Mở đường dẫn Domain CloudFront (ví dụ: `https://dxxxxxxxxx.cloudfront.net`) trên trình duyệt để kiểm tra giao diện ứng dụng!
+

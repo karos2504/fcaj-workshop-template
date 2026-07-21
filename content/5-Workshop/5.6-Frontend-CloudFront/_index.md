@@ -69,11 +69,25 @@ dist/
 
 ### 4. Upload Assets to Amazon S3 Bucket
 
-Use the AWS CLI to synchronize static assets from `dist/` to your S3 hosting bucket:
+Use the AWS CLI to create the bucket and synchronize static assets from `dist/` to your S3 hosting bucket:
 
 ```bash
+# Create Frontend S3 Bucket
+aws s3 mb s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID> --region ap-southeast-1
+
+# Synchronize build assets to S3
 aws s3 sync dist/ s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID> --delete
 ```
+
+> [!TIP]
+> **Troubleshooting `Your account must be verified before you can add new CloudFront resources`:**  
+> This security restriction applies to new AWS accounts.  
+> - **Immediate Workaround (S3 Website Endpoint):** Enable S3 Static Website Hosting to preview your React application instantly:
+>   ```bash
+>   aws s3 website s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID>/ --index-document index.html
+>   ```
+>   Access via link: `http://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID>.s3-website.ap-southeast-1.amazonaws.com`
+> - **Unlock CloudFront:** Open a ticket at [AWS Support Center](https://console.aws.amazon.com/support/home#/) under **Account Verification** to enable CloudFront resource creation.
 
 ---
 
@@ -86,3 +100,4 @@ aws s3 sync dist/ s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID> --delete
    aws cloudfront create-invalidation --distribution-id <DISTRIBUTION_ID> --paths "/*"
    ```
 4. Access your CloudFront Domain URL (e.g., `https://dxxxxxxxxx.cloudfront.net`) in a web browser to verify the live application!
+
