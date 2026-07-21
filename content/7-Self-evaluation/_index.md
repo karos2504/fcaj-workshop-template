@@ -30,6 +30,10 @@ To objectively reflect on my internship period, I evaluate myself based on the f
 
 ### Areas for Improvement
 
-* Enhance personal discipline and strictly comply with company policies and organizational regulations.
-* Further refine problem-solving mindset and analytical thinking.
-* Improve daily and workplace communication skills, as well as situational handling.
+Based on the criteria rated as **Fair** in the assessment table above, I identify the following key areas for continuous self-improvement:
+
+* **Professional Knowledge & Technical Skills:** Further deepen my expertise in advanced AWS Serverless architecture, cloud cost optimization solutions, and enterprise security practices.
+* **Discipline & Workflow:** Enhance personal discipline, strictly adhering to working hours, company regulations, and standard professional workflows.
+* **Learning Agility & Continuous Growth:** Accelerate the pace of mastering new cloud technologies and proactively act on constructive feedback from colleagues and mentors.
+* **Communication Skills:** Refine the ability to present ideas concisely and handle situational interactions flexibly in daily team collaboration.
+

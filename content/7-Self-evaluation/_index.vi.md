@@ -30,6 +30,10 @@ Về tác phong, tôi luôn cố gắng hoàn thành tốt nhiệm vụ, tuân t
 
 ### Cần cải thiện
 
-* Nâng cao tính kỹ luật, chấp hành nghiêm chỉnh nội quy của công ty hoặc bất kỳ trong một tổ chức nào
-* Cải thiện trong cách tư duy giải quyết vấn đề
-* Học cách giao tiếp tốt hơn trong giao tiếp hằng ngày và trong công việc, xử lý tình huống
+Dựa trên các tiêu chí được đánh giá ở mức **Khá** trong bảng trên, tôi nhận thấy bản thân cần tiếp tục rèn luyện và hoàn thiện các điểm sau:
+
+* **Kiến thức & Kỹ năng chuyên môn:** Nâng cao trình độ chuyên sâu về kiến trúc đám mây AWS Serverless, các giải pháp tối ưu chi phí và cơ chế bảo mật nâng cao cho dự án thực tế.
+* **Kỷ luật & Quy trình làm việc:** Rèn luyện tính kỷ luật cá nhân cao hơn, tuân thủ nghiêm ngặt giờ giấc, nội quy công ty và quy trình làm việc chuyên nghiệp.
+* **Khả năng học hỏi & Tính cầu tiến:** Chủ động đẩy nhanh tốc độ nghiên cứu công nghệ mới, tích cực lắng nghe feedback từ đồng nghiệp và Mentor để hoàn thiện kỹ năng.
+* **Kỹ năng giao tiếp:** Trau dồi cách trình bày ý tưởng ngắn gọn, rõ ràng và xử lý tình huống linh hoạt hơn trong công việc hàng ngày.
+
