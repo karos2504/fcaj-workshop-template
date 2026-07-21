@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 3. </b> "
 ---
 
-### [Blog 1 - SESSION POLICIES IN AMAZON EKS POD IDENTITY](3.1-Blog1/)
+### [Blog 1 - ...](3.1-Blog1/)
 
 ### [Blog 2 - ...](3.2-Blog2/)
 
