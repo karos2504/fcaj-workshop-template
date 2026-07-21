@@ -6,27 +6,27 @@ chapter: false
 pre: " <b> 5.1 </b> "
 ---
 
-# Smart Attendance SaaS Platform Workshop Overview
+# Overview of the Smart Attendance SaaS Platform Workshop
 
 ### Introduction
 
-In this lab, you will explore the end-to-end architecture and concepts behind building a multi-tenant timekeeping Software-as-a-Service (**SaaS**) platform running 100% on **AWS Serverless**.
+In this lab, you will explore the big picture of building a multi-tenant timekeeping software-as-a-service (**SaaS**) platform powered 100% by the **AWS Serverless** ecosystem.
 
 ### System Architecture Diagram
 
-Below is the complete Serverless infrastructure architecture that you will construct and deploy throughout this workshop:
+Below is the complete serverless architecture model that you will build and deploy throughout this workshop series:
 
-![Smart Attendance SaaS Architecture](/images/2-Proposal/platform_architecture.png)
+![Smart Attendance SaaS Architecture](/images/5-Workshop/5.1-Workshop-overview/platform_architecture.png)
 
 ### Key Objectives & Learning Outcomes
 
-Upon completing this workshop series, you will gain hands-on expertise in:
+After completing this workshop, you will gain hands-on expertise in:
 
-1. **Infrastructure as Code (IaC):** Using **AWS SAM (Serverless Application Model)** to declaratively define and automate 18+ AWS resources in code (`template.yaml`).
-2. **Multi-Tenant Authentication:** Configuring **Amazon Cognito User Pools** with custom tenant claims (`tenantId`, `role`) integrated with **Amazon API Gateway HTTP API v2** via JWT Authorizers.
-3. **High-Performance NoSQL Modeling:** Implementing an **Amazon DynamoDB Single-Table Design**, encrypting data-at-rest via **AWS KMS CMK**, and capturing Change Data Capture (CDC) events with **DynamoDB Streams**.
-4. **Asynchronous Event-Driven Workflows:** Orchestrating **EventBridge Pipes**, **AWS Step Functions Express Workflows**, **Amazon SQS Queues**, and **Amazon SES** to automatically generate and email monthly Excel/PDF attendance reports.
-5. **Edge Security & SPA Distribution:** Deploying a modern React + Vite Single Page Application to **Amazon S3**, served globally through **Amazon CloudFront CDN** secured with Custom Origin Verification Headers (`x-origin-verify`).
+1. **Infrastructure as Code (IaC):** Defining and managing cloud infrastructure using **AWS SAM (Serverless Application Model)** via template code (`template.yaml`).
+2. **Multi-Tenant Authentication:** Configuring **Amazon Cognito User Pool** with custom attributes (`tenantId`, `role`) and attaching it to **Amazon API Gateway HTTP API v2** via JWT Authorizer.
+3. **Optimized NoSQL Database Modeling:** Designing a **Single-Table Design** on **Amazon DynamoDB**, enabling KMS CMK encryption and **DynamoDB Streams** for Change Data Capture (CDC).
+4. **Asynchronous Event-Driven Workflows:** Integrating **EventBridge Pipe**, **AWS Step Functions Express Workflow**, **Amazon SQS**, and **Amazon SES** to automatically generate and deliver monthly PDF/Excel attendance reports via email.
+5. **Web SPA Delivery & Edge Ingress Protection:** Hosting a React SPA on **Amazon S3**, delivering it globally via **Amazon CloudFront CDN**, and restricting API ingress using a Custom Verification Header (`x-origin-verify`).
 
 ### Estimated Duration
 

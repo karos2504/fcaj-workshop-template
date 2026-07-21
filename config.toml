@@ -1,4 +1,4 @@
-baseURL = "http://aws-first-cloud-ai-journey-2026.s3-website-ap-southeast-1.amazonaws.com/"
+baseURL = "https://karos2504.github.io/fcj-workshop-template/"
 relativeURLs = false
 canonifyURLs = false
 defaultContentLanguage = "en"

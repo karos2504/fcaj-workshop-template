@@ -100,19 +100,18 @@ ReportStateMachine:
 Để đảm bảo không bị mất email thông báo trong trường hợp dịch vụ SES hoặc mạng gặp sự cố, hệ thống sử dụng cơ chế **Dead Letter Queue (DLQ)**:
 
 ```yaml
-EmailDLQ:
-  Type: AWS::SQS::Queue
-  Properties:
-    QueueName: smart-attendance-email-dlq
-
 EmailQueue:
   Type: AWS::SQS::Queue
   Properties:
     QueueName: smart-attendance-email-queue
-    VisibilityTimeout: 30
     RedrivePolicy:
       deadLetterTargetArn: !GetAtt EmailDLQ.Arn
       maxReceiveCount: 3
+
+EmailDLQ:
+  Type: AWS::SQS::Queue
+  Properties:
+    QueueName: smart-attendance-email-dlq
 ```
 
-> **Giải thích:** Nếu hàm `EmailWorkerFunction` xử lý lỗi quá 3 lần (`maxReceiveCount: 3`), tin nhắn sẽ tự động được chuyển sang `EmailDLQ` để quản trị viên kiểm tra và xử lý sau.
+* Nếu Lambda Email Worker gặp lỗi quá 3 lần, tin nhắn tự động chuyển sang **EmailDLQ** để hỗ trợ truy vết lỗi mà không làm thất lạc dữ liệu.

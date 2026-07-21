@@ -1,61 +1,60 @@
 ---
-title: "Prerequisites & Environment Setup"
+title: "Prerequisites"
 date: 2024-01-01
 weight: 2
 chapter: false
 pre: " <b> 5.2 </b> "
 ---
 
-# Prerequisites & Development Environment Setup
+# Environment Prerequisites & Setup
 
-Before starting the hands-on deployment of the **Smart Attendance SaaS Platform**, ensure your workstation (or **AWS Cloud9** environment) has the following prerequisites configured.
-
-### 1. Requirements & Tools
-
-1. **AWS Account:** With `AdministratorAccess` permissions or administrative rights to Cognito, API Gateway, Lambda, DynamoDB, Step Functions, SQS, SES, S3, and CloudFront.
-2. **AWS CLI v2:** Command-line tool for interacting with AWS services.
-3. **AWS SAM CLI (Serverless Application Model):** Tool for building, testing, and deploying Serverless infrastructure.
-4. **Node.js (v18+, v20.x recommended):** Runtime environment for Lambda functions and React Vite frontend.
-5. **Git:** Source code version control.
+Before starting the hands-on deployment of the **Smart Attendance SaaS Platform**, ensure your local development environment or AWS Cloud9 workspace is configured with the necessary tools and credentials.
 
 ---
 
-### 2. Verify Installed Tools
+### 1. Required Tooling Setup
 
-Open your Terminal (or AWS Cloud9 Terminal) and execute the following commands to check tool versions:
+Verify that the following CLI tools are installed on your workstation:
 
-```bash
-# 1. Verify AWS CLI
-aws --version
-
-# 2. Verify AWS SAM CLI
-sam --version
-
-# 3. Verify Node.js and npm
-node -v
-npm -v
-```
-
-> **Note:** Each command should output a valid version string without errors.
+* **AWS CLI (v2.x):** Command-line interface for communicating with AWS services.
+  ```bash
+  aws --version
+  ```
+* **AWS SAM CLI:** Tool for building, testing, and deploying Serverless applications.
+  ```bash
+  sam --version
+  ```
+* **Node.js (v20.x+) & npm:** JavaScript runtime for Lambda microservices & React SPA frontend.
+  ```bash
+  node -v
+  npm -v
+  ```
+* **Git:** Source control management.
+  ```bash
+  git --version
+  ```
 
 ---
 
-### 3. Configure AWS Credentials
+### 2. Configure AWS Account Credentials
 
-Initialize and verify your AWS CLI credentials:
+1. Create an IAM User with appropriate administrative permissions (`AdministratorAccess` or service permissions covering Lambda, API Gateway, DynamoDB, Cognito, S3, CloudFront, SQS, Step Functions, KMS, SES).
+2. Execute the CLI configuration wizard:
 
 ```bash
 aws configure
 ```
 
-Provide your parameters when prompted:
+Provide your credentials when prompted:
 
-* **AWS Access Key ID:** `[Your Access Key ID]`
-* **AWS Secret Access Key:** `[Your Secret Access Key]`
-* **Default region name:** `us-east-1` (or `ap-southeast-1`)
-* **Default output format:** `json`
+```text
+AWS Access Key ID [None]: AKIAXXXXXXXXXXXXXXXX
+AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+Default region name [None]: us-east-1
+Default output format [None]: json
+```
 
-Verify your AWS IAM identity:
+Verify your authentication identity:
 
 ```bash
 aws sts get-caller-identity
@@ -63,27 +62,28 @@ aws sts get-caller-identity
 
 ---
 
-### 4. Clone Project Source Code
+### 3. Clone Project Source Repository
 
-Clone the **Smart Attendance SaaS Platform** repository to your workspace:
+Clone the project source repository into your working directory:
 
 ```bash
+cd ~/Documents/AWS
 git clone https://github.com/your-repo/smart-attendance-saas.git
 cd smart-attendance-saas
 ```
 
-The workspace directory structure is organized as follows:
+Source project file structure:
 
-```
+```text
 smart-attendance-saas/
-├── platform_architecture.drawio                # Architecture diagram
-├── backend/                   # Serverless Backend & AWS SAM Template
-│   ├── template.yaml          # Infrastructure as Code (IaC) defining AWS resources
-│   ├── src/                   # Lambda functions logic (Auth, Attendance, Reports, Admin)
-│   └── package.json
-└── frontend/                  # React SPA Dashboard & Mobile Web frontend
-    ├── src/
-    └── package.json
+├── backend/                  # Serverless Backend Infrastructure (AWS SAM)
+│   ├── src/                  # Lambda microservice handler functions
+│   ├── template.yaml         # AWS SAM Infrastructure Template
+│   └── samconfig.toml        # Deployment parameter configurations
+├── frontend/                 # React SPA Frontend (Vite + TailwindCSS)
+│   ├── src/                  # Components and Dashboard pages
+│   └── package.json          # Node dependencies
+└── platform_architecture.drawio # System architecture diagram
 ```
 
-Your environment is now completely set up for the next lab!
+You are now ready to proceed to the backend deployment module!

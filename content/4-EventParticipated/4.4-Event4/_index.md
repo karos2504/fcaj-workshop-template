@@ -108,4 +108,4 @@ The **FCAJ Community Day** provided deep technical insights into autonomous inci
 
 ### Event Photos
 
-![AWS Community Day Event Photo](event_4.jpg)
+![AWS Community Day Event Photo](/images/4-EventParticipated/event_4.jpg)

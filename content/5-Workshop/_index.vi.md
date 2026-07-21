@@ -12,7 +12,7 @@ pre: " <b> 5. </b> "
 
 Trong chuỗi bài thực hành Workshop này, bạn sẽ từng bước xây dựng và triển khai một nền tảng **Smart Attendance SaaS Platform** hoàn chỉnh dành cho mô hình đa doanh nghiệp (Multi-tenant) dựa trên kiến trúc **AWS Serverless Optimized Pro**.
 
-Bạn sẽ trực tiếp thao tác đóng gói hạ tầng bằng mã với **AWS SAM (Serverless Application Model)**, cấu hình bảo mật xác thực với **Amazon Cognito User Pool**, làm việc với **Amazon DynamoDB (Single-Table Design)** cô lập dữ liệu theo `tenantId`, triển khai **AWS Step Functions Express Workflow** và **Amazon SQS / SES** xử lý báo cáo bất đồng bộ, phân phối ứng dụng React SPA qua **Amazon S3** và **Amazon CloudFront CDN**.
+Bạn sẽ trực tiếp thao tác đóng gói hạ tầng bằng mã với **AWS SAM (Serverless Application Model)**, cấu hình bảo mật xác thực với **Amazon Cognito User Pool**, làm việc với **Amazon DynamoDB (Single-Table Design)** cô lập dữ liệu theo `tenantId`, triển khai **AWS Step Functions Express Workflow** và **Amazon SQS / SES** xử lý báo cáo bất đồng bộ, phân phối ứng dụng React SPA qua **Amazon S3** và **Amazon CloudFront CDN** bảo mật với Custom Origin Verification Header.
 
 #### Nội dung thực hành
 

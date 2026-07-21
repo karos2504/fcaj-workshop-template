@@ -1,14 +1,14 @@
 ---
-title: "Deploying Frontend & CloudFront CDN"
+title: "Deploy Frontend & CloudFront CDN"
 date: 2024-01-01
 weight: 6
 chapter: false
 pre: " <b> 5.6 </b> "
 ---
 
-# Deploying React SPA Frontend & CloudFront CDN
+# Deploy React SPA Frontend & CloudFront CDN
 
-In this section, you will compile the user-facing **React Single Page Application (SPA)**, deploy static web artifacts to an **Amazon S3 Bucket**, and serve the application globally via **Amazon CloudFront CDN** integrated with Custom Verification Header security (`x-origin-verify`).
+In this section, you will build the **React Single Page Application (SPA)** web frontend, upload static build artifacts to **Amazon S3**, and distribute the app globally over **Amazon CloudFront CDN** integrated with Custom Verification Headers (`x-origin-verify`).
 
 ---
 
@@ -20,15 +20,15 @@ In this section, you will compile the user-facing **React Single Page Applicatio
                                  └──> [API Gateway (Header: x-origin-verify)]
 ```
 
-* **Amazon S3 (`SpaBucket`):** Stores static `index.html`, `js`, `css`, and asset files. Public internet access is completely blocked directly on the S3 bucket policy.
-* **Amazon CloudFront:** Distributes static content to global Edge Locations with minimal latency.
-* **Custom Verification Header (`x-origin-verify`):** CloudFront automatically injects a secret token header on all API requests routed to API Gateway. API Gateway denies any direct incoming traffic that lacks this secret header, protecting origin APIs from bypassing CloudFront/WAF safeguards.
+* **Amazon S3 (`SpaBucket`):** Stores static `index.html`, `js`, `css`, and image assets for the React application. Direct public HTTP access to the bucket is blocked.
+* **Amazon CloudFront:** Serves static content at low latency worldwide across edge locations.
+* **Custom Verification Header (`x-origin-verify`):** CloudFront automatically injects a secret token header into all origin requests forwarded to API Gateway. API Gateway denies requests missing this secret header, protecting the API Gateway endpoint against direct bypass attacks.
 
 ---
 
 ### 2. Configure Environment Variables (`.env.production`)
 
-Navigate to the `frontend/` directory and configure production variables with the API endpoints output from Lab 5.3:
+Change directory into `frontend/` and populate the production environment configuration with your SAM deployment output values:
 
 ```bash
 cd ../frontend
@@ -45,16 +45,16 @@ VITE_AWS_REGION=us-east-1
 
 ---
 
-### 3. Build the React Application
+### 3. Build React Application
 
-Install frontend dependencies and build the static assets:
+Install dependencies and compile the production bundle:
 
 ```bash
 npm install
 npm run build
 ```
 
-The production bundle is compiled into the `dist/` directory:
+The output build directory `dist/` is generated:
 
 ```text
 dist/
@@ -67,9 +67,9 @@ dist/
 
 ---
 
-### 4. Upload Assets to Amazon S3
+### 4. Upload Assets to Amazon S3 Bucket
 
-Sync the compiled `dist/` directory to your S3 SPA Hosting Bucket using AWS CLI:
+Use the AWS CLI to synchronize static assets from `dist/` to your S3 hosting bucket:
 
 ```bash
 aws s3 sync dist/ s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID> --delete
@@ -77,12 +77,12 @@ aws s3 sync dist/ s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID> --delete
 
 ---
 
-### 5. Verify Site Distribution on CloudFront
+### 5. Verify & Invalidate CloudFront CDN Cache
 
 1. Open the [Amazon CloudFront Console](https://console.aws.amazon.com/cloudfront/).
-2. Select your `smart-attendance` distribution.
-3. Issue a cache **Invalidation** to refresh CDN edge nodes:
+2. Select your distribution associated with `smart-attendance`.
+3. Invalidate cached objects to immediately serve updated assets:
    ```bash
    aws cloudfront create-invalidation --distribution-id <DISTRIBUTION_ID> --paths "/*"
    ```
-4. Navigate to your CloudFront domain URL (e.g. `https://dxxxxxxxxx.cloudfront.net`) in your web browser to test the web interface!
+4. Access your CloudFront Domain URL (e.g., `https://dxxxxxxxxx.cloudfront.net`) in a web browser to verify the live application!

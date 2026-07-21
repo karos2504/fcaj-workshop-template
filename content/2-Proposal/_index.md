@@ -101,104 +101,73 @@ Based on the architecture diagram (`platform_architecture.drawio`), the system o
 
 #### Implementation Phases
 
-The project is structured across 4 standardized phases:
+The project is structured into 4 standardized delivery phases:
 
-1. **Phase 1: Architecture & Data Modeling (Weeks 1–2)**
-   * Design DynamoDB Single-Table schema (Access Patterns: Employee Check-in, Check-out, Monthly Summary, Tenant Admin Queries).
-   * Configure Cognito User Pools, Custom Attributes (`tenantId`, `role`), and Security Policies.
-   * Map end-to-end security ingress flow across CloudFront, WAF v2, and API Gateway.
-2. **Phase 2: Core Serverless Backend Development with AWS SAM (Weeks 3–5)**
-   * Package Infrastructure as Code (IaC) using **AWS SAM / CloudFormation** (`template.yaml`).
-   * Develop Node.js 20.x Lambda microservices for Authentication, Check-in/out, History, Admin, Report Export API, Webhook.
-   * Configure EventBridge Pipe, SQS Queues with DLQ, and Step Functions Express Workflows.
-3. **Phase 3: React SPA Frontend & CloudFront Integration (Weeks 6–7)**
-   * Build Admin Dashboard and Employee Web App interfaces using React + Vite + TailwindCSS.
-   * Integrate Cognito SDK for Auth flows, Token refresh, and role-based access control (RBAC).
-   * Deploy static site build to S3 Bucket with CloudFront CDN distribution and Secret Origin Verification Header.
-4. **Phase 4: Testing, Security Audit, CI/CD & Production Go-Live (Week 8)**
-   * Establish automated CI/CD pipeline using **AWS CodePipeline** and **AWS CodeBuild** (Inspector vulnerability scanning).
-   * Conduct load testing simulating 10,000 concurrent clock-in requests per minute.
-   * Audit security compliance via **AWS Security Hub**, enable **AWS X-Ray** tracing and **CloudWatch Alarms**.
+1. **Phase 1: Architecture & Data Model Design (Weeks 1–2)**
+   * Design Single-Table Design schema on DynamoDB (Access Patterns: Employee Check-in, Check-out, Monthly Summary, Tenant Admin Queries).
+   * Configure Cognito User Pool, Custom Attributes (`tenantId`, `role`), and Security Policies.
+   * Map end-to-end security ingress across CloudFront + WAF v2 + API Gateway.
+2. **Phase 2: Core Serverless Backend with AWS SAM (Weeks 3–5)**
+   * Package infrastructure as code (IaC) using **AWS SAM / CloudFormation** (`template.yaml`).
+   * Develop Lambda microservices (Node.js 20) for Auth, Check-in/out, History, Admin, Report Export API, and Webhooks.
+   * Set up EventBridge Pipe, SQS Queue, SQS Email DLQ, and Step Functions Express Workflows.
+3. **Phase 3: Frontend React SPA & CloudFront Integration (Weeks 6–7)**
+   * Build Admin Dashboard and Employee Web App using React + Vite + TailwindCSS.
+   * Integrate Cognito JS SDK for sign-in/registration, token refresh, and role-based access control (RBAC).
+   * Bundle static site assets and deploy to S3 Bucket + CloudFront Distribution with Secret Origin Verification Header.
+4. **Phase 4: Testing, Security Audit, CI/CD & Go-Live (Week 8)**
+   * Establish CI/CD pipelines via **AWS CodePipeline** and **AWS CodeBuild** (vulnerability scanning with Amazon Inspector).
+   * Perform load testing simulating 10,000 concurrent check-in requests in 1 minute.
+   * Audit security posture using **AWS Security Hub**, enabling distributed tracing via **AWS X-Ray** & **CloudWatch Alarms**.
 
 #### Technical Stack & Requirements
 
-* **Frontend:** React.js, Vite, TailwindCSS, AWS Amplify / Cognito JS SDK.
-* **Backend:** Node.js 20.x (AWS Lambda runtime), AWS SAM (Serverless Application Model), AWS SDK v3.
+* **Frontend:** React.js, Vite, TailwindCSS, AWS Amplify/Cognito JS SDK.
+* **Backend:** Node.js 20.x (AWS Lambda Runtime), AWS SAM (Serverless Application Model), AWS SDK v3.
 * **Database:** Amazon DynamoDB (Single-Table Design, On-Demand Capacity Mode, DynamoDB Streams).
-* **Storage & CDN:** Amazon S3 (Static Website Hosting & Report Files), Amazon CloudFront (Global CDN, TLS 1.3).
+* **Storage & CDN:** Amazon S3 (Static Web & Report Storage), Amazon CloudFront (Edge Network, TLS 1.3).
 * **Security & Auth:** Amazon Cognito, AWS WAF v2, AWS KMS (CMK), AWS Secrets Manager.
 * **Orchestration & Events:** AWS Step Functions, Amazon EventBridge, Amazon SQS.
 
 ---
 
-### 5. Timeline & Milestones
+### 5. Roadmap & Milestones
 
 ```
 +-----------------------------------------------------------------------------------+
-| Month 1: Discovery & Planning    | Month 2: Backend & Data Implementation         |
-| - Finalize requirements & Schema | - Build AWS SAM Template                       |
-| - Design OpenAPI & Cognito Auth  | - Develop Lambda Microservices & DynamoDB      |
+| Month 1: Planning & Design      | Month 2: Backend & Data Implementation          |
+| - Requirements & Data Schema    | - Build AWS SAM Infrastructure Template         |
+| - OpenAPI & Cognito Setup       | - Develop Lambda Microservices & DynamoDB Table |
 +---------------------------------+-------------------------------------------------+
-| Month 3: Frontend & Integration  | Month 4: Testing, Security & Production Go-Live |
-| - Develop React Admin Dashboard | - Peak Load Testing & Security Hub Audit        |
-| - Connect API Gateway & SES     | - Set up CI/CD CodePipeline & Official Go-Live  |
+| Month 3: Frontend Integration   | Month 4: Testing, Security & Production Go-Live |
+| - Develop React Dashboard UI    | - High-load testing, Audit AWS Security Hub     |
+| - Connect API Gateway & SES     | - Setup CodePipeline CI/CD & Production Deploy  |
 +-----------------------------------------------------------------------------------+
 ```
 
-* **Milestone 1 (End of Month 1):** Architecture blueprint finalized, SAM template initialized, Cognito User Pool configured.
-* **Milestone 2 (End of Month 2):** Core Backend APIs (Check-in/out, History, Query, Webhooks) and DynamoDB Single-Table deployed.
-* **Milestone 3 (End of Month 3):** Web Dashboard for Admins/HR and Employee App frontend completed.
-* **Milestone 4 (End of Month 4):** Production Go-Live on AWS Cloud with complete operational documentation.
+* **Milestone 1 (End of Month 1):** Architecture blueprint finalized, SAM template scaffolding complete, Cognito User Pool deployed.
+* **Milestone 2 (End of Month 2):** Core Backend APIs complete (Check-in/out, History, Reports, Webhooks) with DynamoDB Single-Table.
+* **Milestone 3 (End of Month 3):** Web Dashboard for Admin/HR and Employee App fully integrated.
+* **Milestone 4 (End of Month 4):** Full system launched on AWS Cloud Production environment.
 
 ---
 
-### 6. Budget Estimation
+### 6. Cost Analysis & ROI
 
-Estimated monthly cost based on the **AWS Pricing Calculator** for a baseline workload of **100 Tenants – 5,000 Active Employees (500,000 check-in transactions/month)**:
+#### Monthly Infrastructure Cost Estimation (100 Tenants ~ 5,000 Active Employees)
 
-#### Monthly Infrastructure Cost Breakdown
-
-| AWS Service | Estimated Monthly Usage | Monthly Cost (USD) |
+| AWS Service | Actual Usage Metrics | Estimated Cost (USD/Month) |
 | :--- | :--- | :--- |
-| **AWS Lambda** | 2,000,000 requests/month (128MB - 512MB, avg 200ms) | $0.40 USD (Covered by Free Tier) |
-| **Amazon DynamoDB** | On-Demand (500k writes, 1.5M reads, 5GB storage) | $1.25 USD |
-| **Amazon API Gateway** | 2,500,000 HTTP API requests/month | $2.50 USD |
-| **Amazon CloudFront** | 50 GB Data Transfer Out + 1,000,000 HTTP requests | $0.85 USD |
-| **Amazon S3** | 10 GB Report & Static site storage + Intelligent-Tiering | $0.23 USD |
-| **Amazon Cognito** | 5,000 MAUs (Monthly Active Users) | $0.00 USD (Free Tier up to 50k MAUs) |
-| **Amazon EventBridge & SQS**| 1,000,000 events & queue messages/month | $0.40 USD |
-| **Amazon SES** | 10,000 notification emails/month | $1.00 USD |
-| **AWS KMS & Secrets Manager**| 1 Customer Master Key + 2 Secrets | $1.50 USD |
-| **Amazon CloudWatch & X-Ray**| 5GB Log Ingestion, Alarms & Tracing | $1.80 USD |
-| **Total Monthly Infra Cost** | **For 100 Tenants (5,000 Active Users)** | **~$9.93 USD / month** |
+| **Amazon Cognito** | 5,000 MAUs (Free Tier includes 50,000 MAUs) | **$0.00** |
+| **Amazon API Gateway** | 3,000,000 HTTP Requests/month | **$3.00** |
+| **AWS Lambda** | 3,000,000 invocations (128MB RAM, avg 100ms) | **$0.60** |
+| **Amazon DynamoDB** | On-Demand (Storage 5GB, 3M Writes, 6M Reads) | **$4.25** |
+| **Amazon S3** | 10GB Reports & Web Assets (Intelligent-Tiering) | **$0.23** |
+| **Amazon CloudFront** | 50GB Data Transfer Out (Free Tier includes 1TB/month)| **$0.00** |
+| **AWS Step Functions** | 10,000 Express Executions | **$0.05** |
+| **Amazon SQS & SES** | 10,000 transactional emails sent | **$1.00** |
+| **AWS KMS & Secrets Manager** | 1 CMK Key & Secrets | **$0.80** |
+| **TOTAL INFRASTRUCTURE COST**| | **~$9.93 USD/month** |
 
-> **Cost Comparison:** Traditional server infrastructure running 2 EC2 instances (`t3.medium`) + RDS PostgreSQL (`db.t3.medium`) costs roughly **$120 – $150 USD/month**. The AWS Serverless architecture delivers over **90% cost savings**.
-
----
-
-### 7. Risk Assessment
-
-#### Risk Matrix & Mitigation Strategies
-
-| Risk Item | Impact | Likelihood | Mitigation Strategy |
-| :--- | :---: | :---: | :--- |
-| **Lambda Cold Start Spikes** | Medium | Low | Enable Provisioned Concurrency for core Check-in/out functions during morning rush hours; optimize Lambda bundle sizes. |
-| **DynamoDB Throttling & Quotas** | High | Low | Provision DynamoDB in On-Demand Capacity Mode; implement API Gateway and CloudFront caching layer. |
-| **DDoS / Auth Brute Force Attacks** | High | Medium | Enforce **AWS WAF v2** Rate Limiting (1000 req/IP); activate Cognito Advanced Security Mode to block brute force attempts. |
-| **Cross-Tenant Data Leakage** | Critical | Very Low | Enforce strict Partition Key isolation (`TENANT#<tenantId>`) on all database queries; validate JWT Claims at API Gateway. |
-| **Email Delivery Bottlenecks** | Low | Medium | Buffer email events using **Amazon SQS Queues** with Dead Letter Queues (DLQ) for failed message retry mechanisms. |
-
-#### Contingency Plans
-
-* **Disaster Recovery (DR):** Enable DynamoDB Point-in-Time Recovery (PITR) allowing continuous microsecond-level data restores up to 35 days.
-* **Infrastructure Rollback:** Infrastructure defined completely via AWS SAM, enabling full stack rollbacks within 5 minutes in case of deployment errors.
-
----
-
-### 8. Expected Results
-
-#### Technical Improvements
-
-* **Processing Speed:** Check-in response time under **200ms**, attendance history query latency under **50ms**.
-* **Reliability:** 99.99% system availability SLA with automatic failover and recovery.
-* **100% Automation:** Automated report generation and email distribution eliminate manual HR tasks completely.
+> [!TIP]
+> **Return on Investment (ROI):** Compared to traditional legacy infrastructure requiring 24/7 EC2/RDS instances (approx. **$120 - $150 USD/month**), the AWS Serverless architecture delivers **over 90% in monthly infrastructure cost savings**.

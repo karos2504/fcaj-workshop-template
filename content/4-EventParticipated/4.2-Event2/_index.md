@@ -198,4 +198,4 @@ Attending this event was an invaluable experience that exposed me to cutting-edg
 
 ### Event Photos
 
-![AWS Community Day Event Photo](event_2.jpg)
+![AWS Community Day Event Photo](/images/4-EventParticipated/event_2.jpg)

@@ -1,44 +1,46 @@
 ---
-title: "Deploying Serverless Backend with AWS SAM"
+title: "Deploy Serverless Backend"
 date: 2024-01-01
 weight: 3
 chapter: false
 pre: " <b> 5.3 </b> "
 ---
 
-# Deploying Serverless Backend with AWS SAM & Cognito
+# Deploy Serverless Backend Infrastructure with AWS SAM & Cognito
 
-In this module, you will use **AWS SAM (Serverless Application Model)** to package and deploy the entire Serverless Backend infrastructure including **Amazon Cognito User Pool**, **HTTP API Gateway v2**, **AWS Lambda** microservices, **Amazon DynamoDB Single-Table**, and **AWS KMS Keys**.
+In this module, you will package and deploy the complete Serverless Backend infrastructure using **AWS SAM (Serverless Application Model)**, including **Amazon Cognito User Pool**, **HTTP API Gateway v2**, **AWS Lambda** microservices, **Amazon DynamoDB Single-Table**, and **AWS KMS Keys**.
 
 ---
 
-### 1. Understanding the SAM Template (`template.yaml`)
+### 1. Inspect Infrastructure Code (`template.yaml`)
 
-The `template.yaml` file defines the Infrastructure as Code (IaC) for your entire platform:
+The `template.yaml` file specifies all cloud resources declaratively. Key components include:
 
-* **Cognito User Pool (`CognitoUserPool`):** Manages sign-up, login, and JWT token issuance with Custom Attributes `tenantId` and `role` for multi-tenant isolation.
-* **HTTP API Gateway (`AttendanceApi`):** Configures a `CognitoAuthorizer` enforcing JWT authentication against your Cognito User Pool issuer.
-* **KMS Key (`DataKMSKey`):** Customer Managed Key (CMK) providing data-at-rest encryption for DynamoDB and S3.
-* **DynamoDB Table (`SaaSAttendanceTable`):** Single-Table Design with Partition Key `PK` and Sort Key `SK` operating in On-Demand capacity mode.
+* **Cognito User Pool (`CognitoUserPool`):** Manages user registration, authentication, and JWT issuing. Defines custom schema attributes `tenantId` and `role` to support multi-tenancy.
+* **HTTP API Gateway (`AttendanceApi`):** Configures `CognitoAuthorizer` using OAuth2/JWT standard pointing to the Cognito User Pool issuer URL.
+* **KMS Key (`DataKMSKey`):** Customer Managed Key (CMK) for data-at-rest encryption across DynamoDB and S3 buckets.
+* **DynamoDB Table (`SaaSAttendanceTable`):** Single-Table Design schema with `PK` partition key and `SK` sort key, On-Demand billing, and DynamoDB Streams enabled.
 * **Lambda Microservices:**
-  * `AuthFunction`: Registration, login, and token verification (`/auth/*`).
-  * `CheckInFunction`: Employee check-in recording (`/attendance/check-in`).
-  * `CheckOutFunction`: Employee check-out recording (`/attendance/check-out`).
-  * `AttendanceHistoryFunction`: Attendance history querying (`/attendance/history`).
-  * `AdminFunction`: HR admin tenant & employee management (`/admin/*`).
+  * `AuthFunction`: Handles login, registration, and token exchange (`/auth/*`).
+  * `CheckInFunction`: Records employee clock-in events (`/attendance/check-in`).
+  * `CheckOutFunction`: Records employee clock-out events (`/attendance/check-out`).
+  * `AttendanceHistoryFunction`: Queries attendance logs (`/attendance/history`).
+  * `AdminFunction`: Handles admin management and company metrics (`/admin/*`).
+  * `ReportFunction`: Handles async report creation requests.
+  * `WebhookFunction`: Processes external payment webhooks and system alerts.
 
 ---
 
-### 2. Build the SAM Project
+### 2. Build Infrastructure Artifacts (`sam build`)
 
-Navigate to the `backend/` folder and build your Lambda functions:
+Navigate to the `backend/` directory and execute the build command:
 
 ```bash
 cd backend
 sam build
 ```
 
-Expected output:
+Expected build confirmation:
 
 ```text
 Build Succeeded
@@ -49,15 +51,15 @@ Valid Templates  : .aws-sam/build/template.yaml
 
 ---
 
-### 3. Deploy Stack to AWS Cloud
+### 3. Deploy Cloud Infrastructure (`sam deploy`)
 
-Run guided deployment using SAM CLI:
+Execute the guided deployment command:
 
 ```bash
 sam deploy --guided
 ```
 
-Fill in the prompt parameters:
+Provide the deployment parameters when prompted:
 
 ```text
 Configuring SAM deploy
@@ -75,18 +77,27 @@ Configuring SAM deploy
 	SAM configuration environment [default]: default
 ```
 
-CloudFormation resource creation takes approximately 2–3 minutes.
+CloudFormation stack creation takes approximately 2–3 minutes.
 
 ---
 
-### 4. Verify Output Details
+### 4. Capture Stack Outputs
 
-Once deployment completes, SAM will print the stack outputs in your terminal:
+Upon successful deployment, SAM CLI displays the stack `Outputs`:
 
 ```text
 Key                 AttendanceApiUrl
-Description         Link API Endpoint
+Description         API Endpoint URL
 Value               https://xxxxxxx.execute-api.us-east-1.amazonaws.com/prod
+
+Key                 CognitoUserPoolId
+Description         Cognito User Pool ID
+Value               us-east-1_xxxxxxxxx
+
+Key                 CognitoUserPoolClientId
+Description         Cognito App Client ID
+Value               xxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-> **Important:** Save the `AttendanceApiUrl` along with your `CognitoUserPoolId` and `CognitoUserPoolClientId` for configuring the frontend in upcoming steps!
+> [!IMPORTANT]
+> Save the `AttendanceApiUrl`, `CognitoUserPoolId`, and `CognitoUserPoolClientId` values. You will need them to configure the React SPA frontend in subsequent modules!

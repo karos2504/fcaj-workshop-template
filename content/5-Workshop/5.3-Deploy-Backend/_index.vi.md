@@ -14,18 +14,20 @@ Trong phần này, bạn sẽ sử dụng **AWS SAM (Serverless Application Mode
 
 ### 1. Phân tích AWS SAM Template (`template.yaml`)
 
-File `template.yaml` định nghĩa toàn bộ tài nguyên hạ tầng của dự án. Hãy xem qua các thành phần cốt lõi:
+File `template.yaml` định nghĩa toàn bộ tài nguyên hạ tầng của dự án dưới dạng mã (IaC). Hãy xem qua các thành phần cốt lõi:
 
-* **Cognito User Pool (`CognitoUserPool`):** Quản lý đăng ký, đăng nhập và cấp mã Token JWT. Khai báo Custom Attributes `tenantId` và `role` để hỗ trợ đa doanh nghiệp.
+* **Cognito User Pool (`CognitoUserPool`):** Quản lý đăng ký, đăng nhập và cấp mã Token JWT. Khai báo Custom Attributes `tenantId` và `role` để hỗ trợ đa doanh nghiệp (Multi-tenant).
 * **HTTP API Gateway (`AttendanceApi`):** Cấu hình `CognitoAuthorizer` sử dụng chuẩn OAuth2/JWT với Issuer URL trỏ về Cognito User Pool.
 * **KMS Key (`DataKMSKey`):** Khóa CMK mã hóa dữ liệu tại chỗ (Data at rest) cho DynamoDB và S3.
-* **DynamoDB Table (`SaaSAttendanceTable`):** Bảng Single-Table Design với HASH Key `PK` và RANGE Key `SK`, chế độ On-Demand Billing.
+* **DynamoDB Table (`SaaSAttendanceTable`):** Bảng Single-Table Design với HASH Key `PK` và RANGE Key `SK`, chế độ On-Demand Billing và DynamoDB Streams (CDC enabled).
 * **Lambda Microservices:**
   * `AuthFunction`: Đăng nhập, đăng ký và xác thực tài khoản (`/auth/*`).
   * `CheckInFunction`: Ghi nhận dữ liệu check-in nhân viên (`/attendance/check-in`).
   * `CheckOutFunction`: Ghi nhận dữ liệu check-out (`/attendance/check-out`).
   * `AttendanceHistoryFunction`: Truy vấn lịch sử chấm công (`/attendance/history`).
   * `AdminFunction`: Quản trị nhân sự và tổng hợp dữ liệu doanh nghiệp (`/admin/*`).
+  * `ReportFunction`: Tiếp nhận yêu cầu xuất báo cáo và khởi chạy async workflow.
+  * `WebhookFunction`: Xử lý webhook thanh toán B2B và thông báo hệ thống ngoài.
 
 ---
 
@@ -87,6 +89,15 @@ Khi quá trình deploy kết thúc, màn hình Terminal sẽ trả về thông t
 Key                 AttendanceApiUrl
 Description         Link API Endpoint
 Value               https://xxxxxxx.execute-api.us-east-1.amazonaws.com/prod
+
+Key                 CognitoUserPoolId
+Description         Cognito User Pool ID
+Value               us-east-1_xxxxxxxxx
+
+Key                 CognitoUserPoolClientId
+Description         Cognito App Client ID
+Value               xxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-> **Lưu ý:** Hãy lưu lại giá trị `AttendanceApiUrl` và `CognitoUserPoolId` / `CognitoUserPoolClientId` để cấu hình cho ứng dụng Frontend ở bài lab tiếp theo!
+> [!IMPORTANT]
+> Hãy lưu lại các giá trị `AttendanceApiUrl`, `CognitoUserPoolId`, và `CognitoUserPoolClientId` để cấu hình cho ứng dụng Frontend ở bài lab tiếp theo!

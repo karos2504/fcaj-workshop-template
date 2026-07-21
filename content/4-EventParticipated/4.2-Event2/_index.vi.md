@@ -198,4 +198,4 @@ Tham gia sự kiện này là một trải nghiệm vô cùng quý báu, giúp t
 
 ### Hình ảnh sự kiện
 
-![Hình ảnh sự kiện AWS Community Day](event_2.jpg)
+![Hình ảnh sự kiện AWS Community Day](/images/4-EventParticipated/event_2.jpg)

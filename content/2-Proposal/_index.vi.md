@@ -49,7 +49,7 @@ Nền tảng **Smart Attendance SaaS** giải quyết triệt để các bài to
 
 Nền tảng áp dụng mô hình kiến trúc **AWS Serverless Multi-Layered Architecture** hoàn chỉnh:
 
-![Smart Attendance SaaS Architecture](/2-Proposal/platform_architecture.png)
+![Smart Attendance SaaS Architecture](/images/2-Proposal/platform_architecture.png)
 
 #### Các tầng dịch vụ AWS sử dụng
 
@@ -148,57 +148,26 @@ Dự án được triển khai theo 4 giai đoạn chuẩn hóa:
 * **Mốc 1 (Cuối Tháng 1):** Hoàn tất bản vẽ kiến trúc chi tiết, SAM template mẫu và Cognito User Pool.
 * **Mốc 2 (Cuối Tháng 2):** Hoàn thành bộ API Backend (Check-in/out, Báo cáo, Webhook) và DynamoDB Single-Table.
 * **Mốc 3 (Cuối Tháng 3):** Hoàn thiện Web Dashboard cho Admin/HR và Employee App.
-* **Mốc 4 (Cuối Tháng 4):** Go-Live chính thức hệ thống trên AWS Cloud, bàn giao tài liệu vận hành.
+* **Mốc 4 (Cuối Tháng 4):** Đưa toàn bộ hệ thống lên môi trường Production trên AWS Cloud.
 
 ---
 
-### 6. Ước tính ngân sách
+### 6. Phân tích Chi phí & ROI
 
-Dựa trên công cụ **AWS Pricing Calculator**, ước tính chi phí hàng tháng cho quy mô **100 Doanh nghiệp (Tenants) – 5,000 Nhân viên (500,000 lượt check-in/tháng)**:
+#### Chi phí Hạ tầng Hàng tháng (Ước tính cho 100 Tenants ~ 5,000 Nhân viên)
 
-#### Chi phí hạ tầng AWS hàng tháng
-
-| Dịch Vụ AWS | Mức Sử Dụng Dự Tính | Chi Phí Hàng Tháng (USD) |
+| Dịch Vụ AWS | Mức Sử Dụng Thực Tế | Chi Phí Ước Tính (USD/Tháng) |
 | :--- | :--- | :--- |
-| **AWS Lambda** | 2,000,000 requests/tháng (128MB - 512MB, avg 200ms) | $0.40 USD (Trong Free Tier) |
-| **Amazon DynamoDB** | On-Demand (500k writes, 1.5M reads, 5GB storage) | $1.25 USD |
-| **Amazon API Gateway** | 2,500,000 HTTP API requests/tháng | $2.50 USD |
-| **Amazon CloudFront** | 50 GB Data Transfer Out + 1,000,000 HTTP requests | $0.85 USD |
-| **Amazon S3** | 10 GB Report & Static site + Intelligent-Tiering | $0.23 USD |
-| **Amazon Cognito** | 5,000 MAUs (Monthly Active Users) | $0.00 USD (Miễn phí 50,000 MAUs) |
-| **Amazon EventBridge & SQS**| 1,000,000 events & messages/tháng | $0.40 USD |
-| **Amazon SES** | 10,000 emails thông báo/tháng | $1.00 USD |
-| **AWS KMS & Secrets Manager**| 1 Customer Master Key + 2 Secrets | $1.50 USD |
-| **Amazon CloudWatch & X-Ray**| Logs 5GB/tháng, Alarms & Tracing | $1.80 USD |
-| **Tổng Chi Phí Hạ Tầng** | **Cho toàn bộ 100 Tenants (5,000 Users)** | **~$9.93 USD / tháng** |
+| **Amazon Cognito** | 5,000 MAUs (Free Tier 50,000 MAUs) | **$0.00** |
+| **Amazon API Gateway** | 3,000,000 HTTP Requests/tháng | **$3.00** |
+| **AWS Lambda** | 3,000,000 invocations (128MB RAM, avg 100ms) | **$0.60** |
+| **Amazon DynamoDB** | On-Demand (Storage 5GB, 3M Writes, 6M Reads) | **$4.25** |
+| **Amazon S3** | 10GB Reports & Web Assets (Intelligent-Tiering) | **$0.23** |
+| **Amazon CloudFront** | 50GB Data Transfer Out (Free Tier 1TB/month) | **$0.00** |
+| **AWS Step Functions** | 10,000 Express Executions | **$0.05** |
+| **Amazon SQS & SES** | 10,000 emails sent | **$1.00** |
+| **AWS KMS & Secrets Manager** | 1 CMK Key & Secrets | **$0.80** |
+| **TỔNG CHI PHÍ HẠ TẦNG** | | **~$9.93 USD/tháng** |
 
-> **So sánh:** Mô hình truyền thống chạy 2 máy chủ EC2 (`t3.medium`) + RDS PostgreSQL (`db.t3.medium`) có chi phí ước tính khoảng **$120 - $150 USD/tháng**. Kiến trúc Serverless giúp **tiết kiệm hơn 90% chi phí vận hành**.
-
----
-
-### 7. Đánh giá rủi ro
-
-#### Ma trận rủi ro & Chiến lược giảm thiểu
-
-| Rủi Ro Phát Sinh | Mức Độ | Xác Suất | Chiến Lược Giảm Thiểu (Mitigation Strategy) |
-| :--- | :---: | :---: | :--- |
-| **Tăng đột biến Cold Start của Lambda** | Trung bình | Thấp | Sử dụng Provisioned Concurrency cho các hàm Check-in/out trọng yếu giờ cao điểm; tối ưu dung lượng package Lambda. |
-| **Vượt Hạn ngạch (Quota Limit) DynamoDB** | Cao | Thấp | Cấu hình DynamoDB chế độ Auto-Scaling On-Demand Capacity Mode; áp dụng caching tại API Gateway / CloudFront. |
-| **Tấn công DDoS / Brute Force Auth** | Cao | Trung bình | Bật **AWS WAF v2** với Rate Limiting (1000 req/IP); kích hoạt Cognito Advanced Security Mode chặn Brute Force. |
-| **Rò rỉ dữ liệu giữa các Tenant** | Rất Cao | Cực Thấp | Bắt buộc sử dụng Partition Key Isolation (`TENANT#<tenantId>`) trong mọi Query; kiểm tra chặt chẽ JWT Claim tại API Gateway. |
-| **Nghẽn tiến trình gửi Email hàng loạt** | Thấp | Trung bình | Đẩy tin nhắn qua **Amazon SQS Queue Buffer**; cấu hình Dead Letter Queue (DLQ) để ghi nhận và retry các mail thất bại. |
-
-#### Kế hoạch dự phòng (Contingency Plan)
-
-* **Khôi phục thảm họa (Disaster Recovery):** Bật chế độ Point-in-Time Recovery (PITR) cho DynamoDB cho phép khôi phục dữ liệu tới từng giây trong vòng 35 ngày.
-* **Infrastructure as Code Rollback:** Toàn bộ hạ tầng định nghĩa qua AWS SAM, cho phép rollback phiên bản trong vòng 5 phút nếu có sự cố deployment.
-
----
-
-### 8. Kết quả kỳ vọng
-
-#### Cải tiến kỹ thuật
-
-* **Tốc độ xử lý:** Thời gian phản hồi Check-in dưới **200ms**, truy vấn lịch sử chấm công dưới **50ms**.
-* **Độ tin cậy:** Hệ thống đạt độ sẵn sàng **99.99%**, tự động khôi phục lỗi không cần can thiệp con người.
-* **Tự động hóa 100%:** Luồng tạo báo cáo và gửi email tự động giúp loại bỏ 100% thao tác thủ công.
+> [!TIP]
+> **Hiệu quả đầu tư (ROI):** So với giải pháp hạ tầng truyền thống duy trì máy chủ EC2/RDS 24/7 (khoảng **$120 - $150 USD/tháng**), giải pháp AWS Serverless giúp doanh nghiệp tiết kiệm **hơn 90% chi phí vận hành hạ tầng**.

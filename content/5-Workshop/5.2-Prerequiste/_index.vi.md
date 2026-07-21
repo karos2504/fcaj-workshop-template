@@ -8,41 +8,38 @@ pre: " <b> 5.2 </b> "
 
 # Chuẩn bị Môi trường Triển khai
 
-Trước khi bắt đầu thực hành xây dựng hệ thống **Smart Attendance SaaS Platform**, bạn cần đảm bảo máy tính cá nhân (hoặc môi trường **AWS Cloud9**) đã cài đặt đầy đủ các công cụ sau.
-
-### 1. Yêu cầu Tài khoản & Công cụ
-
-1. **Tài khoản AWS (AWS Account):** Quyền `AdministratorAccess` hoặc các quyền quản trị trên các dịch vụ Cognito, API Gateway, Lambda, DynamoDB, Step Functions, SQS, SES, S3, CloudFront.
-2. **AWS CLI v2:** Công cụ dòng lệnh tương tác với AWS APIs.
-3. **AWS SAM CLI (Serverless Application Model):** Công cụ đóng gói, build và deploy hạ tầng Serverless.
-4. **Node.js (v18 trở lên, khuyến nghị v20.x):** Môi trường chạy cho Lambda backend và React Vite frontend.
-5. **Git:** Quản lý mã nguồn.
+Để bắt đầu chuỗi thực hành triển khai dự án **Smart Attendance SaaS Platform**, bạn cần chuẩn bị các công cụ và cấu hình môi trường dưới đây trên máy tính cá nhân hoặc môi trường AWS Cloud9.
 
 ---
 
-### 2. Kiểm tra các công cụ cài đặt
+### 1. Yêu cầu Cài đặt Công cụ (Prerequisites)
 
-Mở Terminal (hoặc Command Prompt / Cloud9 Terminal) và chạy các câu lệnh sau để kiểm tra phiên bản:
+Hãy đảm bảo máy tính của bạn đã được cài đặt các công cụ lệnh sau:
 
-```bash
-# 1. Kiểm tra AWS CLI
-aws --version
-
-# 2. Kiểm tra AWS SAM CLI
-sam --version
-
-# 3. Kiểm tra Node.js và npm
-node -v
-npm -v
-```
-
-> **Lưu ý:** Kết quả trả về cần hiển thị thông tin phiên bản hợp lệ của từng công cụ.
+* **AWS CLI (v2.x):** Công cụ dòng lệnh giao tiếp với tài nguyên AWS Cloud.
+  ```bash
+  aws --version
+  ```
+* **AWS SAM CLI:** Công cụ xây dựng và đóng gói ứng dụng Serverless.
+  ```bash
+  sam --version
+  ```
+* **Node.js (v20.x trở lên) & npm:** Môi trường thực thi JavaScript cho Lambda microservices & React SPA.
+  ```bash
+  node -v
+  npm -v
+  ```
+* **Git:** Quản lý mã nguồn.
+  ```bash
+  git --version
+  ```
 
 ---
 
-### 3. Cấu hình AWS Credentials
+### 2. Cấu hình Tài khoản AWS & Credentials
 
-Kiểm tra và cấu hình tài khoản AWS CLI bằng lệnh:
+1. Tạo một tài khoản AWS (nếu chưa có) và khởi tạo một người dùng IAMUser có quyền quản trị tối thiểu cho bài lab (`AdministratorAccess` hoặc các quyền dịch vụ bao gồm Lambda, API Gateway, DynamoDB, Cognito, S3, CloudFront, SQS, Step Functions, KMS, SES).
+2. Chạy câu lệnh cấu hình AWS CLI credentials:
 
 ```bash
 aws configure
@@ -50,12 +47,14 @@ aws configure
 
 Nhập các thông tin tương ứng:
 
-* **AWS Access Key ID:** `[Key ID của bạn]`
-* **AWS Secret Access Key:** `[Secret Key của bạn]`
-* **Default region name:** `us-east-1` (hoặc `ap-southeast-1`)
-* **Default output format:** `json`
+```text
+AWS Access Key ID [None]: AKIAXXXXXXXXXXXXXXXX
+AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+Default region name [None]: us-east-1
+Default output format [None]: json
+```
 
-Kiểm tra quyền truy cập tài khoản bằng lệnh:
+Kiểm tra kết nối thành công:
 
 ```bash
 aws sts get-caller-identity
@@ -63,27 +62,28 @@ aws sts get-caller-identity
 
 ---
 
-### 4. Tải Mã nguồn Dự án
+### 3. Tải Mã nguồn Dự án (Source Code)
 
-Tải mã nguồn dự án **Smart Attendance SaaS Platform** về máy:
+Clone repository mã nguồn dự án `smart-attendance-saas` về máy local:
 
 ```bash
+cd ~/Documents/AWS
 git clone https://github.com/your-repo/smart-attendance-saas.git
 cd smart-attendance-saas
 ```
 
-Cấu trúc thư mục của dự án như sau:
+Cấu trúc thư mục mã nguồn bao gồm:
 
-```
+```text
 smart-attendance-saas/
-├── platform_architecture.drawio                # Sơ đồ kiến trúc hệ thống
-├── backend/                   # Mã nguồn Serverless Backend & AWS SAM Template
-│   ├── template.yaml          # File IaC AWS SAM quy định toàn bộ tài nguyên AWS
-│   ├── src/                   # Logic các hàm Lambda (Auth, Attendance, Reports, Admin)
-│   └── package.json
-└── frontend/                  # Mã nguồn React SPA Dashboard & Mobile Web
-    ├── src/
-    └── package.json
+├── backend/                  # Mã nguồn Serverless Backend (AWS SAM)
+│   ├── src/                  # Các hàm Lambda microservices
+│   ├── template.yaml         # AWS SAM Infrastructure Template
+│   └── samconfig.toml        # Cấu hình tham số deployment
+├── frontend/                 # Mã nguồn React SPA Frontend (Vite + Tailwind)
+│   ├── src/                  # Components và giao diện Dashboard
+│   └── package.json          # Quản lý dependencies
+└── platform_architecture.drawio # Sơ đồ kiến trúc hệ thống
 ```
 
-Đến bước này, môi trường phát triển của bạn đã sẵn sàng cho bài lab tiếp theo!
+Bạn đã sẵn sàng để bước sang bài thực hành tiếp theo!

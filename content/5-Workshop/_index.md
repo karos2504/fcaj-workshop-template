@@ -6,20 +6,20 @@ chapter: false
 pre: " <b> 5. </b> "
 ---
 
-# Building a Multi-Tenant Smart Attendance SaaS Platform with AWS Serverless Architecture
+# Building a Multi-Tenant Smart Attendance Platform with AWS Serverless Architecture
 
 #### Overview
 
-In this hands-on workshop series, you will step-by-step construct and deploy a production-grade **Smart Attendance SaaS Platform** for multi-tenant organizations based on the **AWS Serverless Optimized Pro Architecture**.
+In this hands-on Workshop series, you will step-by-step build and deploy a complete **Smart Attendance SaaS Platform** engineered for multi-tenant organizations using **AWS Serverless Optimized Pro Architecture**.
 
-You will define Infrastructure as Code (IaC) using **AWS SAM (Serverless Application Model)**, configure identity & access management with **Amazon Cognito User Pools**, implement an **Amazon DynamoDB Single-Table Design** enforcing strict tenant isolation (`tenantId`), orchestrate asynchronous report generation workflows using **AWS Step Functions**, **Amazon SQS**, and **Amazon SES**, and deploy a modern React SPA frontend delivered globally via **Amazon S3** and **Amazon CloudFront CDN**.
+You will directly practice Infrastructure as Code (IaC) with **AWS SAM (Serverless Application Model)**, configure identity authentication with **Amazon Cognito User Pool**, model data with **Amazon DynamoDB (Single-Table Design)** enforcing tenant isolation via `tenantId`, implement **AWS Step Functions Express Workflows** and **Amazon SQS / SES** for asynchronous report generation, and deploy a React SPA frontend globally over **Amazon S3** and **Amazon CloudFront CDN** secured with Custom Origin Verification Headers.
 
-#### Workshop Labs Structure
+#### Workshop Modules
 
 1. [Workshop Overview](5.1-Workshop-overview/)
-2. [Prerequisites & Environment Setup](5.2-Prerequiste/)
-3. [Deploying Serverless Backend with AWS SAM](5.3-Deploy-Backend/)
-4. [Configuring DynamoDB Single-Table & DynamoDB Streams](5.4-DynamoDB-SingleTable/)
-5. [Building Asynchronous Reporting Workflow](5.5-Async-Reporting/)
-6. [Deploying React SPA Frontend & CloudFront CDN](5.6-Frontend-CloudFront/)
+2. [Prerequisites](5.2-Prerequiste/)
+3. [Deploy Serverless Backend with AWS SAM](5.3-Deploy-Backend/)
+4. [DynamoDB Single-Table Design & DynamoDB Streams](5.4-DynamoDB-SingleTable/)
+5. [Build Asynchronous Reporting Workflow](5.5-Async-Reporting/)
+6. [Deploy React SPA Frontend & CloudFront CDN](5.6-Frontend-CloudFront/)
 7. [End-to-End Testing & Resource Cleanup](5.7-Testing-Cleanup/)

@@ -82,7 +82,7 @@ Are you sure you want to delete the stack smart-attendance-backend in region us-
 Are you sure you want to delete the folder smart-attendance-backend in S3? [y/N]: y
 ```
 
-Chờ khoảng 3–5 phút để CloudFormation tự động hủy toàn bộ 18+ tài nguyên AWS (Cognito, API Gateway, Lambda, DynamoDB, Step Functions, SQS, SES, KMS Keys).
+Chờ khoảng 3–5 phút để CloudFormation tự động hủy toàn bộ tài nguyên AWS (Cognito, API Gateway, Lambda, DynamoDB, Step Functions, SQS, SES, KMS Keys).
 
 ---
 
