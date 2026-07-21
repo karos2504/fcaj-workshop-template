@@ -205,7 +205,6 @@ Based on an exact node-by-node inventory of **24 resource instances** across **2
 
 > [!TIP]
 > **Return on Investment (ROI):**
+>
 > * **78% to 95% Monthly Cost Reduction** compared to maintaining 24/7 dedicated EC2 application servers and RDS database instances.
 > * **Zero Idle Cost:** During non-business hours (nights and weekends), compute and API expenses naturally scale down to **$0 USD**.
-
-
