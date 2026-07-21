@@ -99,5 +99,7 @@ aws s3 sync dist/ s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID> --delete
    ```bash
    aws cloudfront create-invalidation --distribution-id <DISTRIBUTION_ID> --paths "/*"
    ```
-4. Access your CloudFront Domain URL (e.g., `https://dxxxxxxxxx.cloudfront.net`) in a web browser to verify the live application!
+4. Access your CloudFront Domain URL (e.g., `https://dxxxxxxxxx.cloudfront.net`) or S3 Website Endpoint in a web browser to verify the live application!
+
+![Smart Attendance React SPA Web Application Interface](/images/5-Workshop/5.6-Frontend-CloudFront/run_front_end.png)
 

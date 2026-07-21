@@ -49,6 +49,8 @@ Built Artifacts  : .aws-sam/build
 Valid Templates  : .aws-sam/build/template.yaml
 ```
 
+![Kết quả thực thi sam build thành công](/images/5-Workshop/5.3-Deploy-Backend/sam_build.png)
+
 ---
 
 ### 3. Triển khai hạ tầng lên AWS Cloud với `sam deploy`
@@ -78,6 +80,8 @@ Configuring SAM deploy
 ```
 
 Quá trình khởi tạo các tài nguyên CloudFormation sẽ diễn ra trong khoảng 2–3 phút.
+
+![Kết quả thực thi sam deploy triển khai hạ tầng AWS](/images/5-Workshop/5.3-Deploy-Backend/sam_deploy.png)
 
 > [!TIP]
 > **Xử lý lỗi `Error: S3 Bucket does not exist`:**  

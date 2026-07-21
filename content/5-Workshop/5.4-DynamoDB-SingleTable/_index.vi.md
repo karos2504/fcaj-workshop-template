@@ -34,12 +34,23 @@ Thay vì tạo nhiều bảng riêng lẻ cho từng doanh nghiệp hoặc từn
 ### 2. Kiểm tra DynamoDB Table trên AWS Console
 
 1. Mở [Amazon DynamoDB Console](https://console.aws.amazon.com/dynamodbv2/).
+
+![Giao diện Amazon DynamoDB Console](/images/5-Workshop/5.4-DynamoDB-SingleTable/access_amazon_dynamodb.png)
+
 2. Chọn mục **Tables** -> Chọn bảng `smart-attendance-database`.
 3. Kiểm tra mục **Overview**:
    * **Read/Write capacity mode:** `On-Demand` (Tự động mở rộng theo lưu lượng thực tế).
+
+![Kiểm tra Capacity Mode On-Demand](/images/5-Workshop/5.4-DynamoDB-SingleTable/check_capacity_mode.png)
+
    * **Encryption:** `KMS` (Mã hóa bằng Customer Managed Key `DataKMSKey`).
    * **Point-in-time recovery (PITR):** `ENABLED`.
+
+![Kiểm tra tính năng Point-in-time recovery (PITR)](/images/5-Workshop/5.4-DynamoDB-SingleTable/check_pirt.png)
+
    * **DynamoDB Streams:** `ENABLED (NEW_AND_OLD_IMAGES)`.
+
+![Kiểm tra trạng thái DynamoDB Streams](/images/5-Workshop/5.4-DynamoDB-SingleTable/check_dynamo_stream.png)
 
 ---
 
@@ -58,3 +69,4 @@ DdbToEventBridgePipe:
 
 * Khi một lượt check-in mới được ghi vào DynamoDB, **DynamoDB Streams** tự động tạo ra một thay đổi dữ liệu (Stream Record).
 * **EventBridge Pipe** đọc các bản ghi này và đẩy thẳng sự kiện `AttendanceCreated` sang **EventBridge Event Bus** để kích hoạt các tiến trình gửi email hoặc bắn Webhook thời gian thực.
+

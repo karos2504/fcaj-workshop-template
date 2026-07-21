@@ -34,12 +34,23 @@ Instead of provisioning separate databases or tables per tenant/entity (Users, A
 ### 2. Inspect DynamoDB Table via AWS Console
 
 1. Open the [Amazon DynamoDB Console](https://console.aws.amazon.com/dynamodbv2/).
+
+![Amazon DynamoDB Console Dashboard](/images/5-Workshop/5.4-DynamoDB-SingleTable/access_amazon_dynamodb.png)
+
 2. Select **Tables** -> Choose `smart-attendance-database`.
 3. Review the **Overview** section:
    * **Read/Write capacity mode:** `On-Demand` (scales throughput automatically).
+
+![Check On-Demand Capacity Mode](/images/5-Workshop/5.4-DynamoDB-SingleTable/check_capacity_mode.png)
+
    * **Encryption:** `KMS` (encrypted using Customer Managed Key `DataKMSKey`).
    * **Point-in-time recovery (PITR):** `ENABLED`.
+
+![Check Point-in-Time Recovery (PITR)](/images/5-Workshop/5.4-DynamoDB-SingleTable/check_pirt.png)
+
    * **DynamoDB Streams:** `ENABLED (NEW_AND_OLD_IMAGES)`.
+
+![Check DynamoDB Streams Status](/images/5-Workshop/5.4-DynamoDB-SingleTable/check_dynamo_stream.png)
 
 ---
 
@@ -58,3 +69,4 @@ DdbToEventBridgePipe:
 
 * When a new clock-in entry is committed to DynamoDB, **DynamoDB Streams** captures the change record.
 * **EventBridge Pipe** routes the `AttendanceCreated` event directly to the **EventBridge Event Bus**, triggering background notification workers or third-party webhooks seamlessly.
+

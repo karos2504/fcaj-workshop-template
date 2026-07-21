@@ -34,6 +34,8 @@ Verify that the following CLI tools are installed on your workstation:
   git --version
   ```
 
+![CLI Tools Version Check Output](/images/5-Workshop/5.2-Prerequisite/check_version_installation.png)
+
 ---
 
 ### 2. Step-by-Step IAM User & Access Key Creation

@@ -99,5 +99,7 @@ aws s3 sync dist/ s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID> --delete
    ```bash
    aws cloudfront create-invalidation --distribution-id <DISTRIBUTION_ID> --paths "/*"
    ```
-4. Mở đường dẫn Domain CloudFront (ví dụ: `https://dxxxxxxxxx.cloudfront.net`) trên trình duyệt để kiểm tra giao diện ứng dụng!
+4. Mở đường dẫn Domain CloudFront (ví dụ: `https://dxxxxxxxxx.cloudfront.net`) hoặc S3 Website Endpoint trên trình duyệt để kiểm tra giao diện ứng dụng!
+
+![Giao diện ứng dụng React SPA Smart Attendance](/images/5-Workshop/5.6-Frontend-CloudFront/run_front_end.png)
 

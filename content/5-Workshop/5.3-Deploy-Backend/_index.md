@@ -49,6 +49,8 @@ Built Artifacts  : .aws-sam/build
 Valid Templates  : .aws-sam/build/template.yaml
 ```
 
+![sam build execution result](/images/5-Workshop/5.3-Deploy-Backend/sam_build.png)
+
 ---
 
 ### 3. Deploy Cloud Infrastructure (`sam deploy`)
@@ -78,6 +80,8 @@ Configuring SAM deploy
 ```
 
 CloudFormation stack creation takes approximately 2–3 minutes.
+
+![sam deploy execution result](/images/5-Workshop/5.3-Deploy-Backend/sam_deploy.png)
 
 > [!TIP]
 > **Troubleshooting `Error: S3 Bucket does not exist`:**  
