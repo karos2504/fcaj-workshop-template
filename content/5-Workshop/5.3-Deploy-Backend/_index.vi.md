@@ -81,10 +81,11 @@ Quá trình khởi tạo các tài nguyên CloudFormation sẽ diễn ra trong k
 
 > [!TIP]
 > **Xử lý lỗi `Error: S3 Bucket does not exist`:**  
-> Nếu gặp thông báo lỗi S3 Bucket chưa tồn tại khi deploy, hãy thêm cờ `--resolve-s3` để SAM CLI tự động khởi tạo mới S3 Deployment Bucket cho tài khoản AWS của bạn:
+> Lỗi này xảy ra khi Stack quản lý của SAM CLI (`aws-sam-cli-managed-default`) vẫn tồn tại nhưng S3 Bucket bị xóa thủ công. Hãy chạy lệnh xóa Stack quản lý cũ:
 > ```bash
-> sam deploy --guided --resolve-s3
+> aws cloudformation delete-stack --stack-name aws-sam-cli-managed-default --region ap-southeast-1
 > ```
+> Sau đó chạy lại `sam deploy --guided` để SAM CLI tự động tạo mới S3 Deployment Bucket sạch 100%.
 
 ---
 

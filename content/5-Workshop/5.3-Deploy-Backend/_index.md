@@ -81,10 +81,11 @@ CloudFormation stack creation takes approximately 2–3 minutes.
 
 > [!TIP]
 > **Troubleshooting `Error: S3 Bucket does not exist`:**  
-> If SAM CLI fails to upload artifacts due to a missing S3 deployment bucket, pass the `--resolve-s3` flag to automatically create a managed S3 bucket in your AWS region:
+> This error occurs when the SAM CLI managed CloudFormation stack (`aws-sam-cli-managed-default`) still exists while its underlying S3 bucket was deleted manually. Delete the stale managed stack with:
 > ```bash
-> sam deploy --guided --resolve-s3
+> aws cloudformation delete-stack --stack-name aws-sam-cli-managed-default --region ap-southeast-1
 > ```
+> Then re-run `sam deploy --guided` to let SAM CLI create a clean, brand-new S3 Deployment Bucket.
 
 ---
 
