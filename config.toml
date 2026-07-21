@@ -1,5 +1,5 @@
-baseURL = "https://karos2504.github.io/fcj-workshop-template/"
-relativeURLs = false
+baseURL = "https://karos2504.github.io/fcaj-workshop-template/"
+relativeURLs = true
 canonifyURLs = false
 defaultContentLanguage = "en"
 
