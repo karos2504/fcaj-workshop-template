@@ -36,33 +36,62 @@ Verify that the following CLI tools are installed on your workstation:
 
 ---
 
-### 2. Configure AWS Account Credentials
+### 2. Step-by-Step IAM User & Access Key Creation
 
-1. Create an IAM User with appropriate administrative permissions (`AdministratorAccess` or service permissions covering Lambda, API Gateway, DynamoDB, Cognito, S3, CloudFront, SQS, Step Functions, KMS, SES).
-2. Execute the CLI configuration wizard:
+Following AWS security best practices, never use the AWS Root Account for hands-on labs. Create a dedicated **IAM User** with administrator permissions:
+
+#### Step 2.1: Create IAM User in AWS Console
+1. Log in to the [AWS IAM Console](https://console.aws.amazon.com/iam/).
+2. In the left navigation pane, select **Users** ➔ Click **Create user**.
+3. Specify user details:
+   * **User name:** `WorkshopAdmin` (or a custom name).
+   * **Provide user access to the AWS Management Console:** *Optional if Web Console access is required*.
+4. Click **Next**.
+
+#### Step 2.2: Attach Permissions
+1. Under **Permissions options**, select **Attach policies directly**.
+2. Search and select the managed policy: `AdministratorAccess` *(Required for SAM CLI to provision CloudFormation stacks, IAM Roles, Lambda, DynamoDB, API Gateway, Cognito, S3, CloudFront, SQS, Step Functions, etc.)*.
+3. Click **Next** ➔ Review details ➔ Click **Create user**.
+
+#### Step 2.3: Generate Access Key ID & Secret Access Key
+1. Click on your newly created user (`WorkshopAdmin`) in the **Users** table.
+2. Select the **Security credentials** tab.
+3. Scroll down to the **Access keys** panel ➔ Click **Create access key**.
+4. Select the use case: **Command Line Interface (CLI)**.
+5. Check the confirmation checkbox *"I understand the above recommendation and want to proceed to create an access key."* ➔ Click **Next**.
+6. (Optional) Set a description tag (e.g., `AWS CLI for Workshop`) ➔ Click **Create access key**.
+7. **CRITICAL:** Download the `.csv` file containing the **Access Key ID** and **Secret Access Key** immediately. *(You will not be able to view the Secret Access Key again after closing this window)*.
+
+---
+
+### 3. Configure AWS CLI Credentials
+
+Once your Access Keys are created, open your terminal and execute:
 
 ```bash
 aws configure
 ```
 
-Provide your credentials when prompted:
+Enter your credentials generated in Step 2.3:
 
 ```text
 AWS Access Key ID [None]: AKIAXXXXXXXXXXXXXXXX
 AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-Default region name [None]: us-east-1
+Default region name [None]: ap-southeast-1
 Default output format [None]: json
 ```
 
-Verify your authentication identity:
+Verify successful connection:
 
 ```bash
 aws sts get-caller-identity
 ```
 
+A JSON response displaying your `UserId` and `Arn` confirms your AWS CLI is successfully configured!
+
 ---
 
-### 3. Clone Project Source Repository
+### 4. Clone Project Source Repository
 
 Clone the project source repository into your working directory:
 
