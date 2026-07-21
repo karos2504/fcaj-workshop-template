@@ -152,22 +152,54 @@ The project is structured into 4 standardized delivery phases:
 
 ---
 
-### 6. Cost Analysis & ROI
+### 6. Detailed Cost Analysis & ROI (Serverless Cost Model)
 
-#### Monthly Infrastructure Cost Estimation (100 Tenants ~ 5,000 Active Employees)
+Based on the complete architecture blueprint (`platform_architecture.drawio`) comprising 16+ AWS Serverless services, below is the detailed monthly operational cost breakdown across 3 growth scales:
 
-| AWS Service | Actual Usage Metrics | Estimated Cost (USD/Month) |
-| :--- | :--- | :--- |
-| **Amazon Cognito** | 5,000 MAUs (Free Tier includes 50,000 MAUs) | **$0.00** |
-| **Amazon API Gateway** | 3,000,000 HTTP Requests/month | **$3.00** |
-| **AWS Lambda** | 3,000,000 invocations (128MB RAM, avg 100ms) | **$0.60** |
-| **Amazon DynamoDB** | On-Demand (Storage 5GB, 3M Writes, 6M Reads) | **$4.25** |
-| **Amazon S3** | 10GB Reports & Web Assets (Intelligent-Tiering) | **$0.23** |
-| **Amazon CloudFront** | 50GB Data Transfer Out (Free Tier includes 1TB/month)| **$0.00** |
-| **AWS Step Functions** | 10,000 Express Executions | **$0.05** |
-| **Amazon SQS & SES** | 10,000 transactional emails sent | **$1.00** |
-| **AWS KMS & Secrets Manager** | 1 CMK Key & Secrets | **$0.80** |
-| **TOTAL INFRASTRUCTURE COST**| | **~$9.93 USD/month** |
+#### Itemized Monthly Operational Cost Table (Standard Scale: 100 Tenants ~ 5,000 Staff, 3M Requests/Month)
+
+| Architectural Layer | AWS Service | Actual Monthly Usage Metrics | Estimated Cost (USD/Month) |
+| :--- | :--- | :--- | :--- |
+| **Global Edge** | Amazon Route 53 | 1 Hosted Zone ($0.50) + 3M DNS Queries ($1.20) | **$1.70** |
+| | AWS WAF v2 & Shield | 1 Web ACL ($5.00) + 1 Rule Group ($1.00) + 3M Requests ($1.80) | **$7.80** |
+| | Amazon CloudFront | 50GB Data Transfer Out (Covered under 1TB Free Tier) | **$0.00** |
+| | Amazon S3 (SPA Hosting) | 1GB Static Assets + 100k GET Requests | **$0.03** |
+| **Auth & Ingress** | Amazon Cognito | 5,000 Monthly Active Users (Free Tier includes up to 50,000 MAUs) | **$0.00** |
+| | Amazon API Gateway | 3,000,000 HTTP API v2 Requests ($1.00 / 1M Requests) | **$3.00** |
+| | AWS Secrets Manager | 1 Secret Key ($0.40) + API Calls ($0.05) | **$0.45** |
+| **Compute Engine** | AWS Lambda (7 Functions) | 3,000,000 Invocations (128MB RAM, avg 100ms runtime) | **$0.63** |
+| | AWS Step Functions | 10,000 Express Workflow Executions ($1.00 / 1M Executions) | **$0.01** |
+| **Data & Storage** | Amazon DynamoDB | On-Demand: 3M Writes ($3.75) + 6M Reads ($1.50) + 5GB Data ($1.25) | **$6.50** |
+| | DynamoDB Streams & Pipes | EventBridge Pipe CDC streaming (Free Tier tier) | **$0.00** |
+| | AWS KMS CMK | 1 Customer Managed Key ($1.00) + Request Encryption | **$1.03** |
+| | Amazon S3 (Reports) | 10GB Report Storage (Intelligent-Tiering Lifecycle) + PUT/GET | **$0.25** |
+| **Event & Messaging**| Amazon EventBridge | 1,000,000 CDC & System Events ($1.00 / 1M Events) | **$1.00** |
+| | Amazon SQS & DLQ | 20,000 Messages (Covered under 1M SQS Request Free Tier) | **$0.00** |
+| | Amazon SES | 10,000 Transactional & Report Emails ($0.10 / 1,000 Emails) | **$1.00** |
+| **Operations & CI/CD**| Amazon CloudWatch | Logs Ingestion 2GB ($1.00) + Basic Metrics & Alarms ($0.50) | **$1.50** |
+| | AWS X-Ray | 1,000,000 Traces Sampled ($5.00 / 1M Traces) | **$5.00** |
+| | CodePipeline / Inspector | 1 Pipeline ($1.00) + Scan Compute | **$1.00** |
+| **TOTAL INFRASTRUCTURE COST**| | **Full Security WAF + X-Ray Monitoring Enabled** | **~$30.90 USD/month** |
+
+> [!NOTE]
+> **Bootstrapping Optimization (Basic Profile):** Disabling advanced managed WAF rules and X-Ray sampling during early startup reduces baseline monthly infrastructure expenses down to **~$18.10 USD/month**.
+
+---
+
+#### Multi-Tier Scalability Comparison
+
+```
++---------------------------------------------------------------------------------------------------+
+| Growth Scale               | Usage Metrics                    | Serverless Cost   | Legacy EC2/RDS |
++----------------------------+----------------------------------+--------------------+----------------+
+| Starter (10 Tenants)       | 500 Staff · 300K Requests/month  | ~$3.50 USD/month   | ~$85.00 USD    |
+| Standard (100 Tenants)     | 5,000 Staff · 3M Requests/month  | ~$30.90 USD/month  | ~$165.00 USD   |
+| Enterprise (1,000 Tenants) | 50,000 Staff · 30M Requests/month| ~$142.50 USD/month | ~$650.00 USD   |
++---------------------------------------------------------------------------------------------------+
+```
 
 > [!TIP]
-> **Return on Investment (ROI):** Compared to traditional legacy infrastructure requiring 24/7 EC2/RDS instances (approx. **$120 - $150 USD/month**), the AWS Serverless architecture delivers **over 90% in monthly infrastructure cost savings**.
+> **Return on Investment (ROI):**
+> * **81% to 95% Monthly Cost Reduction** compared to maintaining 24/7 dedicated EC2 application servers and RDS database instances.
+> * **Zero Idle Cost:** During non-business hours (nights and weekends), compute and API expenses naturally scale down to **$0 USD**.
+

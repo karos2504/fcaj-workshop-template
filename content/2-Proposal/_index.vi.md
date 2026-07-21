@@ -152,22 +152,54 @@ Dự án được triển khai theo 4 giai đoạn chuẩn hóa:
 
 ---
 
-### 6. Phân tích Chi phí & ROI
+### 6. Phân tích Chi phí Chi tiết & ROI (Serverless Cost Model)
 
-#### Chi phí Hạ tầng Hàng tháng (Ước tính cho 100 Tenants ~ 5,000 Nhân viên)
+Dựa trên sơ đồ kiến trúc `platform_architecture.drawio` gồm đầy đủ 16+ dịch vụ AWS Serverless, dưới đây là bảng tính toán chi tiết chi phí vận hành hàng tháng theo 3 quy mô tăng trưởng:
 
-| Dịch Vụ AWS | Mức Sử Dụng Thực Tế | Chi Phí Ước Tính (USD/Tháng) |
-| :--- | :--- | :--- |
-| **Amazon Cognito** | 5,000 MAUs (Free Tier 50,000 MAUs) | **$0.00** |
-| **Amazon API Gateway** | 3,000,000 HTTP Requests/tháng | **$3.00** |
-| **AWS Lambda** | 3,000,000 invocations (128MB RAM, avg 100ms) | **$0.60** |
-| **Amazon DynamoDB** | On-Demand (Storage 5GB, 3M Writes, 6M Reads) | **$4.25** |
-| **Amazon S3** | 10GB Reports & Web Assets (Intelligent-Tiering) | **$0.23** |
-| **Amazon CloudFront** | 50GB Data Transfer Out (Free Tier 1TB/month) | **$0.00** |
-| **AWS Step Functions** | 10,000 Express Executions | **$0.05** |
-| **Amazon SQS & SES** | 10,000 emails sent | **$1.00** |
-| **AWS KMS & Secrets Manager** | 1 CMK Key & Secrets | **$0.80** |
-| **TỔNG CHI PHÍ HẠ TẦNG** | | **~$9.93 USD/tháng** |
+#### Bảng Chi Tiết Chi Phí Vận Hành (Mô Hình Standard: 100 Tenants ~ 5,000 Nhân Viên, 3M Requests/Tháng)
+
+| Tầng Kiến Trúc | Dịch Vụ AWS | Thông Số Sử Dụng Thực Tế (Hàng Tháng) | Chi Phí Ước Tính (USD/Tháng) |
+| :--- | :--- | :--- | :--- |
+| **Global Edge** | Amazon Route 53 | 1 Hosted Zone ($0.50) + 3M DNS Queries ($1.20) | **$1.70** |
+| | AWS WAF v2 & Shield | 1 Web ACL ($5.00) + 1 Rule Group ($1.00) + 3M Requests ($1.80) | **$7.80** |
+| | Amazon CloudFront | 50GB Data Transfer Out (Nằm trong Free Tier 1TB/tháng) | **$0.00** |
+| | Amazon S3 (SPA Hosting) | 1GB Static Assets + 100k GET Requests | **$0.03** |
+| **Auth & Ingress** | Amazon Cognito | 5,000 Monthly Active Users (Free Tier hỗ trợ đến 50,000 MAUs) | **$0.00** |
+| | Amazon API Gateway | 3,000,000 HTTP API v2 Requests ($1.00 / 1M Requests) | **$3.00** |
+| | AWS Secrets Manager | 1 Secret Key ($0.40) + API Calls ($0.05) | **$0.45** |
+| **Compute Engine** | AWS Lambda (7 Functions) | 3,000,000 Invocations (128MB RAM, trung bình 100ms/req) | **$0.63** |
+| | AWS Step Functions | 10,000 Express Workflow Executions ($1.00 / 1M Executions) | **$0.01** |
+| **Data & Storage** | Amazon DynamoDB | On-Demand: 3M Writes ($3.75) + 6M Reads ($1.50) + 5GB Data ($1.25) | **$6.50** |
+| | DynamoDB Streams & Pipes | EventBridge Pipe trung chuyển CDC (Nằm trong Free Tier) | **$0.00** |
+| | AWS KMS CMK | 1 Customer Managed Key ($1.00) + Request Encryption | **$1.03** |
+| | Amazon S3 (Reports) | 10GB Report Storage (Intelligent-Tiering Lifecycle) + PUT/GET | **$0.25** |
+| **Event & Messaging**| Amazon EventBridge | 1,000,000 CDC & System Events ($1.00 / 1M Events) | **$1.00** |
+| | Amazon SQS & DLQ | 20,000 Messages (Nằm trong Free Tier 1,000,000 SQS Requests) | **$0.00** |
+| | Amazon SES | 10,000 Email Báo cáo & Cảnh báo ($0.10 / 1,000 Emails) | **$1.00** |
+| **Operations & CI/CD**| Amazon CloudWatch | Logs Ingestion 2GB ($1.00) + Basic Metrics & Alarms ($0.50) | **$1.50** |
+| | AWS X-Ray | 1,000,000 Traces Sampled ($5.00 / 1M Traces) | **$5.00** |
+| | CodePipeline / Inspector | 1 Pipeline ($1.00) + Scan Compute | **$1.00** |
+| **TỔNG CHI PHÍ HẠ TẦNG**| | **Đầy đủ bảo mật WAF + X-Ray Monitoring** | **~$30.90 USD/tháng** |
+
+> [!NOTE]
+> **Tối ưu chi phí giai đoạn khởi chạy (Basic Profile):** Nếu tắt WAF nâng cao và X-Ray tracing giai đoạn đầu, tổng chi phí hạ tầng thực tế của hệ thống Serverless chỉ rơi vào khoảng **~$18.10 USD/tháng**.
+
+---
+
+#### So Sánh Chi Phí Theo Quy Mô Doanh Nghiệp (Multi-Tier Scalability Comparison)
+
+```
++---------------------------------------------------------------------------------------------------+
+| Quy Mô (Scale)             | Mức Sử Dụng (Metrics)            | Chi Phí Serverless | Máy Chủ EC2/RDS|
++----------------------------+----------------------------------+--------------------+----------------+
+| Starter (10 Tenants)       | 500 Staff · 300K Requests/tháng  | ~$3.50 USD/tháng   | ~$85.00 USD    |
+| Standard (100 Tenants)     | 5,000 Staff · 3M Requests/tháng  | ~$30.90 USD/tháng  | ~$165.00 USD   |
+| Enterprise (1,000 Tenants) | 50,000 Staff · 30M Requests/tháng| ~$142.50 USD/tháng | ~$650.00 USD   |
++---------------------------------------------------------------------------------------------------+
+```
 
 > [!TIP]
-> **Hiệu quả đầu tư (ROI):** So với giải pháp hạ tầng truyền thống duy trì máy chủ EC2/RDS 24/7 (khoảng **$120 - $150 USD/tháng**), giải pháp AWS Serverless giúp doanh nghiệp tiết kiệm **hơn 90% chi phí vận hành hạ tầng**.
+> **Tỷ lệ Hoàn vốn (ROI):**
+> * **Tiết kiệm đến 81% - 95%** chi phí hạ tầng hàng tháng so với mô hình máy chủ EC2 + RDS duy trì 24/7.
+> * **Không chi phí nhàn rỗi (Zero Idle Cost):** Ngoài giờ làm việc (đêm và ngày nghỉ), chi phí compute và API giảm về mức **$0 USD**.
+
