@@ -79,15 +79,20 @@ aws s3 mb s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID> --region ap-southea
 aws s3 sync dist/ s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID> --delete
 ```
 
+![Kết quả upload static files lên S3 Bucket](/images/5-Workshop/5.6-Frontend-CloudFront/upload_static_files.png)
+
 > [!TIP]
 > **Xử lý lỗi `Your account must be verified before you can add new CloudFront resources`:**  
 > Lỗi này xuất hiện trên các tài khoản AWS mới do chính sách bảo mật tạm thời khóa tạo CloudFront.  
-> - **Giải pháp dùng ngay (S3 Website Endpoint):** Bạn có thể bật S3 Static Website Hosting để xem trước giao diện lập tức:
+>
+> * **Giải pháp dùng ngay (S3 Website Endpoint):** Bạn có thể bật S3 Static Website Hosting để xem trước giao diện lập tức:
+>
 >   ```bash
 >   aws s3 website s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID>/ --index-document index.html
 >   ```
+>
 >   Truy cập link: `http://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID>.s3-website.ap-southeast-1.amazonaws.com`
-> - **Mở khóa CloudFront:** Mở ticket tại [AWS Support Center](https://console.aws.amazon.com/support/home#/) chọn **Account Verification** để kích hoạt dịch vụ CloudFront.
+> * **Mở khóa CloudFront:** Mở ticket tại [AWS Support Center](https://console.aws.amazon.com/support/home#/) chọn **Account Verification** để kích hoạt dịch vụ CloudFront.
 
 ---
 
@@ -96,10 +101,10 @@ aws s3 sync dist/ s3://smart-attendance-spa-hosting-<AWS_ACCOUNT_ID> --delete
 1. Truy cập [Amazon CloudFront Console](https://console.aws.amazon.com/cloudfront/).
 2. Chọn Distribution tương ứng với project `smart-attendance`.
 3. Khởi tạo **Invalidation** để xóa cache cũ:
+
    ```bash
    aws cloudfront create-invalidation --distribution-id <DISTRIBUTION_ID> --paths "/*"
    ```
-4. Mở đường dẫn Domain CloudFront (ví dụ: `https://dxxxxxxxxx.cloudfront.net`) hoặc S3 Website Endpoint trên trình duyệt để kiểm tra giao diện ứng dụng!
 
-![Giao diện ứng dụng React SPA Smart Attendance](/images/5-Workshop/5.6-Frontend-CloudFront/run_front_end.png)
+4. Mở đường dẫn Domain CloudFront (ví dụ: `https://dxxxxxxxxx.cloudfront.net`) hoặc S3 Website Endpoint trên trình duyệt để kiểm tra giao diện ứng dụng!
 
