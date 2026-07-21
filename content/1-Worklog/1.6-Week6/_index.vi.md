@@ -1,29 +1,31 @@
 ---
 title: "Worklog Tuần 6"
-date: 2024-01-01
-weight: 1
+date: 2026-06-08
+weight: 6
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
 
 ### Mục tiêu tuần 6
 
-* Hiểu các nguyên lý thiết kế hệ thống tính sẵn sàng cao (High Availability) và tự động mở rộng (Scalability).
-* Cấu hình Elastic Load Balancing (Application Load Balancer - ALB) phân phối lưu lượng truy cập.
-* Thiết lập EC2 Auto Scaling Group và Route 53 Health Checks & DNS Failover.
+* Hiểu triết lý thiết kế ứng dụng Không máy chủ (Serverless) và Kiến trúc hướng sự kiện (Event-Driven Architecture) trên AWS.
+* Làm chủ AWS Lambda (Môi trường thực thi, Execution Role, Layers & Triggers) và xác thực người dùng với Amazon Cognito.
+* Xây dựng Serverless APIs với Amazon API Gateway, quản lý luồng công việc phức tạp bằng AWS Step Functions & công cụ AWS SAM CLI.
 
 ### Các công việc cần triển khai trong tuần này
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Tìm hiểu Elastic Load Balancing (ELB): <br>&emsp; + ALB (Layer 7) vs NLB (Layer 4) <br>&emsp; + Target Groups, Health Checks & Listener Rules <br>&emsp; + SSL/TLS Termination với AWS Certificate Manager (ACM) | 08/06/2026 | 08/06/2026 | <https://000006.awsstudygroup.com> |
-| 3 | - Tìm hiểu EC2 Auto Scaling Groups (ASG): <br>&emsp; + Launch Templates vs Launch Configurations <br>&emsp; + Scaling Policies: Target Tracking, Step Scaling & Scheduled Scaling <br>&emsp; + Dynamic Scaling dựa trên CPU utilization / ALB Request count | 09/06/2026 | 09/06/2026 | <https://000006.awsstudygroup.com> |
-| 4 | - **Thực hành:** <br>&emsp; + Tạo Launch Template định nghĩa Web Server EC2 <br>&emsp; + Khởi tạo ALB trên 2 Public Subnets và gắn Target Group <br>&emsp; + Tạo Auto Scaling Group spanning 2 Private Subnets tích hợp với ALB | 10/06/2026 | 10/06/2026 | <https://000006.awsstudygroup.com> |
-| 5 | - Tìm hiểu Amazon Route 53 & Hybrid DNS: <br>&emsp; + Hosted Zones (Public vs Private) <br>&emsp; + Routing Policies: Simple, Weighted, Latency, Failover & Geolocation <br>&emsp; + Route 53 Health Checks cấu hình DNS Failover | 11/06/2026 | 11/06/2026 | <https://000010.awsstudygroup.com> <br> <https://000101.awsstudygroup.com> |
-| 6 | - **Thực hành:** <br>&emsp; + Giả lập tải cao bằng công cụ Stress Test trên EC2 để kiểm tra Auto Scaling tự động tăng/giảm số lượng instance <br>&emsp; + Cấu hình Route 53 Failover Routing thử nghiệm chuyển hướng lưu lượng khi primary region gặp sự cố | 12/06/2026 | 12/06/2026 | <https://000101.awsstudygroup.com> |
+| 2 | - **Serverless Automation with AWS Lambda:** <br>&emsp; + Mô hình xử lý Event-driven model, Execution Environment & Concurrency limits <br>&emsp; + IAM Execution Roles & Resource-based policies <br>&emsp; + Sử dụng Lambda Layers tái sử dụng thư viện dùng chung | 08/06/2026 | 08/06/2026 | <https://000022.awsstudygroup.com> |
+| 3 | - **Building Serverless APIs with Amazon API Gateway:** <br>&emsp; + So sánh REST API vs HTTP API vs WebSocket API <br>&emsp; + Cơ chế Tích hợp Lambda Proxy, Request Validation & cấu hình CORS <br>&emsp; + Xác thực người dùng qua Amazon Cognito User Pools | 09/06/2026 | 09/06/2026 | <https://000066.awsstudygroup.com> <br> <https://000141.awsstudygroup.com> |
+| 4 | - **Thực hành:** <br>&emsp; + Lập trình các hàm Lambda xử lý nghiệp vụ bằng Node.js/Python <br>&emsp; + Tạo REST API trên API Gateway kết nối với Lambda & DynamoDB <br>&emsp; + Thử nghiệm kiểm thử gọi API từ Postman và kiểm tra phân quyền JWT Token | 10/06/2026 | 10/06/2026 | <https://000066.awsstudygroup.com> |
+| 5 | - **Workflow Orchestration with AWS Step Functions:** <br>&emsp; + Máy trạng thái State Machines (Standard vs Express Workflow) <br>&emsp; + Rẽ nhánh điều kiện (Choice States), song song (Parallel States) & xử lý lỗi (Catch/Retry) <br>&emsp; + Giới thiệu chuẩn cấu trúc AWS SAM (`template.yaml`) | 11/06/2026 | 11/06/2026 | <https://000047.awsstudygroup.com> <br> <https://000080.awsstudygroup.com/> |
+| 6 | - **Thực hành Serverless Application Model (AWS SAM):** <br>&emsp; + Xây dựng quy trình xử lý bất đồng bộ phức tạp điều phối nhiều hàm Lambda qua Step Functions <br>&emsp; + Sử dụng SAM CLI (`sam build`, `sam local`, `sam deploy`) đóng gói và triển khai ứng dụng Serverless tự động | 12/06/2026 | 12/06/2026 | <https://000047.awsstudygroup.com> <br> <https://000080.awsstudygroup.com/> |
 
 ### Kết quả đạt được tuần 6
 
-* Triển khai thành công bộ cân bằng tải Application Load Balancer phân phối lưu lượng truy cập đa AZ.
-* Thiết lập Auto Scaling Group tự động co giãn tài nguyên EC2 theo nhu cầu thực tế.
-* Làm chủ các chiến lược định tuyến Route 53 DNS và cơ chế tự động chuyển hướng khi xảy ra thảm họa (Disaster Recovery Failover).
+* Thành thạo viết và tối ưu hóa các hàm AWS Lambda theo mô hình Event-Driven.
+* Triển khai hệ thống Serverless REST API hoàn chỉnh tích hợp API Gateway, Lambda, Cognito và DynamoDB.
+* Quản lý quy trình nghiệp vụ nhiều bước phức tạp bằng AWS Step Functions với khả năng tự động khôi phục khi gặp lỗi.
+* Đóng gói, kiểm thử cục bộ và triển khai tự động toàn bộ ứng dụng Serverless chuẩn hóa bằng AWS SAM CLI.
+

@@ -1,30 +1,30 @@
 ---
 title: "Week 11 Worklog"
-date: 2024-01-01
-weight: 2
+date: 2026-07-13
+weight: 11
 chapter: false
 pre: " <b> 1.11. </b> "
 ---
 
 ### Week 11 Objectives
 
-* Master AWS data encryption, security governance, and compliance solutions (AWS KMS, Secrets Manager, WAF, GuardDuty).
-* Understand database migration methodologies using AWS DMS & Schema Conversion Tool (SCT).
-* Explore Data Lake fundamentals and serverless data analytics querying with Amazon Athena.
+* **Updating Frontend UI and Backend Logic:** Refactor and upgrade user interface components (React/Vite) and core serverless backend execution logic (AWS Lambda) for the project.
+* **Continued CloudJourney Learning:** Deepen skills in full-stack Serverless Web App integration and CI/CD automation pipelines on CloudJourney (`https://cloudjourney.awsstudygroup.com/`).
+* Refine AWS CDK v2 stacks and finalize automated CodePipeline deployment workflows.
 
 ### Tasks to be carried out this week
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Study AWS KMS (Key Management Service) & AWS Secrets Manager: <br>&emsp; + Customer Managed Keys (CMK), Envelope Encryption & Key Policies <br>&emsp; + Manage and automate DB credential rotation in Secrets Manager | 13/07/2026 | 13/07/2026 | <https://000033.awsstudygroup.com> <br> <https://000096.awsstudygroup.com> |
-| 3 | - Study AWS WAF (Web Application Firewall) & Threat Detection: <br>&emsp; + Managed Rule Groups (SQLi, XSS, OWASP Top 10) & Rate Limiting <br>&emsp; + Continuous threat detection with AWS GuardDuty & AWS Security Hub | 14/07/2026 | 14/07/2026 | <https://000026.awsstudygroup.com> <br> <https://000098.awsstudygroup.com> |
-| 4 | - **Practice:** <br>&emsp; + Create KMS Key encrypting S3 Buckets & EBS Volumes <br>&emsp; + Configure AWS WAF Web ACL protecting Application Load Balancer <br>&emsp; + Store DB password in Secrets Manager and retrieve programmatically from Lambda | 15/07/2026 | 15/07/2026 | <https://000033.awsstudygroup.com> <br> <https://000026.awsstudygroup.com> |
-| 5 | - Study Database Migration (AWS Migration): <br>&emsp; + AWS Schema Conversion Tool (SCT) converting heterogeneous schemas <br>&emsp; + AWS Database Migration Service (DMS) real-time CDC data replication | 16/07/2026 | 16/07/2026 | <https://000043.awsstudygroup.com> |
-| 6 | - Study Data & Analytics on AWS: <br>&emsp; + Data Lake design pattern on Amazon S3 & AWS Glue Crawlers/Data Catalog <br>&emsp; + Execute serverless SQL queries directly on S3 data using Amazon Athena | 17/07/2026 | 17/07/2026 | <https://000035.awsstudygroup.com> <br> <https://000106.awsstudygroup.com> |
+| 2 | - **Updating Frontend User Interface (13/07/2026 – 19/07/2026):** <br>&emsp; + Refactor React/Vite UI components: Optimize Dashboard layout, Admin panel, and GPS check-in screens <br>&emsp; + Study Web App frontend integration on CloudJourney | 13/07/2026 | 13/07/2026 | <https://cloudjourney.awsstudygroup.com> <br> <https://000141.awsstudygroup.com> |
+| 3 | - **Updating Backend Handler Logic (AWS Lambda):** <br>&emsp; + Refactor Lambda functions logic: `CheckInFunction`, `CheckOutFunction`, `AttendanceSummary`, and `AdminFunction` <br>&emsp; + Standardize API response JSON schemas and error formatting | 14/07/2026 | 14/07/2026 | <https://000060.awsstudygroup.com> |
+| 4 | - **Frontend & Backend API Gateway Integration:** <br>&emsp; + Wire frontend HTTP request clients to API Gateway HTTP API v2 endpoints <br>&emsp; + Inject Authorization Bearer JWT Tokens and implement session refresh handling | 15/07/2026 | 15/07/2026 | <https://000066.awsstudygroup.com> |
+| 5 | - **AWS CDK v2 Infrastructure Code Updating:** <br>&emsp; + Refine infrastructure CDK stacks: `DatabaseStack`, `AuthStack`, `ApiStack`, and `FrontendStack` (S3 + CloudFront OAC) <br>&emsp; + Run `cdk synth` and `cdk diff` validation checks | 16/07/2026 | 16/07/2026 | <https://000076.awsstudygroup.com> |
+| 6 | - **CI/CD Pipeline Refinement & End-to-End Testing:** <br>&emsp; + Update `buildspec.yml` script to automate React UI bundling, unit tests execution, and `cdk deploy` execution <br>&emsp; + Perform end-to-end integration testing between updated frontend and backend | 17/07/2026 | 17/07/2026 | <https://000152.awsstudygroup.com> |
 
 ### Week 11 Achievements
 
-* Implemented comprehensive Data-at-Rest and Data-in-Transit encryption strategies with AWS KMS.
-* Secured web applications against web exploits (SQLi, XSS) using AWS WAF Web ACLs.
-* Eliminated hardcoded secrets by integrating AWS Secrets Manager into application code.
-* Mastered zero-downtime database migration strategies (DMS/SCT) and serverless analytics querying with Athena.
+* Successfully updated and polished both Frontend UI and Backend serverless handlers.
+* Continued applying full-stack serverless integration concepts learned on CloudJourney.
+* Connected React Web UI to Serverless API Gateway backend seamlessly.
+

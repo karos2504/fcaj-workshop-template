@@ -8,22 +8,19 @@ chapter: false
     
 # Internship Report
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+### Student Information
 
-### Student Information:
-&emsp; **Full Name:** Nguyen Van A
+&emsp; **Full Name:** Nguyen Anh Khoa
 
-&emsp; **Phone Number:** 0989888999 
+&emsp; **Phone Number:** 0338010733
 
-&emsp; **Email:** Anguyenvan@gmail.com
+&emsp; **Email:** <khoaanh.kgi@gmail.com>
 
-&emsp; **University:** Ho Chi Minh City University of Technology and Education
+&emsp; **University:** HUTECH - Ho Chi Minh City University of Technology
 
 &emsp; **Major:** Information Technology
 
-&emsp; **Class:** AWS082025
+&emsp; **Class:** 22DTHD4
 
 &emsp; **Internship Company:** Amazon Web Services Viet Nam Company Limited
 
@@ -35,10 +32,10 @@ chapter: false
 
 ### Report Content
 
-1.  [Worklog](1-Worklog/)
-2.  [Proposal](2-Proposal/)
-3.  [BlogsPosted](3-BlogsPosted/)
-4.  [Events Participated](4-EventParticipated/)
-5.  [Workshop](5-Workshop/)
-6.  [Self-evaluation](6-Self-evaluation/)
-7.  [Sharing and Feedback](7-Feedback/)
+1. [Worklog](1-Worklog/)
+2. [Proposal](2-Proposal/)
+3. [BlogsPosted](3-BlogsPosted/)
+4. [Events Participated](4-EventParticipated/)
+5. [Workshop](5-Workshop/)
+6. [Self-evaluation](6-Self-evaluation/)
+7. [Sharing and Feedback](7-Feedback/)

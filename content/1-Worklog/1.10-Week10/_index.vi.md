@@ -1,30 +1,31 @@
 ---
 title: "Worklog Tuần 10"
-date: 2024-01-01
-weight: 2
+date: 2026-07-06
+weight: 10
 chapter: false
 pre: " <b> 1.10. </b> "
 ---
 
 ### Mục tiêu tuần 10
 
-* Hiểu quy trình phát triển phần mềm hiện đại với các khái niệm CI/CD (Continuous Integration / Continuous Delivery & Deployment).
-* Làm chủ bộ công cụ lập trình AWS Developer Tools (CodeCommit, CodeBuild, CodeDeploy & CodePipeline).
-* Tự động hóa hoàn toàn quy trình đóng gói, kiểm thử và triển khai ứng dụng Serverless & ECS Container.
+* **Thực hiện cấu hình bảo mật cơ bản cho dự án:** Triển khai các lớp bảo mật cho dữ liệu tĩnh, dữ liệu truyền tải, tầng API và phân quyền dịch vụ cho dự án SaaS Timekeeping Platform.
+* **Tiếp tục học trên CloudJourney:** Tìm hiểu các tiêu chuẩn an toàn thông tin trên AWS, giải pháp mã hóa KMS, Secrets Manager & AWS WAF v2 (`https://cloudjourney.awsstudygroup.com/`).
+* Đảm bảo hệ thống đạt chuẩn an toàn bảo mật, chống khai thác lỗ hổng và rò rỉ dữ liệu nhạy cảm.
 
 ### Các công việc cần triển khai trong tuần này
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Tìm hiểu văn hóa DevOps & Khái niệm CI/CD: <br>&emsp; + Sự khác biệt giữa CI, CD & Continuous Deployment <br>&emsp; + Tổng quan các dịch vụ AWS Developer Tools <br>&emsp; + Source control với AWS CodeCommit / GitHub integration | 06/07/2026 | 06/07/2026 | <https://000017.awsstudygroup.com> |
-| 3 | - Tìm hiểu AWS CodeBuild: <br>&emsp; + Cấu trúc tệp cấu hình `buildspec.yml` (phases: install, pre_build, build, post_build) <br>&emsp; + Environment Images, Build Artifacts & Environment Variables | 07/07/2026 | 07/07/2026 | <https://000017.awsstudygroup.com> <br> <https://000051.awsstudygroup.com> |
-| 4 | - Tìm hiểu AWS CodeDeploy & Chiến lược triển khai: <br>&emsp; + In-place deployment vs Blue/Green deployment <br>&emsp; + Deployment groups, AppSpec file (`appspec.yml`) & Rollback triggers | 08/07/2026 | 08/07/2026 | <https://000023.awsstudygroup.com> |
-| 5 | - Tìm hiểu AWS CodePipeline: <br>&emsp; + Các Stages (Source, Build, Test, Deploy, Manual Approval) <br>&emsp; + Tích hợp Webhooks từ GitHub / CodeCommit tự động kích hoạt Pipeline khi có git push | 09/07/2026 | 09/07/2026 | <https://000023.awsstudygroup.com> <br> <https://000152.awsstudygroup.com> |
-| 6 | - **Thực hành:** <br>&emsp; + Thiết lập CI/CD Pipeline hoàn chỉnh tự động build Docker Image, push ECR & deploy lên ECS Fargate mỗi khi phát sinh commit mới <br>&emsp; + Cấu hình thông báo Slack/Email qua CloudWatch Events khi pipeline thành công hoặc thất bại | 10/07/2026 | 10/07/2026 | <https://000152.awsstudygroup.com> |
+| 2 | - **Nghiên cứu Giải pháp Bảo mật AWS (06/07/2026 – 12/07/2026):** <br>&emsp; + Học các bài giảng bảo mật dữ liệu và quản lý khóa mã hóa trên CloudJourney <br>&emsp; + Phân tích mô hình bảo mật 3 tầng cho dự án: Tầng Biên (WAF), Tầng Xác thực (Cognito/IAM) & Tầng Dữ liệu (KMS) | 06/07/2026 | 06/07/2026 | <https://cloudjourney.awsstudygroup.com> <br> <https://000033.awsstudygroup.com> |
+| 3 | - **Cấu hình Mã hóa Dữ liệu với AWS KMS (CMK):** <br>&emsp; + Tạo Customer Managed Keys (CMK) mã hóa bảng DynamoDB Single-Table và S3 Bucket lưu trữ báo cáo <br>&emsp; + Cấu hình KMS Key Policy giới hạn quyền truy cập cho dịch vụ Lambda | 07/07/2026 | 07/07/2026 | <https://000033.awsstudygroup.com> |
+| 4 | - **Quản lý Thông tin Nhạy cảm với AWS Secrets Manager:** <br>&emsp; + Lưu trữ API keys, kết nối database và thông tin cấu hình nhạy cảm lên Secrets Manager <br>&emsp; + Cấu hình tự động xoay vòng (Automatic Secrets Rotation) và tích hợp lấy bí mật từ mã nguồn Lambda | 08/07/2026 | 08/07/2026 | <https://000096.awsstudygroup.com> |
+| 5 | - **Cấu hình Bảo mật Tầng Biên với AWS WAF v2:** <br>&emsp; + Thiết lập WAF Web ACL gắn vào Amazon CloudFront & API Gateway HTTP API v2 <br>&emsp; + Áp dụng các nhóm luật AWS Managed Rules (chống SQL Injection, XSS) và cấu hình Rate-based Rule ngăn chặn tấn công DDoS | 09/07/2026 | 09/07/2026 | <https://000026.awsstudygroup.com> |
+| 6 | - **Rà soát Phân quyền IAM & Kiểm thử Bảo mật:** <br>&emsp; + Cấu hình IAM Execution Roles cho tất cả các hàm Lambda theo chuẩn Quyền Tối thiểu (Least Privilege) <br>&emsp; + Thực hiện audit bảo mật cơ bản cho toàn bộ API Gateway endpoints | 10/07/2026 | 10/07/2026 | <https://000002.awsstudygroup.com> |
 
 ### Kết quả đạt được tuần 10
 
-* Nắm vững các bước xây dựng quy trình phân phối phần mềm tự động hóa CI/CD trên AWS.
-* Viết thành thạo `buildspec.yml` và `appspec.yml` quản lý giai đoạn build và deploy ứng dụng.
-* Xây dựng thành công pipeline tự động hóa end-to-end cho ứng dụng Container/Serverless.
-* Áp dụng thành công chiến lược Blue/Green deployment hạn chế tối đa thời gian gián đoạn dịch vụ (Zero Downtime).
+* Hoàn thành cấu hình bảo mật cơ bản cho toàn bộ hạ tầng dự án SaaS Timekeeping Platform.
+* Tiếp tục nâng cao kiến thức bảo mật đám mây nhờ các bài học hướng dẫn trên CloudJourney.
+* Mã hóa an toàn dữ liệu tĩnh với AWS KMS CMK và bảo vệ tầng API chống lại các cuộc tấn công phổ biến với AWS WAF.
+
+

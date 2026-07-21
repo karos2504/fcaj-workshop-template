@@ -16,7 +16,7 @@ Use the children shortcode to list the child pages of a page and the further des
 | depth       | 1         | Enter a number to specify the depth of descendants to display. For example, if the value is 2, the shortcode will display 2 levels of child pages. <br/> **Tips:** set 999 to get all descendants                                                                                  |
 | sort        | none      | Sort Children By<br><li><strong>Weight</strong> - to sort on menu order</li><li><strong>Name</strong> - to sort alphabetically on menu label</li><li><strong>Identifier</strong> - to sort alphabetically on identifier set in frontmatter</li><li><strong>URL</strong> - URL</li> |
 
-## Demo
+## platform_architecture
 
     {{%/* children  */%}}
 

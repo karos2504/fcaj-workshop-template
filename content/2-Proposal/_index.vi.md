@@ -6,119 +6,199 @@ chapter: false
 pre: " <b> 2. </b> "
 ---
 
+# Smart Attendance SaaS Platform
 
-Tại phần này, bạn cần tóm tắt các nội dung trong workshop mà bạn **dự tính** sẽ làm.
+## Giải pháp Nền tảng Chấm công Đa doanh nghiệp (Multi-Tenant) dựa trên Kiến trúc AWS Serverless Toàn diện
 
-# IoT Weather Platform for Lab Research  
+### 1. Tóm tắt điều hành
 
-## Giải pháp AWS Serverless hợp nhất cho giám sát thời tiết thời gian thực  
+**Smart Attendance SaaS Platform** là nền tảng quản lý điểm danh, chấm công và quản trị nhân sự đám mây thiết kế chuẩn SaaS (Software-as-a-Service) dành cho các doanh nghiệp vừa và nhỏ (SMEs) cũng như các tập đoàn đa chi nhánh. Hệ thống cho phép hàng trăm doanh nghiệp (**Tenants**) vận hành trên hạ tầng đám mây dùng chung nhưng đảm bảo tuyệt đối khả năng **Cô lập dữ liệu (Tenant Data Isolation)**, phản hồi thời gian thực dưới 200ms và khả năng tự động mở rộng (Elastic Auto-scaling) khi có hàng ngàn yêu cầu điểm danh đồng thời vào khung giờ cao điểm.
 
-### 1. Tóm tắt điều hành  
+Bằng cách tận dụng 100% hệ sinh thái **AWS Serverless** (bao gồm *Amazon CloudFront, AWS WAF v2, AWS Shield, Amazon Cognito, Amazon API Gateway, AWS Lambda, AWS Step Functions, Amazon DynamoDB, Amazon S3, Amazon EventBridge, Amazon SQS, Amazon SES, AWS KMS, AWS Secrets Manager*), hệ thống loại bỏ hoàn toàn chi phí bảo trì máy chủ, tối ưu chi phí hạ tầng ở mức gần như bằng 0 khi không có lượt truy cập (Pay-as-you-go) và đạt độ sẵn sàng cao (**High Availability 99.99%**).
 
-IoT Weather Platform được thiết kế dành cho nhóm *ITea Lab* tại TP. Hồ Chí Minh nhằm nâng cao khả năng thu thập và phân tích dữ liệu thời tiết. Nền tảng hỗ trợ tối đa 5 trạm thời tiết, có khả năng mở rộng lên 10–15 trạm, sử dụng thiết bị biên Raspberry Pi kết hợp cảm biến ESP32 để truyền dữ liệu qua MQTT. Nền tảng tận dụng các dịch vụ AWS Serverless để cung cấp giám sát thời gian thực, phân tích dự đoán và tiết kiệm chi phí, với quyền truy cập giới hạn cho 5 thành viên phòng lab thông qua Amazon Cognito.  
+---
 
-### 2. Tuyên bố vấn đề  
+### 2. Tuyên bố vấn đề
 
-*Vấn đề hiện tại*  
-Các trạm thời tiết hiện tại yêu cầu thu thập dữ liệu thủ công, khó quản lý khi có nhiều trạm. Không có hệ thống tập trung cho dữ liệu hoặc phân tích thời gian thực, và các nền tảng bên thứ ba thường tốn kém và quá phức tạp.  
+#### Vấn đề hiện tại
 
-*Giải pháp*  
-Nền tảng sử dụng AWS IoT Core để tiếp nhận dữ liệu MQTT, AWS Lambda và API Gateway để xử lý, Amazon S3 để lưu trữ (bao gồm data lake), và AWS Glue Crawlers cùng các tác vụ ETL để trích xuất, chuyển đổi, tải dữ liệu từ S3 data lake sang một S3 bucket khác để phân tích. AWS Amplify với Next.js cung cấp giao diện web, và Amazon Cognito đảm bảo quyền truy cập an toàn. Tương tự như Thingsboard và CoreIoT, người dùng có thể đăng ký thiết bị mới và quản lý kết nối, nhưng nền tảng này hoạt động ở quy mô nhỏ hơn và phục vụ mục đích sử dụng nội bộ. Các tính năng chính bao gồm bảng điều khiển thời gian thực, phân tích xu hướng và chi phí vận hành thấp.  
+* **Chấm công thủ công và nghẽn mạng giờ cao điểm:** Các doanh nghiệp truyền thống sử dụng máy chấm công vân tay/thẻ từ hoặc file Excel thủ công. Vào các khung giờ cao điểm (7:45 AM - 8:15 AM), hàng ngàn nhân viên đồng thời điểm danh gây ra điểm nghẽn (bottleneck), quá tải API và đơ lag hệ thống.
+* **Chi phí hạ tầng và bảo trì cao:** Việc tự triển khai hệ thống chấm công trên máy chủ truyền thống (EC2 / RDS / On-Premise) đòi hỏi chi phí đầu tư ban đầu lớn, chi phí duy trì máy chủ 24/7 dù ngoài giờ làm việc hệ thống không có lưu lượng sử dụng.
+* **Thách thức Multi-Tenancy và Bảo mật:** Các giải pháp phần mềm thông thường dễ gặp rủi ro rò rỉ dữ liệu giữa các công ty (Cross-tenant data leakage) nếu không được thiết kế kiến trúc phân tách phân vùng dữ liệu (Partition Key Isolation) và phân quyền chặt chẽ từ tầng API.
+* **Thiếu khả năng tự động hóa báo cáo và cảnh báo:** Việc tổng hợp và xuất báo cáo bảng công hàng tháng tốn nhiều thời gian xử lý thủ công của phòng HR, dễ sai sót và không tích hợp tự động với email notification hay webhook hệ thống bên thứ ba.
 
-*Lợi ích và hoàn vốn đầu tư (ROI)*  
-Giải pháp tạo nền tảng cơ bản để các thành viên phòng lab phát triển một nền tảng IoT lớn hơn, đồng thời cung cấp nguồn dữ liệu cho những người nghiên cứu AI phục vụ huấn luyện mô hình hoặc phân tích. Nền tảng giảm bớt báo cáo thủ công cho từng trạm thông qua hệ thống tập trung, đơn giản hóa quản lý và bảo trì, đồng thời cải thiện độ tin cậy dữ liệu. Chi phí hàng tháng ước tính 0,66 USD (theo AWS Pricing Calculator), tổng cộng 7,92 USD cho 12 tháng. Tất cả thiết bị IoT đã được trang bị từ hệ thống trạm thời tiết hiện tại, không phát sinh chi phí phát triển thêm. Thời gian hoàn vốn 6–12 tháng nhờ tiết kiệm đáng kể thời gian thao tác thủ công.  
+#### Giải pháp đề xuất
 
-### 3. Kiến trúc giải pháp  
+Nền tảng **Smart Attendance SaaS** giải quyết triệt để các bài toán trên thông qua kiến trúc **AWS Serverless Optimized Pro**:
 
-Nền tảng áp dụng kiến trúc AWS Serverless để quản lý dữ liệu từ 5 trạm dựa trên Raspberry Pi, có thể mở rộng lên 15 trạm. Dữ liệu được tiếp nhận qua AWS IoT Core, lưu trữ trong S3 data lake và xử lý bởi AWS Glue Crawlers và ETL jobs để chuyển đổi và tải vào một S3 bucket khác cho mục đích phân tích. Lambda và API Gateway xử lý bổ sung, trong khi Amplify với Next.js cung cấp bảng điều khiển được bảo mật bởi Cognito.  
+1. **Edge & API Protection Layer:** Sử dụng **Amazon CloudFront** kết hợp **AWS WAF v2** và **AWS Shield** để phân phối ứng dụng React SPA, chặn truy cập trái phép, rate-limit chống tấn công DDoS/Botnet và bảo mật đường truyền API bằng Token xác thực độc quyền (`x-origin-verify`).
+2. **Multi-tenant Identity Management:** **Amazon Cognito User Pool** quản lý xác thực người dùng tích hợp sẵn Custom Attributes (`tenantId`, `role`, `userId`), hỗ trợ xác thực 2 yếu tố (TOTP MFA) và Advanced Security Mode.
+3. **High-Performance Compute & Microservices:** Bộ hàm **AWS Lambda** (Auth, Check-in, Check-out, Attendance History, Admin Management, Export Report API, Webhook, Subscription) xử lý song song không trạng thái (stateless), tự động mở rộng theo nhu cầu cao điểm.
+4. **Single-Table Design Database:** **Amazon DynamoDB** lưu trữ toàn bộ dữ liệu (Attendance, Users, Tenants) trong 1 bảng duy nhất (Single-Table Design) với Partition Key `TENANT#<tenantId>`, mang lại tốc độ truy xuất dưới 10ms và bảo mật cô lập tuyệt đối dữ liệu doanh nghiệp.
+5. **Asynchronous Reporting Engine:** Kết hợp **AWS Step Functions Express Workflow** và **Amazon SQS** để xử lý tạo báo cáo PDF/Excel/CSV bất đồng bộ, lưu trữ trên **Amazon S3 (Intelligent-Tiering)** và tự động gửi mail báo cáo qua **Amazon SES**.
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+#### Lợi ích và Hoàn vốn đầu tư (ROI)
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+* **Tối ưu chi phí đến 90%:** Kiến trúc Serverless giúp doanh nghiệp chỉ trả tiền cho số lượng request và thời gian thực thi thực tế. Chi phí hạ tầng cho quy mô 100 Tenants (5,000 nhân viên) chỉ khoảng **~$9.93 USD/tháng**, cực kỳ tiết kiệm so với việc vận hành máy chủ EC2/RDS 24/7 ($120 - $150 USD/tháng).
+* **Khả năng mở rộng vô hạn (Elastic Scalability):** Hệ thống có khả năng đáp ứng mượt mà từ vài chục đến hàng trăm ngàn lượt check-in mỗi phút trong khung giờ cao điểm mà không cần can thiệp thủ công.
+* **Thời gian hoàn vốn (ROI):** Tiết kiệm 95% thời gian tổng hợp bảng công hàng tháng của bộ phận HR, đồng thời các nhà cung cấp SaaS có thể thu hồi vốn đầu tư chỉ sau 2-3 tháng vận hành thương mại.
 
-*Dịch vụ AWS sử dụng*  
+---
 
-- *AWS IoT Core*: Tiếp nhận dữ liệu MQTT từ 5 trạm, mở rộng lên 15.  
-- *AWS Lambda*: Xử lý dữ liệu và kích hoạt Glue jobs (2 hàm).  
-- *Amazon API Gateway*: Giao tiếp với ứng dụng web.  
-- *Amazon S3*: Lưu trữ dữ liệu thô (data lake) và dữ liệu đã xử lý (2 bucket).  
-- *AWS Glue*: Crawlers lập chỉ mục dữ liệu, ETL jobs chuyển đổi và tải dữ liệu.  
-- *AWS Amplify*: Lưu trữ giao diện web Next.js.  
-- *Amazon Cognito*: Quản lý quyền truy cập cho người dùng phòng lab.  
+### 3. Kiến trúc giải pháp
 
-*Thiết kế thành phần*  
+Nền tảng áp dụng mô hình kiến trúc **AWS Serverless Multi-Layered Architecture** hoàn chỉnh:
 
-- *Thiết bị biên*: Raspberry Pi thu thập và lọc dữ liệu cảm biến, gửi tới IoT Core.  
-- *Tiếp nhận dữ liệu*: AWS IoT Core nhận tin nhắn MQTT từ thiết bị biên.  
-- *Lưu trữ dữ liệu*: Dữ liệu thô lưu trong S3 data lake; dữ liệu đã xử lý lưu ở một S3 bucket khác.  
-- *Xử lý dữ liệu*: AWS Glue Crawlers lập chỉ mục dữ liệu; ETL jobs chuyển đổi để phân tích.  
-- *Giao diện web*: AWS Amplify lưu trữ ứng dụng Next.js cho bảng điều khiển và phân tích thời gian thực.  
-- *Quản lý người dùng*: Amazon Cognito giới hạn 5 tài khoản hoạt động.  
+![Smart Attendance SaaS Architecture](/2-Proposal/platform_architecture.png)
 
-### 4. Triển khai kỹ thuật  
+#### Các tầng dịch vụ AWS sử dụng
 
-*Các giai đoạn triển khai*  
-Dự án gồm 2 phần — thiết lập trạm thời tiết biên và xây dựng nền tảng thời tiết — mỗi phần trải qua 4 giai đoạn:  
+| Tầng Kiến Trúc | Dịch Vụ AWS | Vai Trò & Chức Năng Chi Tiết |
+| :--- | :--- | :--- |
+| **Global Edge Layer** | Amazon Route 53 | Quản lý DNS resolution toàn cầu, định tuyến tên miền chính xác. |
+| | AWS WAF v2 | Bảo vệ API & Web trước DDoS, Rate Limiting (1000 req/IP), chặn Bot & OWASP Top 10. |
+| | AWS Shield | Bảo vệ chống tấn công DDoS tầng 3/4 tự động. |
+| | Amazon CloudFront | CDN toàn cầu phân phối React SPA và mã hóa/proxy bảo mật cho API Gateway với Custom Header Verification. |
+| **Auth & Ingress Layer** | Amazon Cognito | Quản lý người dùng, JWT Token gắn kèm context `{tenantId, role, userId}`, TOTP MFA. |
+| | Amazon API Gateway | HTTP API v2 với Cognito JWT Authorizer, xác thực Header bảo mật từ CloudFront. |
+| | AWS Secrets Manager | Quản lý và tự động xoay vòng (Auto-rotation) Webhook API Keys & Credentials. |
+| **Compute Layer** | AWS Lambda | Xử lý logic microservices (Auth, Check-in/out, History, Admin, Export Report API, Billing, Webhook). |
+| | AWS Step Functions | Điều phối Express Workflow bất đồng bộ phức tạp cho công tác tạo báo cáo hàng loạt. |
+| **Data & Storage Layer** | Amazon DynamoDB | Lưu trữ NoSQL Single-Table Design, mã hóa KMS CMK, bật DynamoDB Streams (CDC). |
+| | Amazon S3 | Lưu trữ React SPA & file Báo cáo (PDF/Excel/CSV) với chế độ Intelligent-Tiering và Force SSL policy. |
+| **Event & Messaging** | Amazon EventBridge | EventBus & EventBridge Pipe định tuyến sự kiện CDC từ DynamoDB Streams (`AttendanceCreated`, `ReportGenerated`). |
+| | Amazon SQS | Hàng chờ thông báo & Email Queue kèm Dead Letter Queue (DLQ) đảm bảo không mất tin. |
+| | Amazon SES | Gửi email tự động chứa báo cáo, cảnh báo điểm danh và hóa đơn thanh toán. |
+| **Operations & Security** | AWS KMS | Quản lý khóa mã hóa dữ liệu Customer Managed Keys (CMK) cho DynamoDB, S3, SQS. |
+| | Amazon CloudWatch | Thu thập Log, Metrics, thiết lập Dashboard và Alarms cảnh báo sự cố API/Lambda tự động. |
+| | AWS X-Ray | Distributed Tracing giám sát hiệu năng và thời gian phản hồi end-to-end. |
+| | AWS Security Hub & Inspector | Quản trị an ninh hạ tầng, phát hiện lỗ hổng và cảnh báo mối đe dọa (GuardDuty). |
+| | CodePipeline & CodeBuild | Quy trình CI/CD tự động hóa kiểm thử, build artifact và deploy qua AWS SAM/CloudFormation. |
 
-1. *Nghiên cứu và vẽ kiến trúc*: Nghiên cứu Raspberry Pi với cảm biến ESP32 và thiết kế kiến trúc AWS Serverless (1 tháng trước kỳ thực tập).  
-2. *Tính toán chi phí và kiểm tra tính khả thi*: Sử dụng AWS Pricing Calculator để ước tính và điều chỉnh (Tháng 1).  
-3. *Điều chỉnh kiến trúc để tối ưu chi phí/giải pháp*: Tinh chỉnh (ví dụ tối ưu Lambda với Next.js) để đảm bảo hiệu quả (Tháng 2).  
-4. *Phát triển, kiểm thử, triển khai*: Lập trình Raspberry Pi, AWS services với CDK/SDK và ứng dụng Next.js, sau đó kiểm thử và đưa vào vận hành (Tháng 2–3).  
+#### Quy trình vận hành & Dòng dữ liệu (16-Step Process Flow)
 
-*Yêu cầu kỹ thuật*  
+Dựa trên sơ đồ kiến trúc `platform_architecture.drawio`, luồng dữ liệu hoạt động theo 16 bước được mã hóa chi tiết:
 
-- *Trạm thời tiết biên*: Cảm biến (nhiệt độ, độ ẩm, lượng mưa, tốc độ gió), vi điều khiển ESP32, Raspberry Pi làm thiết bị biên. Raspberry Pi chạy Raspbian, sử dụng Docker để lọc dữ liệu và gửi 1 MB/ngày/trạm qua MQTT qua Wi-Fi.  
-- *Nền tảng thời tiết*: Kiến thức thực tế về AWS Amplify (lưu trữ Next.js), Lambda (giảm thiểu do Next.js xử lý), AWS Glue (ETL), S3 (2 bucket), IoT Core (gateway và rules), và Cognito (5 người dùng). Sử dụng AWS CDK/SDK để lập trình (ví dụ IoT Core rules tới S3). Next.js giúp giảm tải Lambda cho ứng dụng web fullstack.  
+1. **DNS Resolution (`1`):** Người dùng gửi yêu cầu DNS qua **Amazon Route 53**.
+2. **HTTPS Ingress (`2`):** Yêu cầu HTTPS đến **Amazon CloudFront**, được bảo vệ bởi **AWS WAF v2** & **AWS Shield**.
+3. **Static Content (`3`):** Web App (React SPA) được tải trực tiếp từ **Amazon S3** thông qua CloudFront CDN.
+4. **Authentication (`4`):** Người dùng/Mobile App đăng nhập qua **Amazon Cognito**, nhận về Cognito JWT Token mang thông tin `{tenantId, role, userId}`.
+5. **API Proxy Path (`4a` & `5`):** Yêu cầu API gửi kèm JWT Token và Secret Header `x-origin-verify` từ CloudFront đến **API Gateway**.
+6. **API Gateway Execution (`6`):** API Gateway kiểm tra JWT Authorizer & Header, sau đó kích hoạt hàm **AWS Lambda** tương ứng (Check-in, Check-out, History).
+7. **Async Report Request (`7`):** Khi yêu cầu xuất báo cáo lớn, request được đẩy vào **Amazon SQS Queue** để giải phóng giao diện lập tức.
+8. **CDC Capture (`8a` & `8b`):** **DynamoDB Streams** ghi nhận biến động dữ liệu (Change Data Capture) và đẩy sang **EventBridge Pipe** tới **Amazon EventBridge**.
+9. **Workflow Execution (`9`):** **AWS Step Functions Engine** nhận request từ SQS, điều phối các hàm Lambda tạo file báo cáo chi tiết.
+10. **Transactional Data Ops (`10`):** Lambda trực tiếp ghi/đọc dữ liệu vào **Amazon DynamoDB** theo chuẩn Single-Table Design với Partition Key `TENANT#<tenantId>`.
+11. **Report Storage (`11`):** File báo cáo (PDF, Excel, CSV) được lưu vào **Amazon S3 Bucket** (cấu hình S3 Intelligent-Tiering để tối ưu chi phí).
+12. **Notification Event (`12` & `13`):** EventBridge kích hoạt đẩy thông báo vào **SQS Email Queue**, hàm **Lambda Email Worker** tiêu thụ tin nhắn theo lô (batch).
+13. **Secured Email Delivery (`14`):** Lambda Email Worker gọi **Amazon SES** để gửi mail kèm link tải báo cáo an toàn cho người dùng.
+14. **Outbound Webhook (`15`):** **Lambda Webhook** gửi cảnh báo thời gian thực đến các hệ thống bên ngoài (Slack, Teams, HRM).
+15. **B2B Billing Integration (`16` & `16a`):** **Lambda Subscription** tương tác với Cổng thanh toán (Payment Gateway). Khi thanh toán hoàn tất, Webhook trả về API Gateway (`16a`) để cập nhật trạng thái doanh nghiệp.
 
-### 5. Lộ trình & Mốc triển khai  
+---
 
-- *Trước thực tập (Tháng 0)*: 1 tháng lên kế hoạch và đánh giá trạm cũ.  
-- *Thực tập (Tháng 1–3)*:  
-  - Tháng 1: Học AWS và nâng cấp phần cứng.  
-  - Tháng 2: Thiết kế và điều chỉnh kiến trúc.  
-  - Tháng 3: Triển khai, kiểm thử, đưa vào sử dụng.  
-- *Sau triển khai*: Nghiên cứu thêm trong vòng 1 năm.  
+### 4. Triển khai kỹ thuật
 
-### 6. Ước tính ngân sách  
+#### Các giai đoạn triển khai
 
-Có thể xem chi phí trên [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01)  
-Hoặc tải [tệp ước tính ngân sách](../attachments/budget_estimation.pdf).  
+Dự án được triển khai theo 4 giai đoạn chuẩn hóa:
 
-*Chi phí hạ tầng*  
+1. **Giai đoạn 1: Thiết kế Kiến trúc & Data Model (Tuần 1–2)**
+   * Thiết kế Single-Table Design trên DynamoDB (Access Patterns: Employee Check-in, Check-out, Monthly Summary, Tenant Admin Query).
+   * Cấu hình Cognito User Pool, Custom Attributes (`tenantId`, `role`) và Security Policies.
+   * Lập sơ đồ kiến trúc tổng thể và luồng bảo mật trên CloudFront + WAF v2 + API Gateway.
+2. **Giai đoạn 2: Xây dựng Core Serverless Backend với AWS SAM (Tuần 3–5)**
+   * Đóng gói hạ tầng dưới dạng mã (IaC) sử dụng **AWS SAM / CloudFormation** (`template.yaml`).
+   * Lập trình các hàm Lambda (Node.js 20) cho Auth, Check-in/out, History, Admin, Report Export API, Webhook.
+   * Cấu hình EventBridge Pipe, SQS Queue, SQS Email DLQ và Step Functions Express Workflows.
+3. **Giai đoạn 3: Phát triển Frontend React SPA & CloudFront Integration (Tuần 6–7)**
+   * Xây dựng giao diện Dashboard cho Admin và Employee Web App bằng React + Vite + TailwindCSS.
+   * Tích hợp Cognito SDK cho Đăng nhập/Đăng ký, Refresh Token và phân quyền vai trò.
+   * Đóng gói static site và triển khai lên S3 Bucket + CloudFront Distribution với Secret Origin Verification Header.
+4. **Giai đoạn 4: Kiểm thử, Bảo mật, CI/CD & Đưa vào Vận hành (Tuần 8)**
+   * Xây dựng luồng CI/CD với **AWS CodePipeline** và **AWS CodeBuild** (quét lỗ hổng với Amazon Inspector).
+   * Kiểm thử tải (Load Testing) giả lập 10,000 lượt check-in đồng thời trong 1 phút.
+   * Đánh giá an ninh hạ tầng với **AWS Security Hub**, bật theo dõi **AWS X-Ray** & **CloudWatch Alarms**.
 
-- AWS Lambda: 0,00 USD/tháng (1.000 request, 512 MB lưu trữ).  
-- S3 Standard: 0,15 USD/tháng (6 GB, 2.100 request, 1 GB quét).  
-- Truyền dữ liệu: 0,02 USD/tháng (1 GB vào, 1 GB ra).  
-- AWS Amplify: 0,35 USD/tháng (256 MB, request 500 ms).  
-- Amazon API Gateway: 0,01 USD/tháng (2.000 request).  
-- AWS Glue ETL Jobs: 0,02 USD/tháng (2 DPU).  
-- AWS Glue Crawlers: 0,07 USD/tháng (1 crawler).  
-- MQTT (IoT Core): 0,08 USD/tháng (5 thiết bị, 45.000 tin nhắn).  
+#### Yêu cầu kỹ thuật & Công nghệ
 
-*Tổng*: 0,7 USD/tháng, 8,40 USD/12 tháng  
+* **Frontend:** React.js, Vite, TailwindCSS, AWS Amplify/Cognito JS SDK.
+* **Backend:** Node.js 20.x (Runtime AWS Lambda), AWS SAM (Serverless Application Model), AWS SDK v3.
+* **Database:** Amazon DynamoDB (Single-Table Design, On-Demand Capacity Mode, DynamoDB Streams).
+* **Storage & CDN:** Amazon S3 (Static Web & Report Storage), Amazon CloudFront (Edge Network, TLS 1.3).
+* **Security & Auth:** Amazon Cognito, AWS WAF v2, AWS KMS (CMK), AWS Secrets Manager.
+* **Orchestration & Events:** AWS Step Functions, Amazon EventBridge, Amazon SQS.
 
-- *Phần cứng*: 265 USD một lần (Raspberry Pi 5 và cảm biến).  
+---
 
-### 7. Đánh giá rủi ro  
+### 5. Lộ trình & Mốc triển khai
 
-*Ma trận rủi ro*  
+```
++-----------------------------------------------------------------------------------+
+| Tháng 1: Khảo sát & Kế hoạch    | Tháng 2: Triển khai Backend & Data              |
+| - Chốt yêu cầu & Data Schema    | - Xây dựng AWS SAM Template                     |
+| - Thiết kế OpenAPI & Cognito    | - Lập trình Lambda Microservices & DynamoDB     |
++---------------------------------+-------------------------------------------------+
+| Tháng 3: Frontend & Integration | Tháng 4: Testing, Security & Go-Live            |
+| - Phát triển React Dashboard    | - Load test cao điểm, Audit AWS Security Hub    |
+| - Kết nối API Gateway & SES     | - Thiết lập CI/CD CodePipeline & Chạy chính thức|
++-----------------------------------------------------------------------------------+
+```
 
-- Mất mạng: Ảnh hưởng trung bình, xác suất trung bình.  
-- Hỏng cảm biến: Ảnh hưởng cao, xác suất thấp.  
-- Vượt ngân sách: Ảnh hưởng trung bình, xác suất thấp.  
+* **Mốc 1 (Cuối Tháng 1):** Hoàn tất bản vẽ kiến trúc chi tiết, SAM template mẫu và Cognito User Pool.
+* **Mốc 2 (Cuối Tháng 2):** Hoàn thành bộ API Backend (Check-in/out, Báo cáo, Webhook) và DynamoDB Single-Table.
+* **Mốc 3 (Cuối Tháng 3):** Hoàn thiện Web Dashboard cho Admin/HR và Employee App.
+* **Mốc 4 (Cuối Tháng 4):** Go-Live chính thức hệ thống trên AWS Cloud, bàn giao tài liệu vận hành.
 
-*Chiến lược giảm thiểu*  
+---
 
-- Mạng: Lưu trữ cục bộ trên Raspberry Pi với Docker.  
-- Cảm biến: Kiểm tra định kỳ, dự phòng linh kiện.  
-- Chi phí: Cảnh báo ngân sách AWS, tối ưu dịch vụ.  
+### 6. Ước tính ngân sách
 
-*Kế hoạch dự phòng*  
+Dựa trên công cụ **AWS Pricing Calculator**, ước tính chi phí hàng tháng cho quy mô **100 Doanh nghiệp (Tenants) – 5,000 Nhân viên (500,000 lượt check-in/tháng)**:
 
-- Quay lại thu thập thủ công nếu AWS gặp sự cố.  
-- Sử dụng CloudFormation để khôi phục cấu hình liên quan đến chi phí.  
+#### Chi phí hạ tầng AWS hàng tháng
 
-### 8. Kết quả kỳ vọng  
+| Dịch Vụ AWS | Mức Sử Dụng Dự Tính | Chi Phí Hàng Tháng (USD) |
+| :--- | :--- | :--- |
+| **AWS Lambda** | 2,000,000 requests/tháng (128MB - 512MB, avg 200ms) | $0.40 USD (Trong Free Tier) |
+| **Amazon DynamoDB** | On-Demand (500k writes, 1.5M reads, 5GB storage) | $1.25 USD |
+| **Amazon API Gateway** | 2,500,000 HTTP API requests/tháng | $2.50 USD |
+| **Amazon CloudFront** | 50 GB Data Transfer Out + 1,000,000 HTTP requests | $0.85 USD |
+| **Amazon S3** | 10 GB Report & Static site + Intelligent-Tiering | $0.23 USD |
+| **Amazon Cognito** | 5,000 MAUs (Monthly Active Users) | $0.00 USD (Miễn phí 50,000 MAUs) |
+| **Amazon EventBridge & SQS**| 1,000,000 events & messages/tháng | $0.40 USD |
+| **Amazon SES** | 10,000 emails thông báo/tháng | $1.00 USD |
+| **AWS KMS & Secrets Manager**| 1 Customer Master Key + 2 Secrets | $1.50 USD |
+| **Amazon CloudWatch & X-Ray**| Logs 5GB/tháng, Alarms & Tracing | $1.80 USD |
+| **Tổng Chi Phí Hạ Tầng** | **Cho toàn bộ 100 Tenants (5,000 Users)** | **~$9.93 USD / tháng** |
 
-*Cải tiến kỹ thuật*: Dữ liệu và phân tích thời gian thực thay thế quy trình thủ công. Có thể mở rộng tới 10–15 trạm.  
-*Giá trị dài hạn*: Nền tảng dữ liệu 1 năm cho nghiên cứu AI, có thể tái sử dụng cho các dự án tương lai.
+> **So sánh:** Mô hình truyền thống chạy 2 máy chủ EC2 (`t3.medium`) + RDS PostgreSQL (`db.t3.medium`) có chi phí ước tính khoảng **$120 - $150 USD/tháng**. Kiến trúc Serverless giúp **tiết kiệm hơn 90% chi phí vận hành**.
+
+---
+
+### 7. Đánh giá rủi ro
+
+#### Ma trận rủi ro & Chiến lược giảm thiểu
+
+| Rủi Ro Phát Sinh | Mức Độ | Xác Suất | Chiến Lược Giảm Thiểu (Mitigation Strategy) |
+| :--- | :---: | :---: | :--- |
+| **Tăng đột biến Cold Start của Lambda** | Trung bình | Thấp | Sử dụng Provisioned Concurrency cho các hàm Check-in/out trọng yếu giờ cao điểm; tối ưu dung lượng package Lambda. |
+| **Vượt Hạn ngạch (Quota Limit) DynamoDB** | Cao | Thấp | Cấu hình DynamoDB chế độ Auto-Scaling On-Demand Capacity Mode; áp dụng caching tại API Gateway / CloudFront. |
+| **Tấn công DDoS / Brute Force Auth** | Cao | Trung bình | Bật **AWS WAF v2** với Rate Limiting (1000 req/IP); kích hoạt Cognito Advanced Security Mode chặn Brute Force. |
+| **Rò rỉ dữ liệu giữa các Tenant** | Rất Cao | Cực Thấp | Bắt buộc sử dụng Partition Key Isolation (`TENANT#<tenantId>`) trong mọi Query; kiểm tra chặt chẽ JWT Claim tại API Gateway. |
+| **Nghẽn tiến trình gửi Email hàng loạt** | Thấp | Trung bình | Đẩy tin nhắn qua **Amazon SQS Queue Buffer**; cấu hình Dead Letter Queue (DLQ) để ghi nhận và retry các mail thất bại. |
+
+#### Kế hoạch dự phòng (Contingency Plan)
+
+* **Khôi phục thảm họa (Disaster Recovery):** Bật chế độ Point-in-Time Recovery (PITR) cho DynamoDB cho phép khôi phục dữ liệu tới từng giây trong vòng 35 ngày.
+* **Infrastructure as Code Rollback:** Toàn bộ hạ tầng định nghĩa qua AWS SAM, cho phép rollback phiên bản trong vòng 5 phút nếu có sự cố deployment.
+
+---
+
+### 8. Kết quả kỳ vọng
+
+#### Cải tiến kỹ thuật
+
+* **Tốc độ xử lý:** Thời gian phản hồi Check-in dưới **200ms**, truy vấn lịch sử chấm công dưới **50ms**.
+* **Độ tin cậy:** Hệ thống đạt độ sẵn sàng **99.99%**, tự động khôi phục lỗi không cần can thiệp con người.
+* **Tự động hóa 100%:** Luồng tạo báo cáo và gửi email tự động giúp loại bỏ 100% thao tác thủ công.

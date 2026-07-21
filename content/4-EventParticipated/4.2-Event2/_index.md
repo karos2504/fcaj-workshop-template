@@ -1,16 +1,10 @@
-------
-
+---
 title: "Event 2"
-
 date: 2026-05-23
-
-weight: 1
-
+weight: 2
 chapter: false
-
 pre: " <b> 4.2. </b> "
-
-------
+---
 
 # Summary Report: AWS Community Day – AI Track
 
@@ -118,7 +112,7 @@ pre: " <b> 4.2. </b> "
 - Defining the Problem & Shaping UTMorpho
 - Building Under Pressure – 36-Hour Development Sprint
 - Challenges, Failures & Turning Points
-- UTMorpho – Product Overview & Demo
+- UTMorpho – Product Overview & platform_architecture
 - Key Learnings & What's Next
 
 ### Key Takeaways
@@ -204,8 +198,4 @@ Attending this event was an invaluable experience that exposed me to cutting-edg
 
 ### Event Photos
 
-![AWS Community Day – AI Track Event Photo](event-photo.avif)
-
----
-
-> Overall, these sessions provided comprehensive insights into modern AI applications, from foundational concepts like context and prompt engineering to enterprise-scale implementations. The combination of technical depth and practical examples will significantly influence my approach to building AI-powered solutions.
+![AWS Community Day Event Photo](event_2.jpg)

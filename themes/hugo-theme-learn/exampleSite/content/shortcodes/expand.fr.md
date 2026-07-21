@@ -23,7 +23,7 @@ Ce shortcode prends exactement un paramètre optionel pour définir le texte à 
 
 {{%expand "Est-ce que ce thème envoie du pâté ?" %}}Oui !{{% /expand%}}
 
-# Demo
+# platform_architecture
 
     {{%/*expand*/%}}
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

@@ -6,7 +6,6 @@ chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-
 # SESSION POLICIES TRONG AMAZON EKS POD IDENTITY
 
 Amazon EKS Pod Identity vừa bổ sung tính năng session policies, cho phép bạn thu hẹp quyền IAM một cách linh hoạt và chính xác cho từng pod mà không cần tạo thêm nhiều IAM roles riêng biệt. Đây là bước tiến quan trọng giúp áp dụng nguyên tắc least privilege hiệu quả hơn trong môi trường Kubernetes quy mô lớn.

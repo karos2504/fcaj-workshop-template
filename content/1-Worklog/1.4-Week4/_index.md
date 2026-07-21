@@ -1,30 +1,31 @@
 ---
 title: "Week 4 Worklog"
-date: 2024-01-01
-weight: 1
+date: 2026-05-25
+weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
 
 ### Week 4 Objectives
 
-* Understand Amazon RDS (Relational Database Service) fundamentals and supported database engines (MySQL, PostgreSQL).
-* Study High Availability features with Multi-AZ deployments and read scaling with Read Replicas.
-* Learn NoSQL Database essentials with Amazon DynamoDB (Tables, Primary Key, Sort Key, Capacity Modes, Indexing).
+* Understand AWS Monitoring, Logging, and Observability core principles.
+* Master Amazon CloudWatch (Metrics, Custom CloudWatch Agent, Dashboards, Alarms & Logs Insights).
+* Monitor network traffic using VPC Flow Logs and explore CloudWatch integration with Amazon Managed Grafana.
 
 ### Tasks to be carried out this week
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Learn Amazon RDS Core: <br>&emsp; + Database Engines (MySQL, PostgreSQL, Aurora) <br>&emsp; + Instance Classes, Storage Types (gp3, io2) & Subnet Groups <br>&emsp; + Automated Backups, Snapshots & Parameter Groups | 25/05/2026 | 25/05/2026 | <https://000005.awsstudygroup.com> |
-| 3 | - Learn RDS High Availability Architecture: <br>&emsp; + Multi-AZ deployment (Synchronous replication & Failover) <br>&emsp; + Read Replicas (Asynchronous replication for read scaling) | 26/05/2026 | 26/05/2026 | <https://000005.awsstudygroup.com> |
-| 4 | - **Practice:** <br>&emsp; + Provision an Amazon RDS MySQL Multi-AZ instance inside Private Subnets <br>&emsp; + Restrict Security Group access strictly to Web EC2 instances <br>&emsp; + Test DB connection from app instance and trigger manual failover | 27/05/2026 | 27/05/2026 | <https://000005.awsstudygroup.com> |
-| 5 | - Learn Amazon DynamoDB NoSQL: <br>&emsp; + Partition Key, Sort Key & Composite Primary Keys <br>&emsp; + Read/Write Capacity Modes (On-Demand vs Provisioned) <br>&emsp; + Local Secondary Indexes (LSI) & Global Secondary Indexes (GSI) | 28/05/2026 | 28/05/2026 | <https://000060.awsstudygroup.com> |
-| 6 | - **Practice:** <br>&emsp; + Create a DynamoDB table and perform CRUD operations via AWS CLI/SDK <br>&emsp; + Compare performance, cost, and design trade-offs between RDS and DynamoDB | 29/05/2026 | 29/05/2026 | <https://000060.awsstudygroup.com> |
+| 2 | - **Monitoring with Amazon CloudWatch:** <br>&emsp; + System metrics vs Custom metrics <br>&emsp; + Install CloudWatch Agent on EC2 to collect Memory & Disk utilization <br>&emsp; + Build CloudWatch Dashboards for infrastructure visualization | 25/05/2026 | 25/05/2026 | <https://000008.awsstudygroup.com> |
+| 3 | - **CloudWatch Logs & SNS Alarms:** <br>&emsp; + Log Groups, Log Streams & Retention Policies <br>&emsp; + CloudWatch Alarms (Static Threshold & Anomaly Detection) <br>&emsp; + Integrate CloudWatch Alarms with Amazon SNS for automated email notifications | 26/05/2026 | 26/05/2026 | <https://000008.awsstudygroup.com> <br> <https://000077.awsstudygroup.com> |
+| 4 | - **Network Monitoring with VPC Flow Logs:** <br>&emsp; + Configure VPC Flow Logs to capture ACCEPT and REJECT IP traffic <br>&emsp; + Deliver Flow Logs to CloudWatch Logs & Amazon S3 <br>&emsp; + **Hands-on:** Analyze Security Group / NACL connectivity issues via VPC Flow Logs | 27/05/2026 | 27/05/2026 | <https://000074.awsstudygroup.com> |
+| 5 | - **CloudWatch Logs Insights & Observability:** <br>&emsp; + Write CloudWatch Logs Insights query syntax (`filter`, `fields`, `stats`, `sort`) <br>&emsp; + Integrate CloudWatch data source with Amazon Managed Grafana for advanced dashboards | 28/05/2026 | 28/05/2026 | <https://000036.awsstudygroup.com> <br> <https://000029.awsstudygroup.com> |
+| 6 | - **Cost & Resource Optimization:** <br>&emsp; + Analyze resource expenditure trends using AWS Cost & Usage Management <br>&emsp; + **Hands-on:** Query application logs with Logs Insights and set up automated incident response workflows | 29/05/2026 | 29/05/2026 | <https://000064.awsstudygroup.com> <br> <https://000029.awsstudygroup.com> |
 
 ### Week 4 Achievements
 
-* Successfully provisioned, secured, and connected Amazon RDS instances within private subnets.
-* Understood automated backup retention and RDS Multi-AZ disaster recovery failover.
-* Mastered DynamoDB NoSQL schema design, primary keys, and secondary indexing.
-* Developed clear architectural criteria for choosing Relational vs NoSQL databases.
+* Installed and configured CloudWatch Agent to collect custom EC2 metrics (RAM/Disk).
+* Constructed professional visual monitoring dashboards for core infrastructure.
+* Captured and analyzed real network traffic with VPC Flow Logs to detect anomalous traffic.
+* Mastered CloudWatch Logs Insights query syntax to accelerate root-cause diagnostic workflows.
+

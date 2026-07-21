@@ -1,30 +1,31 @@
 ---
 title: "Worklog Tuần 11"
-date: 2024-01-01
-weight: 2
+date: 2026-07-13
+weight: 11
 chapter: false
 pre: " <b> 1.11. </b> "
 ---
 
 ### Mục tiêu tuần 11
 
-* Hiểu các giải pháp bảo mật dữ liệu, mã hóa và tuân thủ trên AWS (AWS KMS, Secrets Manager, WAF, GuardDuty).
-* Tìm hiểu giải pháp chuyển đổi cơ sở dữ liệu (Migration) với AWS DMS & SCT.
-* Khám phá tổng quan về Data Lake & Phân tích dữ liệu serverless với Amazon Athena.
+* **Thực hiện chỉnh sửa cập nhật giao diện frontend và backend:** Tiến hành cập nhật, nâng cấp mã nguồn giao diện người dùng (React/Vite) và mã nguồn xử lý backend (AWS Lambda) cho dự án.
+* **Tiếp tục học trên CloudJourney:** Học chuyên sâu phương pháp phát triển Web Application kết nối Serverless Backend và quy trình tự động hóa CI/CD (`https://cloudjourney.awsstudygroup.com/`).
+* Hoàn thiện hạ tầng CDK v2 và thiết lập đường ống tự động hóa triển khai (AWS CodePipeline).
 
 ### Các công việc cần triển khai trong tuần này
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Tìm hiểu AWS KMS (Key Management Service) & AWS Secrets Manager: <br>&emsp; + Customer Managed Keys (CMK), Envelope Encryption & Key Policies <br>&emsp; + Quản lý, xoay vòng tự động (Automatic Rotation) credentials DB trong Secrets Manager | 13/07/2026 | 13/07/2026 | <https://000033.awsstudygroup.com> <br> <https://000096.awsstudygroup.com> |
-| 3 | - Tìm hiểu AWS WAF (Web Application Firewall) & Threat Detection: <br>&emsp; + Managed Rule Groups (SQLi, XSS, OWASP Top 10) & Rate Limiting <br>&emsp; + Giám sát an ninh với AWS GuardDuty & AWS Security Hub | 14/07/2026 | 14/07/2026 | <https://000026.awsstudygroup.com> <br> <https://000098.awsstudygroup.com> |
-| 4 | - **Thực hành:** <br>&emsp; + Tạo KMS Key mã hóa S3 Bucket & EBS Volume <br>&emsp; + Cấu hình AWS WAF Web ACL bảo vệ Application Load Balancer <br>&emsp; + Lưu trữ DB password trong Secrets Manager và lấy credential từ ứng dụng Lambda | 15/07/2026 | 15/07/2026 | <https://000033.awsstudygroup.com> <br> <https://000026.awsstudygroup.com> |
-| 5 | - Tìm hiểu Chuyển đổi dữ liệu (AWS Migration): <br>&emsp; + AWS Schema Conversion Tool (SCT) chuyển đổi schema On-Premises sang Cloud <br>&emsp; + AWS Database Migration Service (DMS) đồng bộ hóa dữ liệu thời gian thực (CDC) | 16/07/2026 | 16/07/2026 | <https://000043.awsstudygroup.com> |
-| 6 | - Tìm hiểu Data & Analytics trên AWS: <br>&emsp; + Mô hình Data Lake trên Amazon S3 & AWS Glue Crawler/Data Catalog <br>&emsp; + Thực vấn dữ liệu trực tiếp trên S3 bằng câu lệnh SQL với Amazon Athena | 17/07/2026 | 17/07/2026 | <https://000035.awsstudygroup.com> <br> <https://000106.awsstudygroup.com> |
+| 2 | - **Chỉnh sửa Cập nhật Giao diện Frontend (13/07/2026 – 19/07/2026):** <br>&emsp; + Cập nhật giao diện React/Vite: Tối ưu UI/UX màn hình Dashboard, bảng điều khiển Admin và giao diện Check-in GPS <br>&emsp; + Học bài giảng tích hợp Frontend trên CloudJourney | 13/07/2026 | 13/07/2026 | <https://cloudjourney.awsstudygroup.com> <br> <https://000141.awsstudygroup.com> |
+| 3 | - **Chỉnh sửa Cập nhật Mã nguồn Backend (AWS Lambda):** <br>&emsp; + Refactor và tối ưu mã nguồn các hàm Lambda xử lý nghiệp vụ: `CheckInFunction`, `CheckOutFunction`, `AttendanceSummary` và `AdminFunction` <br>&emsp; + Xử lý định dạng dữ liệu phản hồi API chuẩn hóa | 14/07/2026 | 14/07/2026 | <https://000060.awsstudygroup.com> |
+| 4 | - **Tích hợp Tương tác Frontend & Backend API Gateway:** <br>&emsp; + Kết nối các lệnh gọi HTTP API từ Frontend tới API Gateway v2 <br>&emsp; + Xử lý truyền Authorization Header (Bearer JWT Token) và cơ chế tự động làm mới Token | 15/07/2026 | 15/07/2026 | <https://000066.awsstudygroup.com> |
+| 5 | - **Cập nhật Bộ Mã nguồn Hạ tầng AWS CDK v2:** <br>&emsp; + Cập nhật các stack hạ tầng: `DatabaseStack`, `AuthStack`, `ApiStack` và `FrontendStack` (S3 + CloudFront OAC) <br>&emsp; + Kiểm tra thực thi `cdk synth` và `cdk diff` | 16/07/2026 | 16/07/2026 | <https://000076.awsstudygroup.com> |
+| 6 | - **Cập nhật CI/CD Pipeline & Kiểm thử Liên thông:** <br>&emsp; + Viết lại tệp `buildspec.yml` tự động build React UI, chạy unit tests và thực thi `cdk deploy` <br>&emsp; + Thực hiện kiểm thử toàn trình giữa Frontend và Backend sau khi cập nhật | 17/07/2026 | 17/07/2026 | <https://000152.awsstudygroup.com> |
 
 ### Kết quả đạt được tuần 11
 
-* Triển khai giải pháp mã hóa dữ liệu tĩnh (At-Rest) và dữ liệu chuyển động (In-Transit) sử dụng AWS KMS.
-* Bảo vệ ứng dụng web chống tấn công mạng phổ biến (SQLi/XSS) với WAF Web ACLs.
-* Loại bỏ việc hardcode mật khẩu nhờ quản lý tập trung trên AWS Secrets Manager.
-* Hiểu quy trình dịch chuyển cơ sở dữ liệu lớn không làm gián đoạn hệ thống (AWS DMS/SCT) và phân tích dữ liệu serverless với Athena.
+* Hoàn thành việc chỉnh sửa, nâng cấp giao diện Frontend và mã nguồn Backend xử lý mượt mà.
+* Tiếp tục học tập và áp dụng các kỹ thuật tự động hóa triển khai từ CloudJourney.
+* Kết nối liên thông thành công giữa giao diện Web React và hệ thống Serverless Backend qua API Gateway.
+
+

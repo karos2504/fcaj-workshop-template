@@ -6,27 +6,20 @@ chapter: false
 pre: " <b> 5. </b> "
 ---
 
-
-
-
-# Đảm bảo truy cập Hybrid an toàn đến S3 bằng cách sử dụng VPC endpoint
+# Xây dựng Nền tảng Chấm công Thông minh Multi-Tenant với AWS Serverless Architecture
 
 #### Tổng quan
 
-**AWS PrivateLink** cung cấp kết nối riêng tư đến các dịch vụ aws từ VPCs hoặc trung tâm dữ liệu (on-premise) mà không làm lộ lưu lượng truy cập ra ngoài public internet.
+Trong chuỗi bài thực hành Workshop này, bạn sẽ từng bước xây dựng và triển khai một nền tảng **Smart Attendance SaaS Platform** hoàn chỉnh dành cho mô hình đa doanh nghiệp (Multi-tenant) dựa trên kiến trúc **AWS Serverless Optimized Pro**.
 
-Trong bài lab này, chúng ta sẽ học cách tạo, cấu hình, và kiểm tra VPC endpoints để cho phép workload của bạn tiếp cận các dịch vụ AWS mà không cần đi qua Internet công cộng.
+Bạn sẽ trực tiếp thao tác đóng gói hạ tầng bằng mã với **AWS SAM (Serverless Application Model)**, cấu hình bảo mật xác thực với **Amazon Cognito User Pool**, làm việc với **Amazon DynamoDB (Single-Table Design)** cô lập dữ liệu theo `tenantId`, triển khai **AWS Step Functions Express Workflow** và **Amazon SQS / SES** xử lý báo cáo bất đồng bộ, phân phối ứng dụng React SPA qua **Amazon S3** và **Amazon CloudFront CDN**.
 
-Chúng ta sẽ tạo hai loại endpoints để truy cập đến Amazon S3: gateway vpc endpoint và interface vpc endpoint. Hai loại vpc endpoints này mang đến nhiều lợi ích tùy thuộc vào việc bạn truy cập đến S3 từ môi trường cloud hay từ trung tâm dữ liệu (on-premise).
-
-+ **Gateway** - Tạo gateway endpoint để gửi lưu lượng đến Amazon S3 hoặc DynamoDB using private IP addresses. Bạn điều hướng lưu lượng từ VPC của bạn đến gateway endpoint bằng các bảng định tuyến (route tables)
-+ **Interface** - Tạo interface endpoint để gửi lưu lượng đến các dịch vụ điểm cuối (endpoints) sử dụng Network Load Balancer để phân phối lưu lượng. Lưu lượng dành cho dịch vụ điểm cuối được resolved bằng DNS.
-
-#### Nội dung
+#### Nội dung thực hành
 
 1. [Tổng quan về workshop](5.1-Workshop-overview/)
-2. [Chuẩn bị](5.2-Prerequiste/)
-3. [Truy cập đến S3 từ VPC](5.3-S3-vpc/)
-4. [Truy cập đến S3 từ TTDL On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (làm thêm)](5.5-Policy/)
-6. [Dọn dẹp tài nguyên](5.6-Cleanup/)
+2. [Chuẩn bị môi trường](5.2-Prerequiste/)
+3. [Triển khai Backend Serverless với AWS SAM](5.3-Deploy-Backend/)
+4. [Cấu hình DynamoDB Single-Table & DynamoDB Streams](5.4-DynamoDB-SingleTable/)
+5. [Xây dựng Workflow Xuất Báo cáo Bất đồng bộ](5.5-Async-Reporting/)
+6. [Triển khai React SPA Frontend & CloudFront CDN](5.6-Frontend-CloudFront/)
+7. [Kiểm thử End-to-End & Dọn dẹp Tài nguyên](5.7-Testing-Cleanup/)

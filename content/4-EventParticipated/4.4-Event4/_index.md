@@ -10,121 +10,102 @@ pre: " <b> 4.4. </b> "
 
 ## Event Objectives
 
-- Explore AgenticOps strategies and tools for managing cloud environments.
-- Learn architectural design patterns for building and scaling Voice Agents.
-- Discover the capabilities and operations of the AWS DevOps Agent.
-- Understand how AI-powered productivity fits into workforce planning for large enterprises.
-- Learn how to build secure private Model Context Protocol (MCP) servers for Quick.
+- Explore autonomous resolution and incident response with Deep Response Engine.
+- Learn architectural design patterns for building human-like AI Voice Agents using Amazon Nova Sonic.
+- Discover AWS DevOps Agent and its multi-agent reasoning capabilities to reduce MTTD/MTTR.
+- Understand AI-powered workforce planning and HR transformation using Amazon Quick.
+- Master building secure private Model Context Protocol (MCP) connections with Amazon Quick.
 
 ## Key Highlights
 
-- Introduction to Agentic AI operational tools in cloud infrastructure.
-- High-level design and scaling techniques for latency-critical Voice Agents.
-- Technical overview of AWS DevOps Agent as an automated operational assistant.
-- Strategy and case studies on enterprise workforce planning powered by AI.
-- Step-by-step guidance on constructing secure private MCP networks.
+- Autonomous incident handling shifting from alert-driven to action-driven systems.
+- Low-latency, speech-to-speech AI voice interactions with Amazon Nova Sonic & Bedrock.
+- Multi-agent reasoning for automated infrastructure operations across hybrid & multi-cloud environments.
+- Strategic workforce planning and HR operational acceleration with Amazon Quick.
+- Step-by-step setup of VPC private connectivity for secure enterprise MCP integrations.
 
 ---
 
-## Session 1: AgenticOps for your Cloud
+## Session 1: Deep Response Engine: From Detection to Autonomous Resolution
 
-**Speaker:** Steve Tran
+**Time:** 09:00 - 09:25 AM
 
 ### Topics Covered
 
-- Introduction to AgenticOps: monitoring, managing, and debugging AI agents in cloud environments.
-- Lifecycle management of Autonomous Agents on AWS.
-- Setting up guardrails, monitoring trace logs, and analyzing agent performance.
-- Common failure modes of cloud-based AI agents and how to mitigate them.
-
-### Key Takeaways
-
-- AgenticOps is essential for keeping AI agent execution predictable, secure, and cost-efficient.
-- Proper logging, tracing, and prompt-version auditing are core to operations.
-- Real-time observability helps detect infinite agent loops and execution anomalies.
+- The complexity wall in modern cloud operations
+- Shift from alert-driven to action-driven systems
+- Deep Response Engine architecture overview
+- Live demo of autonomous incident response
+- Business impact: cost reduction and zero-downtime operations
 
 ---
 
-## Session 2: Building Voice Agent at Scale
+## Session 2: Voice Agents: Building Human-Like AI Conversations at Scale
 
-**Speakers:** Tuong Vy - Nghi Danh - Kiet Tran
+**Time:** 09:25 - 09:55 AM
 
 ### Topics Covered
 
-- High-level architecture of scalable Voice Agents.
-- Solving latency, noise cancellation, and streaming challenges in voice processing.
-- Integrating LLMs with Text-to-Speech (TTS) and Speech-to-Text (STT) models.
-- Handling concurrent voice channels and autoscaling compute resources.
-
-### Key Takeaways
-
-- Low latency is the most critical metric for pleasant voice conversation experiences.
-- Combining local STT/TTS cache and streaming response endpoints reduces perceived response times.
-- Resilient architecture is needed to handle connection drops and voice interruptions.
+- Evolution from IVR and chatbots to AI voice agents
+- Key challenges: latency, accuracy, and natural interaction
+- Amazon Nova Sonic and speech-to-speech foundation model
+- Architecture: telephony, streaming, Bedrock, MCP tools
+- Enterprise use cases, best practices, and live demo
 
 ---
 
 ## Session 3: AWS DevOps Agent: Your Always-Available Operations Teammate
 
+**Time:** 09:55 - 10:20 AM
+
 ### Topics Covered
 
-- What is AWS DevOps Agent and how does it integrate into current workflows?
-- Automating infrastructure debugging, log analysis, and incident response.
-- Safety boundaries: how the agent works safely in production environments.
-- Case studies of operations teams deploying AWS DevOps Agent to reduce MTTD/MTTR.
-
-### Key Takeaways
-
-- AWS DevOps Agent acts as a co-pilot for cloud administration and operations.
-- The agent helps summarize complex system logs and suggests immediate remediation steps.
-- Human-in-the-loop validation is vital for high-severity actions.
+- Overview of AWS DevOps Agent
+- Reducing MTTD and MTTR with AI-driven operations
+- Supporting multi-cloud and hybrid environments
+- Bedrock AgentCore and multi-agent reasoning approach
+- Real-world use cases and ECS demo walkthrough
 
 ---
 
-## Session 4: AI-Powered Productivity Workforce Planning For Enterprise
+## Session 4: AI-Powered Productivity: Workforce Planning For Enterprise
 
-**Speakers:** Truong (Wayne) Tran - Anh Dang (Akie)
+**Time:** 10:20 - 10:45 AM
 
 ### Topics Covered
 
-- How AI-powered tools redefine workforce efficiency and capacity planning.
-- Structuring organizational data to train planning and forecasting models.
-- Addressing data privacy, governance, and employee experience concerns.
-- Practical roadmap for large organizations adopting AI in workforce administration.
-
-### Key Takeaways
-
-- AI planning models enable dynamic, data-driven workforce forecasting rather than static annual planning.
-- Governance and employee trust are foundational for success.
-- Boosting productivity with AI requires a combination of tools, training, and cultural change.
+- HR transformation challenges in modern enterprises
+- Overview of Amazon Quick and its HR capabilities
+- Accelerating HR operations with automation
+- Workforce analytics and data-driven insights
+- Strategic workforce planning for enterprise decision-making
 
 ---
 
-## Session 5: Building secure private MCP for Quick
+## Session 5: Building Secure Private MCP Connection with Amazon Quick
 
-**Speakers:** Nguyen Duc Toan - Danh Hoang Hieu Nghi
+**Time:** 10:45 - 11:30 AM
 
 ### Topics Covered
 
-- Introduction to the Model Context Protocol (MCP) and its significance.
-- Architecture of a private, secure MCP server.
-- Implementing authentication, token verification, and data encryption.
-- Case study: Deploying MCP for Quick applications to safely expose internal tools and databases to LLMs.
-
-### Key Takeaways
-
-- MCP provides a standardized interface for connecting LLMs to external data sources and tools.
-- Security must be baked in: least privilege access controls are critical.
-- Private MCP enables secure utilization of enterprise data without exposing proprietary secrets.
+- Introduction to Amazon Quick as an AI assistant platform
+- MCP (Model Context Protocol) and its role in extensibility
+- Security challenges in MCP-based integrations
+- Configuring Amazon Quick VPC private connectivity
+- platform_architecture and real-world implementation insights
 
 ---
 
 ## Event Experience & Learnings
 
-The **FCAJ Community Day** showcased state-of-the-art developments in AI agent orchestration, voice agents, cloud automation, and protocol safety.
+The **FCAJ Community Day** provided deep technical insights into autonomous incident management, real-time speech-to-speech voice agents, AI-driven DevOps operations, and enterprise MCP security.
 
-### Key Learnings
+### Key Takeaways
 
-- **Agent Orchestration**: Building agents requires a rigorous AgenticOps framework to monitor performance.
-- **Secure Integration**: Protocols like MCP are transforming how LLMs interact with private systems safely.
-- **Scale and Latency**: Voice and operations agents require careful engineering to handle low-latency and secure real-time requests.
+- **Action-Driven Operations**: Moving beyond static alerts to autonomous resolution drastically lowers MTTR and operational overhead.
+- **Next-Gen Voice Agents**: Amazon Nova Sonic enables natural, low-latency conversational AI streaming across enterprise telephony.
+- **Enterprise AI & Security**: Amazon Quick combined with private MCP over VPC unlocks powerful HR analytics and extensible AI assistants without compromising corporate security.
+
+### Event Photos
+
+![AWS Community Day Event Photo](event_4.jpg)

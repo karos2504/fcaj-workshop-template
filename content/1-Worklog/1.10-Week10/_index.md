@@ -1,30 +1,31 @@
 ---
 title: "Week 10 Worklog"
-date: 2024-01-01
-weight: 2
+date: 2026-07-06
+weight: 10
 chapter: false
 pre: " <b> 1.10. </b> "
 ---
 
 ### Week 10 Objectives
 
-* Understand modern software delivery paradigms with CI/CD concepts (Continuous Integration / Continuous Delivery & Deployment).
-* Gain hands-on mastery over AWS Developer Tools (CodeCommit, CodeBuild, CodeDeploy & CodePipeline).
-* Automate end-to-end building, testing, and deployment pipelines for Serverless and Containerized applications.
+* **Basic Security Configuration Implementation:** Implement defense-in-depth security controls protecting data at rest, data in transit, API endpoints, and service IAM roles for the project.
+* **Continued CloudJourney Learning:** Master AWS security standards, AWS KMS CMK encryption, Secrets Manager, and AWS WAF v2 configuration on CloudJourney (`https://cloudjourney.awsstudygroup.com/`).
+* Ensure enterprise-grade security compliance and prevent sensitive data leaks.
 
 ### Tasks to be carried out this week
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Study DevOps Culture & CI/CD Fundamentals: <br>&emsp; + Differences between CI, CD & Continuous Deployment <br>&emsp; + Ecosystem of AWS Developer Tools <br>&emsp; + Source control management with AWS CodeCommit / GitHub integration | 06/07/2026 | 06/07/2026 | <https://000017.awsstudygroup.com> |
-| 3 | - Study AWS CodeBuild: <br>&emsp; + `buildspec.yml` specification syntax (install, pre_build, build, post_build phases) <br>&emsp; + Environment Images, Build Artifacts & Environment Variables management | 07/07/2026 | 07/07/2026 | <https://000017.awsstudygroup.com> <br> <https://000051.awsstudygroup.com> |
-| 4 | - Study AWS CodeDeploy & Deployment Strategies: <br>&emsp; + In-place deployment vs Blue/Green deployment <br>&emsp; + Deployment groups, AppSpec file (`appspec.yml`) & Automatic rollback triggers | 08/07/2026 | 08/07/2026 | <https://000023.awsstudygroup.com> |
-| 5 | - Study AWS CodePipeline Orchestration: <br>&emsp; + Pipeline Stages (Source, Build, Test, Deploy, Manual Approval) <br>&emsp; + Webhook integration from GitHub / CodeCommit for automated git-push pipeline execution | 09/07/2026 | 09/07/2026 | <https://000023.awsstudygroup.com> <br> <https://000152.awsstudygroup.com> |
-| 6 | - **Practice:** <br>&emsp; + Construct an end-to-end CI/CD pipeline that builds Docker images, pushes to ECR, and deploys to ECS Fargate upon code push <br>&emsp; + Configure pipeline status notifications via EventBridge & SNS | 10/07/2026 | 10/07/2026 | <https://000152.awsstudygroup.com> |
+| 2 | - **AWS Security Architecture Research (06/07/2026 – 12/07/2026):** <br>&emsp; + Study data encryption and key management modules on CloudJourney <br>&emsp; + Analyze 3-tier security architecture: Edge (WAF), Auth (Cognito/IAM), and Storage (KMS) | 06/07/2026 | 06/07/2026 | <https://cloudjourney.awsstudygroup.com> <br> <https://000033.awsstudygroup.com> |
+| 3 | - **Data-at-Rest Encryption with AWS KMS (CMK):** <br>&emsp; + Create Customer Managed Keys (CMK) encrypting DynamoDB Single-Table and S3 export buckets <br>&emsp; + Configure KMS Key Policies restricting access to authorized Lambda execution roles | 07/07/2026 | 07/07/2026 | <https://000033.awsstudygroup.com> |
+| 4 | - **Secrets & Credentials Management with AWS Secrets Manager:** <br>&emsp; + Store API keys, DB connection strings, and sensitive credentials inside AWS Secrets Manager <br>&emsp; + Enable automatic secrets rotation and programmatic retrieval from Lambda functions | 08/07/2026 | 08/07/2026 | <https://000096.awsstudygroup.com> |
+| 5 | - **Edge Security Enforcement with AWS WAF v2:** <br>&emsp; + Associate WAF Web ACLs with CloudFront distribution and API Gateway HTTP API v2 <br>&emsp; + Enforce AWS Managed Rules (SQLi, XSS protections) and rate-limiting rules against DDoS | 09/07/2026 | 09/07/2026 | <https://000026.awsstudygroup.com> |
+| 6 | - **IAM Least Privilege Audit & Security Testing:** <br>&emsp; + Audit IAM Execution Roles enforcing strict Least Privilege access for all Lambda functions <br>&emsp; + Perform baseline security audit across all API Gateway endpoints | 10/07/2026 | 10/07/2026 | <https://000002.awsstudygroup.com> |
 
 ### Week 10 Achievements
 
-* Mastered automated software release pipeline architecture on AWS.
-* Proficiently wrote `buildspec.yml` and `appspec.yml` control files for automated build/deploy workflows.
-* Built automated end-to-end CI/CD pipelines for ECS Container and Serverless services.
-* Implemented Blue/Green deployment strategies ensuring zero downtime for web applications.
+* Successfully completed basic security configuration across all layers of the project infrastructure.
+* Continued advancing cloud security skills through curated CloudJourney learning materials.
+* Encrypted all sensitive data at rest via AWS KMS CMK and shielded API endpoints with AWS WAF v2.
+
+

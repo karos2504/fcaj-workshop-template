@@ -1,16 +1,10 @@
-------
-
+---
 title: "Sự kiện 2"
-
 date: 2026-05-23
-
-weight: 1
-
+weight: 2
 chapter: false
-
 pre: " <b> 4.2. </b> "
-
-------
+---
 
 # Báo cáo tổng kết: AWS Community Day – AI Track
 
@@ -118,7 +112,7 @@ pre: " <b> 4.2. </b> "
 - Định nghĩa vấn đề & Định hình UTMorpho
 - Xây dựng dưới áp lực – Sprint phát triển 36 giờ
 - Thách thức, Thất bại & Turning Points
-- UTMorpho – Tổng quan sản phẩm & Demo
+- UTMorpho – Tổng quan sản phẩm & platform_architecture
 - Bài học rút ra & Hướng tiếp theo
 
 ### Bài học chính
@@ -204,8 +198,4 @@ Tham gia sự kiện này là một trải nghiệm vô cùng quý báu, giúp t
 
 ### Hình ảnh sự kiện
 
-![Hình ảnh sự kiện AWS Community Day – AI Track](event-photo.avif)
-
----
-
-> Tổng thể, những phiên này cung cấp insights toàn diện về các ứng dụng AI hiện đại, từ các khái niệm cơ bản như context và prompt engineering đến các triển khai quy mô enterprise. Sự kết hợp giữa chiều sâu kỹ thuật và các ví dụ thực tế sẽ ảnh hưởng đáng kể đến cách tiếp cận của tôi khi xây dựng các giải pháp hỗ trợ AI.
+![Hình ảnh sự kiện AWS Community Day](event_2.jpg)

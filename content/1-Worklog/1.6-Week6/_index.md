@@ -1,29 +1,31 @@
 ---
 title: "Week 6 Worklog"
-date: 2024-01-01
-weight: 1
+date: 2026-06-08
+weight: 6
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
 
 ### Week 6 Objectives
 
-* Understand High Availability and Scalability system architecture design principles on AWS.
-* Configure Elastic Load Balancing (Application Load Balancer - ALB) for traffic distribution.
-* Implement EC2 Auto Scaling Groups alongside Route 53 Health Checks & DNS Failover.
+* Understand Serverless Computing philosophy and Event-Driven Architecture on AWS.
+* Master AWS Lambda (Execution environments, Execution Roles, Layers & Event Triggers) and user authentication with Amazon Cognito.
+* Build Serverless REST APIs with Amazon API Gateway, orchestrate complex workflows using AWS Step Functions, and automate deployments using AWS SAM CLI.
 
 ### Tasks to be carried out this week
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Study Elastic Load Balancing (ELB): <br>&emsp; + ALB (Layer 7) vs NLB (Layer 4) <br>&emsp; + Target Groups, Health Checks & Listener Rules <br>&emsp; + SSL/TLS Termination with AWS Certificate Manager (ACM) | 08/06/2026 | 08/06/2026 | <https://000006.awsstudygroup.com> |
-| 3 | - Study EC2 Auto Scaling Groups (ASG): <br>&emsp; + Launch Templates vs Launch Configurations <br>&emsp; + Scaling Policies: Target Tracking, Step Scaling & Scheduled Scaling <br>&emsp; + Dynamic Scaling based on CPU utilization / ALB Request count | 09/06/2026 | 09/06/2026 | <https://000006.awsstudygroup.com> |
-| 4 | - **Practice:** <br>&emsp; + Create Launch Template defining Web Server EC2 instances <br>&emsp; + Provision an ALB across 2 Public Subnets attached to Target Group <br>&emsp; + Create Auto Scaling Group across 2 Private Subnets integrated with ALB | 10/06/2026 | 10/06/2026 | <https://000006.awsstudygroup.com> |
-| 5 | - Study Amazon Route 53 & Hybrid DNS: <br>&emsp; + Hosted Zones (Public vs Private) <br>&emsp; + Routing Policies: Simple, Weighted, Latency, Failover & Geolocation <br>&emsp; + Route 53 Health Checks for DNS Failover configuration | 11/06/2026 | 11/06/2026 | <https://000010.awsstudygroup.com> <br> <https://000101.awsstudygroup.com> |
-| 6 | - **Practice:** <br>&emsp; + Simulate heavy load using CPU stress tool to test auto scale out/in behavior <br>&emsp; + Configure Route 53 Failover Routing to test traffic redirection during primary site failure | 12/06/2026 | 12/06/2026 | <https://000101.awsstudygroup.com> |
+| 2 | - **Serverless Automation with AWS Lambda:** <br>&emsp; + Event-driven execution model, Execution Environments & Concurrency limits <br>&emsp; + IAM Execution Roles & Resource-based access policies <br>&emsp; + Utilize Lambda Layers to share reusable code and libraries | 08/06/2026 | 08/06/2026 | <https://000022.awsstudygroup.com> |
+| 3 | - **Building Serverless APIs with Amazon API Gateway:** <br>&emsp; + REST API vs HTTP API vs WebSocket API comparison <br>&emsp; + Lambda Proxy Integration, Request Validation & CORS configuration <br>&emsp; + User authentication using Amazon Cognito User Pools | 09/06/2026 | 09/06/2026 | <https://000066.awsstudygroup.com> <br> <https://000141.awsstudygroup.com> |
+| 4 | - **Hands-on:** <br>&emsp; + Write business logic inside AWS Lambda functions using Node.js/Python <br>&emsp; + Provision REST API endpoints on API Gateway backed by Lambda & DynamoDB <br>&emsp; + Test API endpoints via Postman and verify JWT token authorization | 10/06/2026 | 10/06/2026 | <https://000066.awsstudygroup.com> |
+| 5 | - **Workflow Orchestration with AWS Step Functions:** <br>&emsp; + State Machine types (Standard vs Express Workflows) <br>&emsp; + Choice States, Parallel execution, and Error Handling (Catch/Retry) <br>&emsp; + Introduction to AWS SAM template specification (`template.yaml`) | 11/06/2026 | 11/06/2026 | <https://000047.awsstudygroup.com> <br> <https://000080.awsstudygroup.com/> |
+| 6 | - **Hands-on Serverless Application Model (AWS SAM):** <br>&emsp; + Build a multi-step asynchronous workflow orchestrating multiple Lambda functions via Step Functions <br>&emsp; + Package, test locally (`sam local`), and deploy automatically using AWS SAM CLI | 12/06/2026 | 12/06/2026 | <https://000047.awsstudygroup.com> <br> <https://000080.awsstudygroup.com/> |
 
 ### Week 6 Achievements
 
-* Successfully deployed an Application Load Balancer distributing web traffic across multi-AZ subnets.
-* Configured Auto Scaling Groups to scale EC2 instances dynamically based on real-time traffic demand.
-* Mastered Route 53 DNS routing policies and automated disaster recovery failover mechanisms.
+* Mastered writing and optimizing AWS Lambda functions following Event-Driven architecture patterns.
+* Built and deployed a production-ready Serverless REST API combining API Gateway, Lambda, Cognito, and DynamoDB.
+* Orchestrated complex multi-step workflows using AWS Step Functions with automated error handling and retries.
+* Standardized, tested locally, and deployed full Serverless applications using AWS SAM CLI.
+

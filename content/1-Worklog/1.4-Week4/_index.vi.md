@@ -1,30 +1,31 @@
 ---
 title: "Worklog Tuần 4"
-date: 2024-01-01
-weight: 1
+date: 2026-05-25
+weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
 
 ### Mục tiêu tuần 4
 
-* Hiểu tổng quan và cách hoạt động của Amazon RDS (Relational Database Service) và các database engine hỗ trợ (MySQL, PostgreSQL).
-* Tìm hiểu cơ chế High Availability với Multi-AZ Deployment và mở rộng đọc với Read Replicas.
-* Tiếp cận NoSQL Database với Amazon DynamoDB (Tables, Primary Key, Sort Key, Capacity Modes, Indexing).
+* Hiểu các khái niệm Giám sát (Monitoring), Ghi log (Logging) và Khả năng quan sát (Observability) trên AWS.
+* Sử dụng thành thạo Amazon CloudWatch (Metrics, Custom CloudWatch Agent, Dashboards, Alarms & Logs Insights).
+* Giám sát lưu lượng mạng bằng VPC Flow Logs và khám phá tích hợp CloudWatch với Amazon Managed Grafana.
 
 ### Các công việc cần triển khai trong tuần này
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Tìm hiểu Amazon RDS Core: <br>&emsp; + Database Engines (MySQL, PostgreSQL, Aurora) <br>&emsp; + Instance Classes, Storage Types (gp3, io2) & Subnet Groups <br>&emsp; + Automated Backups, Snapshots & Parameter Groups | 25/05/2026 | 25/05/2026 | <https://000005.awsstudygroup.com> |
-| 3 | - Tìm hiểu kiến trúc RDS High Availability: <br>&emsp; + Multi-AZ deployment (Synchronous replication & Failover) <br>&emsp; + Read Replicas (Asynchronous replication cho read scaling) | 26/05/2026 | 26/05/2026 | <https://000005.awsstudygroup.com> |
-| 4 | - **Thực hành:** <br>&emsp; + Khởi tạo Amazon RDS MySQL Multi-AZ instance trong Private Subnets <br>&emsp; + Cấu hình Security Group chỉ cho phép kết nối từ Web EC2 instance <br>&emsp; + Thử nghiệm kết nối ứng dụng từ EC2 và thực hiện manual failover test | 27/05/2026 | 27/05/2026 | <https://000005.awsstudygroup.com> |
-| 5 | - Tìm hiểu Amazon DynamoDB NoSQL: <br>&emsp; + Partition Key, Sort Key & Composite Primary Key <br>&emsp; + Read/Write Capacity Modes (On-Demand vs Provisioned) <br>&emsp; + Local Secondary Indexes (LSI) & Global Secondary Indexes (GSI) | 28/05/2026 | 28/05/2026 | <https://000060.awsstudygroup.com> |
-| 6 | - **Thực hành:** <br>&emsp; + Tạo bảng DynamoDB và thực thi các thao tác CRUD từ AWS CLI/SDK <br>&emsp; + So sánh hiệu năng, chi phí và kịch bản áp dụng RDS (Relational) vs DynamoDB (NoSQL) | 29/05/2026 | 29/05/2026 | <https://000060.awsstudygroup.com> |
+| 2 | - **Monitoring with Amazon CloudWatch:** <br>&emsp; + Metrics (System metrics vs Custom metrics) <br>&emsp; + Cài đặt CloudWatch Agent trên EC2 thu thập Memory & Disk utilization metrics <br>&emsp; + Xây dựng CloudWatch Dashboards trực quan hóa dữ liệu hạ tầng | 25/05/2026 | 25/05/2026 | <https://000008.awsstudygroup.com> |
+| 3 | - **CloudWatch Logs & SNS Alarms:** <br>&emsp; + Log Groups, Log Streams & Retention Policies <br>&emsp; + CloudWatch Alarms (Static Threshold & Anomaly Detection) <br>&emsp; + Tích hợp CloudWatch Alarms với Amazon SNS phát email cảnh báo tự động | 26/05/2026 | 26/05/2026 | <https://000008.awsstudygroup.com> <br> <https://000077.awsstudygroup.com> |
+| 4 | - **Network Monitoring with VPC Flow Logs:** <br>&emsp; + Khởi tạo VPC Flow Logs thu thập IP traffic chấp nhận (ACCEPT) và từ chối (REJECT) <br>&emsp; + Đẩy Flow Logs về CloudWatch Logs & Amazon S3 <br>&emsp; + **Thực hành:** Phân tích sự cố kết nối Security Group / NACL từ VPC Flow Logs | 27/05/2026 | 27/05/2026 | <https://000074.awsstudygroup.com> |
+| 5 | - **CloudWatch Logs Insights & Observability:** <br>&emsp; + Truy vấn ngữ pháp CloudWatch Logs Insights (`filter`, `fields`, `stats`, `sort`) <br>&emsp; + Tích hợp nguồn dữ liệu CloudWatch với Amazon Managed Grafana cho Dashboard nâng cao | 28/05/2026 | 28/05/2026 | <https://000036.awsstudygroup.com> <br> <https://000029.awsstudygroup.com> |
+| 6 | - **Cost & Resource Optimization:** <br>&emsp; + Phân tích xu hướng chi tiêu tài nguyên với AWS Cost & Usage Management <br>&emsp; + **Thực hành:** Viết câu truy vấn Logs Insights tìm lỗi trong application log và thiết lập quy trình phản hồi sự cố tự động | 29/05/2026 | 29/05/2026 | <https://000064.awsstudygroup.com> <br> <https://000029.awsstudygroup.com> |
 
 ### Kết quả đạt được tuần 4
 
-* Làm chủ việc khởi tạo, bảo mật và kết nối Amazon RDS instance từ môi trường ứng dụng.
-* Hiểu cơ chế sao lưu tự động và khả năng phục hồi dữ liệu Multi-AZ của RDS.
-* Hiểu cấu trúc NoSQL và các nguyên tắc thiết kế bảng trên Amazon DynamoDB.
-* Phân biệt rõ kịch bản chọn lựa giữa Relational DB (RDS) và NoSQL DB (DynamoDB).
+* Cài đặt và cấu hình thành công CloudWatch Agent thu thập custom metrics (RAM/Disk) trên EC2.
+* Xây dựng Dashboard giám sát trực quan chuyên nghiệp cho toàn bộ hệ thống.
+* Thu thập và phân tích lưu lượng mạng thực tế với VPC Flow Logs để phát hiện truy cập bất thường.
+* Thành thạo kỹ năng truy vấn log bằng CloudWatch Logs Insights giúp rút ngắn thời gian khắc phục sự cố.
+

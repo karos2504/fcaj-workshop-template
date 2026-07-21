@@ -1,30 +1,30 @@
 ---
 title: "Worklog Tuần 12"
-date: 2024-01-01
-weight: 2
+date: 2026-07-20
+weight: 12
 chapter: false
 pre: " <b> 1.12. </b> "
 ---
 
 ### Mục tiêu tuần 12
 
-* Thiết kế và triển khai Giai đoạn 1 dự án Capstone: **SaaS Timekeeping Platform (Hệ thống Điểm danh & Chấm công Multi-Tenant theo kiến trúc AWS Serverless)** dựa trên sơ đồ thiết kế kiến trúc chuẩn `Demo.drawio`.
-* Lập trình mã nguồn hạ tầng tự động hóa bằng AWS CDK (TypeScript/Python): Dựng VPC Private Subnets, CloudFront CDN, Route 53, AWS WAF v2, Amazon Cognito Auth & API Gateway HTTP API v2.
-* Xây dựng các lớp dịch vụ cốt lõi: DynamoDB Single-Table Design (phân lập dữ liệu multi-tenant), tập hợp các hàm AWS Lambda nghiệp vụ (Check-in, Check-out, Attendance, Admin, Subscription), AWS Step Functions Workflow cho quy trình xuất báo cáo và Event-Driven Notification Bus.
+* **Hoàn thiện Nhật ký công việc & Chỉnh sửa Workshop:** Tiến hành rà soát, chỉnh sửa hoàn thiện toàn bộ Nhật ký công việc (Worklog) và tiếp tục chỉnh sửa, nâng cấp bài thực hành Workshop.
+* **Tiếp tục học trên CloudJourney:** Tham khảo các chuẩn tài liệu kỹ thuật và bài thực hành mẫu trên CloudJourney (`https://cloudjourney.awsstudygroup.com/`).
+* Tổng duyệt tài liệu, đóng gói báo cáo và chuẩn bị tổng kết dự án thực tập.
 
 ### Các công việc cần triển khai trong tuần này
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - **Phân tích Kiến trúc & Thiết kế Giải pháp:** <br>&emsp; + Phân tích sơ đồ kiến trúc `Demo.drawio` cho dự án **SaaS Timekeeping Platform** <br>&emsp; + Thiết kế mô hình Multi-Tenancy với cơ chế phân lập dữ liệu theo Partition Key (`tenantId`) trên DynamoDB <br>&emsp; + Xây dựng ma trận phân quyền RBAC (Role-Based Access Control) & Ước tính chi phí vận hành bằng AWS Pricing Calculator | 20/07/2026 | 20/07/2026 | <https://cloudjourney.awsstudygroup.com> |
-| 3 | - **Triển khai Hạ tầng IaC & Edge/Auth Layer (AWS CDK):** <br>&emsp; + Khởi tạo dự án AWS CDK dựng VPC Private Subnets, Amazon Route 53 & Amazon CloudFront CDN (tích hợp AWS WAF v2 & AWS Shield) <br>&emsp; + Cấu hình Amazon Cognito User Pools chứa Custom Claims (`{tenantId, role, userId}`) <br>&emsp; + Dựng Amazon API Gateway (HTTP API v2) tích hợp JWT Authorizer & Custom Header Verification | 21/07/2026 | 21/07/2026 | <https://000076.awsstudygroup.com> <br> <https://000141.awsstudygroup.com> |
-| 4 | - **Triển khai Data Layer & Core Compute (Lambda Functions):** <br>&emsp; + Khởi tạo **Amazon DynamoDB Single-Table Design** (bảng `Attendance`, `Users`, `Tenants`) tích hợp **DynamoDB Streams (CDC)** và mã hóa dữ liệu với **AWS KMS CMK** <br>&emsp; + Viết mã nguồn cho các hàm Lambda nghiệp vụ: `Lambda Check-in` (Clock-In), `Lambda Check-out` (Clock-Out), `Lambda Attendance` (Query & Summary) và `Lambda Admin` <br>&emsp; + Lưu trữ API Keys & DB Credentials trên **AWS Secrets Manager** với cơ chế Auto Rotation | 22/07/2026 | 22/07/2026 | <https://000060.awsstudygroup.com> <br> <https://000096.awsstudygroup.com> |
-| 5 | - **Triển khai Workflow Engine & Event Notification Layer:** <br>&emsp; + Xây dựng quy trình xuất báo cáo chấm công bất đồng bộ với **AWS Step Functions Engine** (Standard Workflow) & **Amazon SQS Queue + DLQ** <br>&emsp; + Khởi tạo **Amazon S3** (Intelligent-Tiering, mã hóa KMS) lưu trữ file báo cáo (PDF, Excel, CSV) <br>&emsp; + Cấu hình luồng sự kiện: **DynamoDB Streams -> EventBridge Event Bus -> SQS Email Queue -> Lambda Email Worker -> Amazon SES** gửi email báo cáo & cảnh báo tự động | 23/07/2026 | 23/07/2026 | <https://000047.awsstudygroup.com> <br> <https://000077.awsstudygroup.com> |
-| 6 | - **Tích hợp Webhook & Thiết lập DevOps CI/CD Pipeline:** <br>&emsp; + Cấu hình `Lambda Subscription` & `Lambda Webhook` tiếp nhận phản hồi thanh toán B2B Subscription từ Payment Gateway <br>&emsp; + Khởi tạo **AWS CodePipeline** & **AWS CodeBuild** tự động hóa quy trình Build, Test & Scan an toàn thông tin mã nguồn với **Amazon Inspector** | 24/07/2026 | 24/07/2026 | <https://000152.awsstudygroup.com> |
+| 2 | - **Chỉnh sửa Hoàn thiện Worklog (20/07/2026 – 26/07/2026):** <br>&emsp; + Rà soát và chỉnh sửa hoàn thiện chi tiết toàn bộ nội dung Nhật ký công việc (Worklog) từ Tuần 1 đến Tuần 12 <br>&emsp; + Đảm bảo tính đồng bộ giữa phiên bản Tiếng Việt và Tiếng Anh | 20/07/2026 | 20/07/2026 | <https://cloudjourney.awsstudygroup.com> |
+| 3 | - **Tiếp tục Chỉnh sửa Bài thực hành Workshop:** <br>&emsp; + Rà soát và cập nhật nội dung tài liệu các phần bài tập Workshop (thư mục `/content/5-Workshop`) <br>&emsp; + Tối ưu hóa cấu trúc Markdown và các bước hướng dẫn triển khai | 21/07/2026 | 21/07/2026 | <https://cloudjourney.awsstudygroup.com> |
+| 4 | - **Tích hợp Kiến thức Mới từ CloudJourney:** <br>&emsp; + Tiếp tục học các bài giảng và kịch bản thực hành mới trên CloudJourney <br>&emsp; + Cập nhật thêm các bước kiểm thử và xử lý lỗi thực tế vào bài hướng dẫn Workshop | 22/07/2026 | 22/07/2026 | <https://cloudjourney.awsstudygroup.com> |
+| 5 | - **Kiểm thử Thực hành & Chuẩn hóa Tài liệu:** <br>&emsp; + Chạy thực nghiệm lại toàn bộ các bước trong bài Workshop để đảm bảo không phát sinh lỗi <br>&emsp; + Viết và đăng tải bài blog kỹ thuật tổng kết dự án lên chuyên mục BlogsPosted | 23/07/2026 | 23/07/2026 | <https://cloudjourney.awsstudygroup.com> |
+| 6 | - **Hoàn tất Đóng gói Tài liệu & Báo cáo Tổng kết:** <br>&emsp; + Biên dịch và kiểm thử trang Hugo tĩnh (`hugo server`) đảm bảo hiển thị chuẩn xác <br>&emsp; + Chuẩn bị slide thuyết trình và hoàn tất tổng kết báo cáo dự án trước hội đồng | 24/07/2026 | 24/07/2026 | <https://cloudjourney.awsstudygroup.com> |
 
 ### Kết quả đạt được tuần 12
 
-* Thiết kế và triển khai hoàn chỉnh hạ tầng Serverless Multi-Tenant cho ứng dụng SaaS Timekeeping Platform theo sơ đồ `Demo.drawio`.
-* Làm chủ kỹ thuật DynamoDB Single-Table Design kết hợp DynamoDB Streams để xử lý Change Data Capture (CDC).
-* Xây dựng luồng xuất báo cáo bất đồng bộ chịu tải cao nhờ AWS Step Functions kết hợp Amazon SQS.
-* Tự động hóa hoàn toàn việc khởi tạo hạ tầng đa tầng bằng AWS CDK v2 và kết nối CI/CD Pipeline trên AWS.
+* Hoàn thành việc chỉnh sửa và hoàn thiện toàn bộ Nhật ký công việc (Worklog) 12 tuần chính xác.
+* Chỉnh sửa và nâng cấp chất lượng bài thực hành Workshop phục vụ cộng đồng học tập.
+* Đóng gói toàn bộ tài liệu dự án, xuất bản bài blog kỹ thuật và báo cáo tổng kết thành công.
+
