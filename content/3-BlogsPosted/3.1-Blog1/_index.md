@@ -1,108 +1,51 @@
 ---
-title: "From Hourly Caching to Real-Time Pricing: How Samsung Solved Price Syncing with AWS Lambda Response Streaming"
+title: "AWS SECURITY & S3 – Amazon S3 Disabling SSE-C by Default Starting April 2026"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-# From Hourly Caching to Real-Time Pricing: How Samsung Solved Price Syncing with AWS Lambda Response Streaming
+# AWS SECURITY & S3 – Amazon S3 Disabling SSE-C by Default Starting April 2026: What Developers and DevOps Need to Know
 
-In e-commerce, product pricing is one of the most critical data points. If the price displayed on a product listing page differs from the checkout price, customer trust and experience suffer immediately.
+Hello everyone!
 
-Recently, an insightful post on the AWS Architecture Blog highlighted how **Samsung** modernized the pricing system on Samsung.com using **AWS Lambda Response Streaming** and **Amazon CloudFront**.
+Amazon S3 has long been one of the most popular storage services on AWS, power systems ranging from static websites and data lakes to backups and AI/ML applications. Alongside near-limitless scalability, data security is always a top priority for AWS.
 
-This case study demonstrates how choosing the right architecture pattern outweighs merely tuning raw cache performance.
-
----
-
-### THE PROBLEM
-
-Samsung.com is Samsung's direct-to-consumer digital storefront, serving millions of shoppers for smartphones, TVs, home appliances, and accessories.
-
-During major peak events like Black Friday, a single product catalog page may render prices for over 30 different SKUs simultaneously. Each product comes with multiple dynamic variables:
-
-* Color variants & storage tiers
-* Active promotional campaigns
-* Regional and carrier-specific discounts
-
-This complexity makes real-time price evaluation a formidable architectural challenge at scale.
+AWS recently announced an important update regarding **Server-Side Encryption with Customer-Provided Keys (SSE-C)**. Starting **April 2026**, new S3 General Purpose Buckets will no longer support SSE-C by default. This change may directly impact applications utilizing this encryption method.
 
 ---
 
-### LEGACY ARCHITECTURE AND ISSUES
+### 1. CORE CHANGES AND REASONING FROM AWS
 
-In the legacy architecture, Samsung used a Data Aggregation Layer positioned between the Pricing Engine and CloudFront. An hourly Cron Job executed to:
+While SSE-C allows organizations full control over encryption keys, it also means that key management responsibility rests entirely on the application side. If a key is lost or sent incorrectly, data cannot be decrypted.
 
-1. Fetch all product catalog data from the Pricing Engine.
-2. Pre-calculate all potential pricing permutations.
-3. Push pre-computed results into an intermediate cache layer.
+According to AWS:
 
-While this improved read latencies, it introduced two major architectural bottlenecks:
+* **Disabled on New Buckets:** New General Purpose Buckets will not support SSE-C by default.
+* **Applied to Unused Accounts:** For AWS Accounts that have never stored SSE-C encrypted data, existing buckets will also have this feature disabled by default.
+* **HTTP 403 Access Denied Error:** If an application sends a `PutObject` request with SSE-C headers (`x-amz-server-side-encryption-customer-algorithm`, `x-amz-server-side-encryption-customer-key`, `x-amz-server-side-encryption-customer-key-MD5`) without re-enabling the feature, Amazon S3 will reject the request with HTTP 403.
 
-#### 1. Permutation Explosion
-As product SKUs and promotional rules expanded, pre-calculated pricing combinations grew exponentially.  
-*Example:* 30 SKUs × multiple storage tiers × regional promos generated tens of thousands of records pre-computed hourly, wasting compute and storage resources on data shoppers never queried.
-
-#### 2. Synchronization Lag
-More critically, because the Cron Job ran hourly, cached prices lagged behind real-time pricing engines by up to 60 minutes.  
-*If a Flash Sale launched at 10:05 AM, shoppers continued seeing pre-sale prices until the next Cron Job ran at 11:00 AM.*
-
-**Impact:**
-* Inaccurate pricing displays
-* Price mismatch at checkout
-* Loss of customer trust & cart abandonment
-* Lost revenue opportunities
+This update aims to prevent misconfigurations for new users while encouraging migration toward centralized key management solutions such as **SSE-KMS**.
 
 ---
 
-### NEW ARCHITECTURE WITH AWS LAMBDA RESPONSE STREAMING
+### 2. OPERATIONAL ACTION ITEMS FOR DEVELOPERS & DEVOPS
 
-Instead of optimizing an intermediate cache, Samsung eliminated the Data Aggregation layer entirely. The new architecture adheres to a core principle: **Always fetch pricing from the Source of Truth at request time.**
+To prevent service disruption in backup pipelines, document upload flows, file-sharing services, or legacy SDK Data Lakes, teams should proactively take the following steps:
 
-**Request Flow:**
-1. User requests product list pricing.
-2. Amazon CloudFront checks Edge Location cache.
-3. On a cache miss, the request forwards to AWS Lambda.
-4. Lambda performs fan-out calls in parallel to the underlying Pricing Engine.
-5. Results are streamed back to the client immediately as data chunks arrive.
-6. CloudFront caches the response for a short TTL to optimize performance.
+1. **Manually Enable SSE-C if Required:** Administrators can re-enable SSE-C via API or update Infrastructure as Code (IaC) templates (AWS CloudFormation, Terraform, AWS CDK, AWS CLI) before deployment.
+2. **Audit All Systems:** Review all S3 Buckets, application source code, and SDKs to identify any Customer-Provided Key usage.
+3. **Migration Roadmap to SSE-S3 or SSE-KMS:**
+   * **Use SSE-S3:** For the simplest zero-cost solution enabled by default for most applications.
+   * **Use SSE-KMS:** For Production environments requiring stringent security, IAM access controls, CloudTrail audit logs, automatic key rotation, and compliance standards (PCI DSS, HIPAA, ISO 27001).
 
 ---
 
-### WHY AWS LAMBDA RESPONSE STREAMING IS THE RIGHT FIT
+### CONCLUSION
 
-Traditionally, AWS Lambda waits for all internal requests to complete before returning a single payload, increasing Time To First Byte (TTFB).
+This update is vital for teams currently relying on SSE-C. Auditing configurations, updating Infrastructure as Code, and considering a transition to SSE-KMS will ensure service stability before AWS officially enforces the new policy.
 
-With **Lambda Response Streaming**:
-* Data chunks stream back to the client progressively as soon as available.
-* Drastically reduces Time To First Byte (TTFB).
-* End-users perceive faster page load performance.
-* Eliminates the need for a complex intermediate caching infrastructure.
+* Reference Source: [AWS Storage Blog - Advanced notice: Amazon S3 will disable SSE-C by default for all new buckets and select existing buckets in April 2026](https://aws.amazon.com/blogs/storage/advanced-notice-amazon-s3-will-disable-sse-c-by-default-for-all-new-buckets-and-select-existing-buckets-in-april-2026/)
 
----
-
-### AWS SERVICES FEATURED IN THE ARCHITECTURE
-
-* **Amazon CloudFront:** Edge CDN providing intelligent caching.
-* **AWS Lambda & Function URLs:** Serverless compute routing concurrent price evaluations.
-* **Lambda Response Streaming:** Streams real-time payload chunks to clients.
-* **Provisioned Concurrency:** Keeps execution environments warm, eliminating cold starts.
-
-Though lightweight in service count, this pattern elegantly solves real-time data aggregation at global scale.
-
----
-
-### KEY ARCHITECTURAL LESSONS
-
-The most compelling takeaway is the architectural philosophy. Caching is frequently treated as a silver bullet for latency. However, when data accuracy trumps raw read speed, caching can become the root cause of business errors.
-
-**Lessons from Samsung's case study:**
-* Adding more cache layers is not always the right path.
-* Source of Truth integrity must be prioritized for pricing applications.
-* Serverless can handle heavy real-time data aggregation seamlessly.
-* A simpler architecture often outperforms a multi-tiered cached system.
-
-* Original Article: [AWS Architecture Blog - How Samsung achieved real-time pricing with AWS Lambda Response Streaming](https://aws.amazon.com/blogs/architecture/how-samsung-achieved-real-time-pricing-with-aws-lambda-response-streaming/)
-
-`#AWS` `#AWSLambda` `#ResponseStreaming` `#AmazonCloudFront` `#Serverless` `#SystemArchitecture` `#ECommerce` `#CloudComputing`
+`#AWS` `#AmazonS3` `#CloudSecurity` `#SSEKMS` `#SSEC` `#DevOps` `#CloudComputing` `#AWSStorage`
