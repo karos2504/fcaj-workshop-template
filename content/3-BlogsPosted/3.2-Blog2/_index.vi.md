@@ -1,12 +1,11 @@
 ---
-title: "AWS BACKUP – AWS Backup bổ sung Item-Level Recovery cho Amazon EBS và Amazon S3"
-date: 2024-01-01
+title: "Blog 2"
 weight: 2
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
 
-# AWS BACKUP – AWS Backup bổ sung Item-Level Recovery cho Amazon EBS và Amazon S3: Khôi phục đúng tệp cần thiết thay vì toàn bộ Backup
+# Blog 2: Khôi phục đúng tệp cần thiết thay vì toàn bộ Backup
 
 Xin chào mọi người!
 

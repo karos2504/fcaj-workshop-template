@@ -1,12 +1,12 @@
 ---
-title: "AWS COST OPTIMIZATION – Optimizing Amazon EBS Costs: Why You Should Migrate from gp2 to gp3"
+title: "Blog 3"
 date: 2024-01-01
 weight: 3
 chapter: false
 pre: " <b> 3.3. </b> "
 ---
 
-# AWS COST OPTIMIZATION – Optimizing Amazon EBS Costs: Why You Should Migrate from gp2 to gp3
+# Blog 3: Why You Should Migrate from gp2 to gp3
 
 Hello everyone!
 
@@ -23,7 +23,7 @@ The core distinction between the two volume types lies in how performance is pro
 * **gp2 (Performance Tied to Volume Size):** Baseline performance is strictly bound to storage capacity (3 IOPS/GB). If your application requires higher IOPS, you are forced to over-provision volume capacity (e.g., provisioning 1,000 GB just to achieve 3,000 IOPS), incurring unnecessary storage costs.
 * **gp3 (Decoupled Capacity & Performance):** Storage capacity, IOPS, and throughput can be configured independently. Every gp3 volume provides a free baseline of **3,000 IOPS** and **125 MB/s Throughput** regardless of size. When higher performance is required, IOPS or throughput can be scaled independently without expanding volume size.
 
-#### Quick Feature Comparison:
+#### Quick Feature Comparison
 
 * **Storage Pricing:** gp3 is up to 20% cheaper per GB/month across all AWS Regions.
 * **Default Baseline IOPS:** gp2 yields 3 IOPS/GB (max 16,000 IOPS), whereas gp3 provides a fixed 3,000 IOPS baseline (scalable up to 16,000 IOPS).
@@ -37,7 +37,7 @@ The core distinction between the two volume types lies in how performance is pro
 * **Immediate FinOps Savings:** gp3 storage is 20% cheaper per GB/month. Across fleets running hundreds or thousands of volumes, this migration delivers substantial recurring monthly savings.
 * **Zero-Downtime Live Migration:** Thanks to Amazon EBS Elastic Volumes, modifying a volume from gp2 to gp3 is an online operation. EC2 instances remain active with zero reboot, data migration, or application impact.
 
-#### Recommended Priority Workloads for Migration:
+#### Recommended Priority Workloads for Migration
 
 * Web Applications & API Gateways
 * Small-to-Medium Databases (MySQL, PostgreSQL, MongoDB, SQL Server)

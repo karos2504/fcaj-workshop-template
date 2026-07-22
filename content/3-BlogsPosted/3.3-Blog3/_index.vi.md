@@ -1,12 +1,12 @@
 ---
-title: "AWS COST OPTIMIZATION – Tối ưu chi phí Amazon EBS: Vì sao doanh nghiệp nên chuyển từ gp2 sang gp3?"
+title: "Blog 3"
 date: 2024-01-01
 weight: 3
 chapter: false
 pre: " <b> 3.3. </b> "
 ---
 
-# AWS COST OPTIMIZATION – Tối ưu chi phí Amazon EBS: Vì sao doanh nghiệp nên chuyển từ gp2 sang gp3?
+# Blog 3: Vì sao doanh nghiệp nên chuyển từ gp2 sang gp3?
 
 Xin chào mọi người!
 
@@ -23,7 +23,7 @@ Sự khác biệt cốt lõi giữa hai thế hệ ổ đĩa nằm ở cơ chế
 * **gp2 (Hiệu năng phụ thuộc Dung lượng):** Hiệu năng của ổ đĩa bị khóa chặt với dung lượng lưu trữ (3 IOPS/GB). Nếu ứng dụng yêu cầu nhiều IOPS hơn, bạn buộc phải tăng dung lượng Volume (ví dụ: muốn có 3.000 IOPS thì ổ đĩa phải đạt từ 1.000 GB trở lên), gây lãng phí chi phí cho phần dung lượng không thực sự sử dụng.
 * **gp3 (Tách biệt Dung lượng và Hiệu năng):** Thiết kế độc lập hoàn toàn giữa Dung lượng, IOPS và Throughput. Một Volume gp3 mặc định đã cung cấp sẵn **3.000 IOPS** và **125 MB/s Throughput** hoàn toàn miễn phí mà không phụ thuộc vào kích thước ổ đĩa. Khi cần hiệu năng cao hơn, bạn chỉ cần mua thêm IOPS hoặc Throughput riêng lẻ mà không cần mở rộng dung lượng.
 
-#### So sánh nhanh:
+#### So sánh nhanh
 
 * **Đơn giá lưu trữ:** gp3 thấp hơn tới 20% so với gp2 trên tất cả các Region.
 * **Mức Baseline mặc định:** gp2 đạt 3 IOPS/GB (tối đa 16.000 IOPS), trong khi gp3 cung cấp sẵn 3.000 IOPS cố định (tối đa 16.000 IOPS).
@@ -37,7 +37,7 @@ Sự khác biệt cốt lõi giữa hai thế hệ ổ đĩa nằm ở cơ chế
 * **Tối ưu ngân sách FinOps ngay lập tức:** Đơn giá GB/tháng của gp3 thấp hơn khoảng 20% so với gp2. Với các hệ thống vận hành hàng trăm hoặc hàng nghìn Volume, việc chuyển đổi mang lại khoản tiết kiệm chi phí vận hành hàng tháng rất lớn.
 * **Chuyển đổi Zero-Downtime:** Nhờ tính năng Amazon EBS Elastic Volumes, việc chuyển từ gp2 sang gp3 diễn ra trực tiếp trên Volume đang hoạt động. Máy chủ EC2 tiếp tục chạy bình thường, không cần reboot, không cần restore dữ liệu và không ảnh hưởng tới ứng dụng.
 
-#### Các Workload ưu tiên chuyển đổi:
+#### Các Workload ưu tiên chuyển đổi
 
 * Web Application & API Server
 * Database cỡ nhỏ và trung bình (MySQL, PostgreSQL, MongoDB, SQL Server)

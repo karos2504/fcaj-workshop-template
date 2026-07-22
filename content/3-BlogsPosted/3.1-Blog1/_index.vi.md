@@ -1,12 +1,12 @@
 ---
-title: "AWS SECURITY & S3 – Amazon S3 sẽ vô hiệu hóa mặc định SSE-C từ tháng 04/2026"
+title: "Blog 1"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-# AWS SECURITY & S3 – Amazon S3 sẽ vô hiệu hóa mặc định SSE-C từ tháng 04/2026: Những điều Developer và DevOps cần biết
+# Blog 1: Những điều Developer và DevOps cần biết
 
 Xin chào mọi người!
 

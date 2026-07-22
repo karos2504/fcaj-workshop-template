@@ -1,12 +1,12 @@
 ---
-title: "AWS SECURITY & S3 – Amazon S3 Disabling SSE-C by Default Starting April 2026"
+title: "Blog 1"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-# AWS SECURITY & S3 – Amazon S3 Disabling SSE-C by Default Starting April 2026: What Developers and DevOps Need to Know
+# Blog 1: What Developers and DevOps Need to Know
 
 Hello everyone!
 
