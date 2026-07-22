@@ -1,12 +1,12 @@
 ---
-title: "AWS SECURITY & S3 – Amazon S3 sẽ vô hiệu hóa mặc định SSE-C từ tháng 04/2026"
+title: "Blog 1"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-# AWS SECURITY & S3 – Amazon S3 sẽ vô hiệu hóa mặc định SSE-C từ tháng 04/2026: Những điều Developer và DevOps cần biết
+# Amazon S3 sẽ vô hiệu hóa mặc định SSE-C từ tháng 04/2026: Những điều Developer và DevOps cần biết
 
 Xin chào mọi người!
 
@@ -46,6 +46,6 @@ Thay đổi này nhằm mục đích giảm nguy cơ cấu hình sai cho ngườ
 
 Thay đổi này rất quan trọng đối với các hệ thống đang sử dụng SSE-C. Việc rà soát cấu hình, cập nhật Infrastructure as Code và cân nhắc chuyển sang SSE-KMS sẽ giúp hệ thống hoạt động ổn định hơn, hạn chế tối đa nguy cơ gián đoạn dịch vụ khi AWS chính thức áp dụng chính sách mới.
 
-* Nguồn tham khảo: [AWS Storage Blog - Advanced notice: Amazon S3 will disable SSE-C by default for all new buckets and select existing buckets in April 2026](https://aws.amazon.com/blogs/storage/advanced-notice-amazon-s3-will-disable-sse-c-by-default-for-all-new-buckets-and-select-existing-buckets-in-april-2026/)
+* Nguồn tham khảo: [AWS Storage Blog - Advanced notice: Amazon S3 will disable SSE-C by default for all new buckets and select existing buckets in April 2026](https://aws.amazon.com/blogs/storage/advanced-notice-amazon-s3-to-disable-the-use-of-sse-c-encryption-by-default-for-all-new-buckets-and-select-existing-buckets-in-april-2026/)
 
 `#AWS` `#AmazonS3` `#CloudSecurity` `#SSEKMS` `#SSEC` `#DevOps` `#CloudComputing` `#AWSStorage`

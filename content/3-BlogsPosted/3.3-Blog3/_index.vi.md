@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 3.3. </b> "
 ---
 
-# Blog 3: Vì sao doanh nghiệp nên chuyển từ gp2 sang gp3?
+# Tối ưu chi phí Amazon EBS: Vì sao doanh nghiệp nên chuyển từ gp2 sang gp3?
 
 Xin chào mọi người!
 

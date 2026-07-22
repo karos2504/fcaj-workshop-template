@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 3.3. </b> "
 ---
 
-# Blog 3: Why You Should Migrate from gp2 to gp3
+# Optimizing Amazon EBS Costs: Why You Should Migrate from gp2 to gp3
 
 Hello everyone!
 

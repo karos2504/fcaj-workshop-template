@@ -1,12 +1,12 @@
 ---
-title: "AWS BACKUP – AWS Backup Adds Item-Level Recovery for Amazon EBS and Amazon S3"
+title: "Blog 2"
 date: 2024-01-01
 weight: 2
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
 
-# AWS BACKUP – AWS Backup Adds Item-Level Recovery for Amazon EBS and Amazon S3: Restore Only the Files You Need
+# AWS Backup Adds Item-Level Recovery for Amazon EBS and Amazon S3: Restore Only the Files You Need
 
 Hello everyone!
 

@@ -1,12 +1,12 @@
 ---
-title: "AWS SECURITY & S3 – Amazon S3 Disabling SSE-C by Default Starting April 2026"
+title: "Blog 1"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-# AWS SECURITY & S3 – Amazon S3 Disabling SSE-C by Default Starting April 2026: What Developers and DevOps Need to Know
+# Amazon S3 Disabling SSE-C by Default Starting April 2026: What Developers and DevOps Need to Know
 
 Hello everyone!
 
@@ -46,6 +46,6 @@ To prevent service disruption in backup pipelines, document upload flows, file-s
 
 This update is vital for teams currently relying on SSE-C. Auditing configurations, updating Infrastructure as Code, and considering a transition to SSE-KMS will ensure service stability before AWS officially enforces the new policy.
 
-* Reference Source: [AWS Storage Blog - Advanced notice: Amazon S3 will disable SSE-C by default for all new buckets and select existing buckets in April 2026](https://aws.amazon.com/blogs/storage/advanced-notice-amazon-s3-will-disable-sse-c-by-default-for-all-new-buckets-and-select-existing-buckets-in-april-2026/)
+* Reference Source: [AWS Storage Blog - Advanced notice: Amazon S3 will disable SSE-C by default for all new buckets and select existing buckets in April 2026](https://aws.amazon.com/blogs/storage/advanced-notice-amazon-s3-to-disable-the-use-of-sse-c-encryption-by-default-for-all-new-buckets-and-select-existing-buckets-in-april-2026/)
 
 `#AWS` `#AmazonS3` `#CloudSecurity` `#SSEKMS` `#SSEC` `#DevOps` `#CloudComputing` `#AWSStorage`
