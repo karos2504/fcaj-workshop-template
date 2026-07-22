@@ -1,123 +1,108 @@
 ---
-title: "AWS ARCHITECTURE CASE STUDY – Samsung Achieves Real-Time Pricing with AWS Lambda Response Streaming"
+title: "From Hourly Caching to Real-Time Pricing: How Samsung Solved Price Syncing with AWS Lambda Response Streaming"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-# AWS ARCHITECTURE CASE STUDY – From Hourly Caching to Real-Time Pricing: How Samsung Solved Price Syncing with AWS Lambda Response Streaming
+# From Hourly Caching to Real-Time Pricing: How Samsung Solved Price Syncing with AWS Lambda Response Streaming
 
-Hello everyone!
+In e-commerce, product pricing is one of the most critical data points. If the price displayed on a product listing page differs from the checkout price, customer trust and experience suffer immediately.
 
-In e-commerce, product pricing is one of the most critical data points. If the price displayed on a product listing page differs from the checkout page, customer experience suffers severely, damaging brand trust and impacting conversion rates.
+Recently, an insightful post on the AWS Architecture Blog highlighted how **Samsung** modernized the pricing system on Samsung.com using **AWS Lambda Response Streaming** and **Amazon CloudFront**.
 
-Today, I would like to share an architectural case study from the **AWS Architecture Blog** detailing how **Samsung** modernized its pricing engine on **Samsung.com** by leveraging **AWS Lambda Response Streaming** and **Amazon CloudFront**.
-
-This case study is a textbook example of choosing the right architectural principles (prioritizing the Source of Truth) over blindly relying on multi-tier caching layers.
+This case study demonstrates how choosing the right architecture pattern outweighs merely tuning raw cache performance.
 
 ---
 
-### 1. THE BUSINESS PROBLEM & OPERATIONAL CHALLENGES
+### THE PROBLEM
 
-**Samsung.com** is Samsung's Direct-to-Consumer (D2C) flagship portal, serving millions of global shoppers across diverse product lineups—smartphones, tablets, TVs, home appliances, and accessories.
+Samsung.com is Samsung's direct-to-consumer digital storefront, serving millions of shoppers for smartphones, TVs, home appliances, and accessories.
 
-During major shopping events such as **Black Friday** or **Flash Sales**:
-* A single Product Listing Page (PLP) must render real-time prices for over **30 different SKUs** simultaneously.
-* Each SKU contains multiple complex permutations: *Colors, storage capacities, time-sensitive promotional discounts, regional pricing, and carrier trade-in offers*.
+During major peak events like Black Friday, a single product catalog page may render prices for over 30 different SKUs simultaneously. Each product comes with multiple dynamic variables:
 
-Querying and rendering accurate prices across thousands of concurrent sessions in real time presents an immense technical challenge regarding both latency and infrastructure cost.
+* Color variants & storage tiers
+* Active promotional campaigns
+* Regional and carrier-specific discounts
 
----
-
-### 2. LEGACY ARCHITECTURE & CORE BOTTLENECK
-
-In the legacy architecture, Samsung placed an intermediary **Data Aggregation Layer** between their core **Pricing Engine** and the **Amazon CloudFront CDN**.
-
-An automated **Cron Job** executed hourly to:
-1. Fetch all product master data from the Pricing Engine.
-2. Pre-compute all potential price permutations.
-3. Store pre-calculated pricing records into a cache tier to serve user requests.
-
-While this approach provided fast read operations, it introduced two major operational flaws:
-
-#### A. Permutation Explosion
-As product lines and promotional rules grew, pre-computed price combinations expanded **exponentially**.
-> *Example:* 30 products × multiple storage options × colors × regional promos created **tens of thousands of cached records**. The system wasted compute and storage resources processing price combinations that users never actually requested.
-
-#### B. Synchronization Lag
-This flaw directly harmed revenue. Because the Cron Job ran only **once every 60 minutes**, cached pricing data could lag behind live promotion updates by up to an hour.
-> *Impact Scenario:* If a Flash Sale started at **10:05 AM**, customers visiting at **10:15 AM** would still see pre-sale pricing until the next scheduled Cron Job ran at **11:00 AM**.
-> * **Consequence:** Mismatched prices, customer frustration during checkout, abandoned carts, and loss of brand credibility.
+This complexity makes real-time price evaluation a formidable architectural challenge at scale.
 
 ---
 
-### 3. THE NEW SOLUTION WITH AWS LAMBDA RESPONSE STREAMING
+### LEGACY ARCHITECTURE AND ISSUES
 
-Instead of attempting to further optimize the complex cache layer, Samsung made a bold architectural decision: **Completely eliminate the intermediary Data Aggregation Layer**.
+In the legacy architecture, Samsung used a Data Aggregation Layer positioned between the Pricing Engine and CloudFront. An hourly Cron Job executed to:
 
-The new architecture operates on a fundamental principle: **Always query prices directly from the Source of Truth at the exact moment a user issues a request.**
+1. Fetch all product catalog data from the Pricing Engine.
+2. Pre-calculate all potential pricing permutations.
+3. Push pre-computed results into an intermediate cache layer.
 
-```
-[User Browser] ➔ [Amazon CloudFront Edge] ➔ (Cache Miss) ➔ [AWS Lambda Function URL] 
-                                                                    │
-                                            ┌───────────────────────┴───────────────────────┐
-                                            ▼                                               ▼
-                              [Fan-out API Request 1]                         [Fan-out API Request 2]
-                                            │                                               │
-                                            └───────────────────────┬───────────────────────┘
-                                                                    ▼
-                                                         [Pricing Engine Service]
-                                                                    │
-                                                (Stream chunks via Response Streaming)
-                                                                    ▼
-                                                     [Stream Response back to Client]
-```
+While this improved read latencies, it introduced two major architectural bottlenecks:
 
-#### Real-Time Execution Workflow:
-1. A user accesses a product page on Samsung.com.
-2. **Amazon CloudFront** checks Edge Location cache.
-3. Upon a Cache Miss, CloudFront routes the request to an **AWS Lambda Function URL**.
-4. The Lambda function executes a **Fan-out pattern**, sending parallel API requests to the Pricing Engine to fetch prices for 30+ SKUs concurrently.
-5. As pricing data chunks for initial items return from the Pricing Engine, Lambda leverages **Response Streaming** to push HTTP payload chunks back to the browser immediately without waiting for all 30 SKUs to finish processing.
-6. CloudFront applies short-lived edge caching to optimize subsequent duplicate requests.
+#### 1. Permutation Explosion
+As product SKUs and promotional rules expanded, pre-calculated pricing combinations grew exponentially.  
+*Example:* 30 SKUs × multiple storage tiers × regional promos generated tens of thousands of records pre-computed hourly, wasting compute and storage resources on data shoppers never queried.
+
+#### 2. Synchronization Lag
+More critically, because the Cron Job ran hourly, cached prices lagged behind real-time pricing engines by up to 60 minutes.  
+*If a Flash Sale launched at 10:05 AM, shoppers continued seeing pre-sale prices until the next Cron Job ran at 11:00 AM.*
+
+**Impact:**
+* Inaccurate pricing displays
+* Price mismatch at checkout
+* Loss of customer trust & cart abandonment
+* Lost revenue opportunities
 
 ---
 
-### 4. WHY AWS LAMBDA RESPONSE STREAMING IS THE GAME CHANGER
+### NEW ARCHITECTURE WITH AWS LAMBDA RESPONSE STREAMING
 
-Traditionally, AWS Lambda functions buffer the complete response in memory before returning the final JSON payload to the caller. When aggregating multiple backend services, latency accumulates.
+Instead of optimizing an intermediate cache, Samsung eliminated the Data Aggregation layer entirely. The new architecture adheres to a core principle: **Always fetch pricing from the Source of Truth at request time.**
 
-With **AWS Lambda Response Streaming**:
-* **Immediate Chunked Data Delivery:** Lambda streams HTTP response chunks to the browser as soon as the first backend service responds.
-* **Drastically Lower Time To First Byte (TTFB):** The client browser begins rendering UI elements and displaying initial product prices without delay.
-* **Simplified Infrastructure:** Removes the overhead of maintaining expensive Redis/ElastiCache clusters and complex cache synchronization scripts.
-
----
-
-### 5. AWS SERVICES FEATURED IN THE ARCHITECTURE
-
-| AWS Service | Architectural Role on Samsung.com |
-| :--- | :--- |
-| **Amazon CloudFront** | Edge CDN distribution layer providing short-lived caching and request security. |
-| **AWS Lambda** | Serverless Compute Engine executing parallel fan-out pricing requests. |
-| **Lambda Response Streaming** | Streamed HTTP payload delivery mechanism optimizing TTFB performance. |
-| **Lambda Function URL** | Dedicated HTTPS endpoint invoking Lambda with minimal routing overhead. |
-| **Provisioned Concurrency** | Keeps Lambda functions warm, completely eliminating Cold Start latency during peak traffic spikes. |
+**Request Flow:**
+1. User requests product list pricing.
+2. Amazon CloudFront checks Edge Location cache.
+3. On a cache miss, the request forwards to AWS Lambda.
+4. Lambda performs fan-out calls in parallel to the underlying Pricing Engine.
+5. Results are streamed back to the client immediately as data chunks arrive.
+6. CloudFront caches the response for a short TTL to optimize performance.
 
 ---
 
-### 6. ARCHITECTURAL TAKEAWAYS & LESSONS LEARNED
+### WHY AWS LAMBDA RESPONSE STREAMING IS THE RIGHT FIT
 
-The greatest insight from Samsung's case study goes beyond Lambda Response Streaming—it highlights **Architectural Mindset**:
+Traditionally, AWS Lambda waits for all internal requests to complete before returning a single payload, increasing Time To First Byte (TTFB).
 
-1. **Caching is Not a Universal Cure:** Caching excels at speed, but in domains where **Data Accuracy** trumps raw retrieval velocity, caching can become a primary root cause of business errors.
-2. **Prioritize the Source of Truth:** For financial, pricing, or inventory systems, always query live data from the primary authoritative source during transactions.
-3. **The Power of Serverless Streaming:** Modern Serverless is no longer limited to short REST API calls; it excels at real-time stream processing and data aggregation at massive scale.
-4. **Less is More:** A simplified architecture with fewer intermediary moving parts is easier to maintain, eliminates Single Points of Failure, and delivers superior reliability.
+With **Lambda Response Streaming**:
+* Data chunks stream back to the client progressively as soon as available.
+* Drastically reduces Time To First Byte (TTFB).
+* End-users perceive faster page load performance.
+* Eliminates the need for a complex intermediate caching infrastructure.
 
 ---
 
-* Original Article on AWS Blog: [How Samsung achieved real-time pricing with AWS Lambda Response Streaming](https://aws.amazon.com/vi/blogs/architecture/how-samsung-achieved-real-time-pricing-with-aws-lambda-response-streaming/)
+### AWS SERVICES FEATURED IN THE ARCHITECTURE
 
-`#AWS` `#Serverless` `#AWSLambda` `#LambdaResponseStreaming` `#AmazonCloudFront` `#CloudArchitecture` `#SystemDesign` `#CaseStudy` `#DevOps`
+* **Amazon CloudFront:** Edge CDN providing intelligent caching.
+* **AWS Lambda & Function URLs:** Serverless compute routing concurrent price evaluations.
+* **Lambda Response Streaming:** Streams real-time payload chunks to clients.
+* **Provisioned Concurrency:** Keeps execution environments warm, eliminating cold starts.
+
+Though lightweight in service count, this pattern elegantly solves real-time data aggregation at global scale.
+
+---
+
+### KEY ARCHITECTURAL LESSONS
+
+The most compelling takeaway is the architectural philosophy. Caching is frequently treated as a silver bullet for latency. However, when data accuracy trumps raw read speed, caching can become the root cause of business errors.
+
+**Lessons from Samsung's case study:**
+* Adding more cache layers is not always the right path.
+* Source of Truth integrity must be prioritized for pricing applications.
+* Serverless can handle heavy real-time data aggregation seamlessly.
+* A simpler architecture often outperforms a multi-tiered cached system.
+
+* Original Article: [AWS Architecture Blog - How Samsung achieved real-time pricing with AWS Lambda Response Streaming](https://aws.amazon.com/blogs/architecture/how-samsung-achieved-real-time-pricing-with-aws-lambda-response-streaming/)
+
+`#AWS` `#AWSLambda` `#ResponseStreaming` `#AmazonCloudFront` `#Serverless` `#SystemArchitecture` `#ECommerce` `#CloudComputing`

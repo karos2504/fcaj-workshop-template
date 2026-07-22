@@ -6,18 +6,18 @@ chapter: false
 pre: " <b> 3. </b> "
 ---
 
-### [Blog 1 - AWS ARCHITECTURE CASE STUDY – Samsung Giải Quyết Bài Toán Đồng Bộ Giá Với AWS Lambda Response Streaming](3.1-Blog1/)
+### [Blog 1 - Từ Cache Theo Giờ Đến Real-Time Pricing: Samsung Giải Quyết Bài Toán Đồng Bộ Giá Với AWS Lambda Response Streaming](3.1-Blog1/)
 
-Phân tích Case Study thực tế từ Samsung.com: Chuyển đổi từ mô hình Cron Job Data Aggregation truyền thống sang kiến trúc Serverless Real-Time Pricing kết hợp AWS Lambda Response Streaming và Amazon CloudFront, giúp tối ưu chỉ số TTFB và đảm bảo tính chính xác 100% của dữ liệu giá bán.
-
----
-
-### [Blog 2 - AWS BACKUP – AWS Backup bổ sung Item-Level Recovery cho Amazon EBS và Amazon S3](3.2-Blog2/)
-
-Bài viết giới thiệu tính năng AWS Backup Search & Item-Level Recovery, cho phép khôi phục chính xác từng file/tài liệu bị xóa nhầm từ các bản backup EBS/S3 mà không cần khôi phục toàn bộ Snapshot, giúp tiết kiệm chi phí và rút ngắn chỉ số RTO.
+Phân tích Case Study từ AWS Architecture Blog về cách Samsung loại bỏ tầng Data Aggregation lãng phí, sử dụng AWS Lambda Response Streaming & Amazon CloudFront để phát luồng dữ liệu giá sản phẩm thời gian thực, triệt tiêu độ trễ đồng bộ giá và tối ưu trải nghiệm khách hàng.
 
 ---
 
-### [Blog 3 - AWS COST OPTIMIZATION – Tối ưu chi phí Amazon EBS: Vì sao nên chuyển từ gp2 sang gp3?](3.3-Blog3/)
+### [Blog 2 - Từ Restore Snapshot Đến Item-Level Recovery: Khôi Phục Đúng File Cần Thiết Với AWS Backup](3.2-Blog2/)
 
-Bài viết phân tích lợi ích tối ưu chi phí (tiết kiệm đến 20%), so sánh kiến trúc giữa gp2 và gp3, hướng dẫn quy trình chuyển đổi hàng loạt Zero-Downtime và cách tự động hóa cho đội ngũ DevOps/FinOps.
+Phân tích bài toán khôi phục file bị xóa nhầm trên Amazon EBS & S3. Giới thiệu giải pháp AWS Backup Search & Item-Level Recovery (ILR) giúp trích xuất và khôi phục trực tiếp từng file riêng lẻ mà không cần restore cả Volume hàng TB, giúp giảm chi phí và tối ưu chỉ số RTO.
+
+---
+
+### [Blog 3 - Tối Ưu Chi Phí Amazon EBS: Vì Sao Doanh Nghiệp Nên Chuyển Từ gp2 Sang gp3?](3.3-Blog3/)
+
+Phân tích bài toán tối ưu ngân sách FinOps bằng cách chuyển đổi ổ đĩa EBS từ thế hệ gp2 sang gp3. So sánh kiến trúc tách biệt độc lập giữa Dung lượng, IOPS và Throughput, mang lại mức tiết kiệm 20% chi phí lưu trữ cùng quy trình tự động hóa chuyển đổi Zero-Downtime.

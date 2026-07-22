@@ -1,74 +1,86 @@
 ---
-title: "Blog 3"
+title: "Optimizing Amazon EBS Costs: Why You Should Migrate from gp2 to gp3"
 date: 2024-01-01
 weight: 3
 chapter: false
 pre: " <b> 3.3. </b> "
 ---
 
-# Blog 3: Why You Should Migrate from gp2 to gp3
+# Optimizing Amazon EBS Costs: Why You Should Migrate from gp2 to gp3
 
-Hello everyone!
+Amazon EBS (Elastic Block Store) is the primary block storage service powering production Amazon EC2 instances across cloud environments. Over the years, many enterprises have continued running large numbers of **gp2 (General Purpose SSD)** volumes simply because gp2 was previously the default choice on AWS.
 
-Amazon EBS (Elastic Block Store) is the primary block storage service used alongside Amazon EC2 instances for production cloud workloads. Over the years, many organizations have continued running large numbers of legacy **gp2 (General Purpose SSD)** volumes simply because it was previously the default choice on AWS.
+However, since AWS introduced **gp3**, migrating from gp2 has become an industry best practice. Not only does gp3 deliver an immediate **20% savings on storage costs**, but it also provides higher baseline performance and complete configuration decoupling.
 
-However, since the launch of **gp3**, AWS has strongly recommended migrating to this next-generation storage type. Not only does gp3 cost significantly less, but it also delivers baseline performance guarantees and independent scalability. According to the **AWS Cost Optimization Hub**, migrating from gp2 to gp3 can save organizations **up to 20% on EBS storage costs** while boosting performance with zero application changes or downtime.
-
----
-
-### 1. ARCHITECTURE & PERFORMANCE COMPARISON: gp2 VS gp3
-
-The core distinction between the two volume types lies in how performance is provisioned:
-
-* **gp2 (Performance Tied to Volume Size):** Baseline performance is strictly bound to storage capacity (3 IOPS/GB). If your application requires higher IOPS, you are forced to over-provision volume capacity (e.g., provisioning 1,000 GB just to achieve 3,000 IOPS), incurring unnecessary storage costs.
-* **gp3 (Decoupled Capacity & Performance):** Storage capacity, IOPS, and throughput can be configured independently. Every gp3 volume provides a free baseline of **3,000 IOPS** and **125 MB/s Throughput** regardless of size. When higher performance is required, IOPS or throughput can be scaled independently without expanding volume size.
-
-#### Quick Feature Comparison
-
-* **Storage Pricing:** gp3 is up to 20% cheaper per GB/month across all AWS Regions.
-* **Default Baseline IOPS:** gp2 yields 3 IOPS/GB (max 16,000 IOPS), whereas gp3 provides a fixed 3,000 IOPS baseline (scalable up to 16,000 IOPS).
-* **Default Throughput:** gp2 ranges from 128 MB/s to 250 MB/s based on size, while gp3 provides a fixed 125 MB/s baseline (scalable up to 1,000 MB/s).
-* **Scaling Flexibility:** gp2 requires purchasing more storage GB to scale performance, while gp3 allows scaling GB, IOPS, and Throughput independently.
+This migration represents one of the highest ROI quick-win cost optimization initiatives available to Cloud Operations and FinOps teams.
 
 ---
 
-### 2. CORE BENEFITS & PRIORITY WORKLOADS
+### THE PROBLEM
 
-* **Immediate FinOps Savings:** gp3 storage is 20% cheaper per GB/month. Across fleets running hundreds or thousands of volumes, this migration delivers substantial recurring monthly savings.
-* **Zero-Downtime Live Migration:** Thanks to Amazon EBS Elastic Volumes, modifying a volume from gp2 to gp3 is an online operation. EC2 instances remain active with zero reboot, data migration, or application impact.
+In large-scale cloud footprints running hundreds or thousands of EC2 instances, Amazon EBS storage comprises a major portion of the monthly AWS bill.
 
-#### Recommended Priority Workloads for Migration
+Continuing to run legacy gp2 volumes exposes organizations to several key cost and architectural inefficiencies:
 
-* Web Applications & API Gateways
-* Small-to-Medium Databases (MySQL, PostgreSQL, MongoDB, SQL Server)
-* Bastion Hosts & Monitoring Servers (Prometheus, Zabbix)
-* CI/CD Worker Nodes (Jenkins, GitLab Runners)
-* File Servers & Storage Nodes
+* **20% Higher Storage Unit Costs:** The per-GB monthly price of gp2 is roughly 20% higher than gp3 across all AWS Regions.
+* **Tightly Coupled Capacity and IOPS:** To get higher IOPS for performance-sensitive applications, teams are forced to provision unneeded extra storage capacity (GB).
+* **Wasted Resources:** Workloads requiring high IOPS but small data footprints (such as DB log volumes or cache nodes) end up paying for bloated storage capacity just to acquire baseline IOPS.
 
 ---
 
-### 3. AUDIT, AUTOMATION & MONITORING WORKFLOW FOR DEVOPS
+### LEGACY ARCHITECTURE (gp2) AND ISSUES
 
-To safely execute fleet-wide migrations, DevOps teams should follow this 3-step workflow:
+In the legacy gp2 architecture, volume performance scales at a fixed ratio of **3 IOPS per 1 GB of provisioned storage**.
 
-* **Step 1: Audit Legacy gp2 Volumes**  
-  Use AWS Cost Optimization Hub, AWS Cost Explorer, or AWS CLI scripts to identify candidate gp2 volumes and calculate projected savings.
+This architectural model creates two significant technical limitations:
 
-* **Step 2: Automate Migration (IaC & Automation)**  
-  Rather than manually updating volumes via the console, leverage AWS Systems Manager (SSM) Automation or Lambda scripts calling the `ModifyVolume` API. For Infrastructure as Code (Terraform / CloudFormation / AWS CDK), update the resource property `volume_type = "gp3"` in source repositories to prevent IaC drifts.
+#### 1. Capacity Coupling Wastes Money for IOPS
+*Example:* A database workload requires 3,000 IOPS for transaction processing. With gp2, the volume must be provisioned to at least **1,000 GB** (1,000 GB × 3 = 3,000 IOPS). If the database only stores 100 GB of real data, the enterprise pays for 900 GB of unused storage every month.
 
-* **Step 3: Monitor Post-Migration CloudWatch Metrics**  
-  After migration, track key Amazon CloudWatch metrics for 7–14 days:
-  * `VolumeReadOps` & `VolumeWriteOps`: Calculate actual IOPS utilization.
-  * `VolumeThroughputPercentage`: Monitor bandwidth utilization.
-  * `VolumeConsumedReadWriteOps`: Ensure workloads do not experience IOPS throttling beyond the 3,000 baseline. Scale IOPS independently if required.
+#### 2. Size-Dependent Throughput Limits
+gp2 throughput is tied to volume size. Small volumes (under 170 GB) suffer restricted throughput baselines, making them vulnerable to I/O throttling during traffic spikes.
 
 ---
 
-### CONCLUSION
+### NEW ARCHITECTURE WITH AMAZON EBS gp3
 
-Migrating from gp2 to gp3 is one of the highest ROI quick-win cost optimization actions on AWS. Organizations immediately cut storage expenses by 20% while gaining independent performance scaling with zero operational downtime. If your cloud infrastructure still runs legacy gp2 volumes, now is the ideal time to automate this upgrade.
+The next-generation **gp3** volume type completely decouples **Storage Capacity, IOPS, and Throughput**.
 
-* Reference Source: [AWS Storage Blog - Migrate your Amazon EBS volumes from gp2 to gp3 and save up to 20% on costs](https://aws.amazon.com/blogs/storage/migrate-your-amazon-ebs-volumes-from-gp2-to-gp3-and-save-up-to-20-on-costs/)
+**Zero-Downtime Migration Workflow:**
+1. Audit existing gp2 volumes using **AWS Cost Optimization Hub** or **AWS CLI** scripts.
+2. Execute the `ModifyVolume` API to change the volume type from `gp2` to `gp3` on live running volumes.
+3. Leveraging **Amazon EBS Elastic Volumes**, the migration occurs transparently in the background without rebooting EC2 instances or stopping application services.
+4. Update Infrastructure as Code (IaC) source files (Terraform / CloudFormation / AWS CDK) to set `volume_type = "gp3"`.
+
+---
+
+### WHY AMAZON EBS gp3 IS THE RIGHT FIT
+
+* **Immediate 20% Cost Savings:** The per-GB storage price of gp3 is 20% lower than gp2 in every AWS Region.
+* **Free High Baseline Performance:** Every gp3 volume includes a free baseline of **3,000 IOPS** and **125 MB/s Throughput** regardless of size (even on a 10 GB volume).
+* **Independent Performance Tuning:** When an application demands 10,000 IOPS, engineers can scale IOPS independently without purchasing extra storage capacity.
+
+---
+
+### AWS SERVICES FEATURED IN THE ARCHITECTURE
+
+* **Amazon EBS (Elastic Block Store):** Next-generation gp3 block storage volumes.
+* **Amazon EC2:** Compute instances attached to live EBS volumes.
+* **AWS Cost Optimization Hub & Cost Explorer:** Auditing and cost projection tools.
+* **AWS Systems Manager (SSM) & AWS Lambda:** Automated batch migration workflows.
+* **Amazon CloudWatch:** I/O metric monitoring (`VolumeReadOps`, `VolumeWriteOps`, `VolumeThroughputPercentage`).
+
+---
+
+### KEY ARCHITECTURAL LESSONS
+
+Migrating from gp2 to gp3 is a textbook example of Cloud FinOps optimization delivering instant financial savings with zero technical risk.
+
+**Key Lessons:**
+* Continuously modernize cloud resource generations to take advantage of lower unit costs and improved performance baselines.
+* Decoupled performance architectures allow organizations to align cloud spend precisely with actual operational requirements.
+* Leverage zero-downtime Elastic Volume features to continuously improve cloud infrastructure without risking service availability.
+
+* Original Article: [AWS Storage Blog - Migrate your Amazon EBS volumes from gp2 to gp3 and save up to 20% on costs](https://aws.amazon.com/blogs/storage/migrate-your-amazon-ebs-volumes-from-gp2-to-gp3-and-save-up-to-20-on-costs/)
 
 `#AWS` `#AmazonEBS` `#AWSStorage` `#CostOptimization` `#FinOps` `#AmazonEC2` `#CloudComputing` `#DevOps`
